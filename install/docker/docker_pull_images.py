@@ -13,7 +13,7 @@ class DockerPullImages:
         # self.command_pull = "docker", "pull"
 
     # If the image does not exist, find in the Docker Hub
-    def pull_not_exists(self):
+    def pull_image_not_exists(self):
         images = DockerImages().get_images()
         for j in images:
             if self.out.find(j) == -1:
@@ -21,12 +21,9 @@ class DockerPullImages:
                 call(command)
 
     #If the image exist, find in the Docker Hub for update
-    def pull_exists(self):
+    def pull_image_exists(self):
         images = DockerImages().get_images()
         for j in images:
             if self.out.find(j) != -1:
                 command = ["docker", "pull", str(j)]
                 call(command)
-
-# DockerPullImages().pull_not_exists()
-DockerPullImages().pull_exists()

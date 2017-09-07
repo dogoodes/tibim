@@ -4,4 +4,5 @@
 
 sudo apt-get install -y \
 		docker.io \
-        python3
+        python3 \
+        git
