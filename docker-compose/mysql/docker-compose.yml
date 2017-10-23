@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:5.7'
+    container_name: 'mysql'
+    restart: 'always'
+    environment:
+      # MYSQL_DATABASE: 'c4_test'
+      # MYSQL_ROOT_HOST: '172.18.0.1'
+      MYSQL_ROOT_PASSWORD: 'dogood'
+      # MYSQL_USER: 'dogood'
+      # MYSQL_PASS: 'dogood'
+      # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    # volumes:
+      # - './data/db/mysql:/var/lib/mysql'
+    # expose: 
+      # - '3306'
+    # ports:
+      # - '3306:3306'
