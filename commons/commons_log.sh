@@ -8,8 +8,10 @@
 ################################################################################
 
 ## Dados do arquivo de log
+#TODO Ver como vou passar o root...
 NAME_LOG="tibim"
 HOME_LOG="../logs"
+
 MAX_SIZE_LOG="10"
 FILE_LOG="${HOME_LOG}/${NAME_LOG}.log"
 FILE_LOG_OLD="${FILE_LOG}.tgz"
