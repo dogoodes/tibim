@@ -2,7 +2,7 @@
 
 ################################################################################
 
-## Name: 
+## Name: Docker Pull Images
 ## Description: Script para atualizar as imagens docker
 
 ################################################################################
@@ -27,42 +27,36 @@ IMAGES=("cassandra"
         "xemuliam/nifi"
        )
 
-function sudo () {
-    logInfo "Executando o sudo."
+sudo () {
     echo sudo -S docker -v
 }
 
-function pull () {
+pull () {
     docker pull $1
 }
 
-#TODO Rodar docker images e validar se a imagem ja existe...
-function loop () {
+loop () {
     for image in "${IMAGES[@]}"
     do
         pull $image
     done
 }
 
-function main() {
-	write_log "-----------------------------------------------------------------"
-	write_log "[INFO] - Inicio do script."
+main() {
+#	write_log "-----------------------------------------------------------------"
+#	write_log "[INFO] - Inicio do script."
 
     sudo
     loop
 
-    write_log "[INFO] - Fim do script."
-    write_log "-----------------------------------------------------------------"
+#    write_log "[INFO] - Fim do script."
+#    write_log "-----------------------------------------------------------------"
 }
-
-################################################################################
 
 ### ..:: Fluxo normal do programa ::..
 
 [ "$DEBUG" == "n" ] && main &> /dev/null || main
 
 exit 0
-
-################################################################################
 
 ## ..:: Fim da execução ::..
