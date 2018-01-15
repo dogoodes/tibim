@@ -7,13 +7,21 @@
 
 ################################################################################
 
+#Aux
+#ln -s tibim.sh tibim
+#sudo mv tibim /usr/local/bin/
+
+################################################################################
+
 app() {
     if [ "$1" != "" ]; then
         case $1 in
-            -help)      help ;;
-            -v | -version)   version ;;
-            *)          call $@ ;;
+            -help)          help ;;
+            -version | -v)  version ;;
+            *)              call $@ ;;
         esac
+    else
+      call
     fi
 }
 
@@ -29,6 +37,7 @@ help() {
     echo "      -docker-compose"
     echo "      -installer"
     echo "      -version"
+    echo "      -wiki"
     echo ""
     echo "Run 'tibim COMMAND --help' for more information on a command."
     echo ""
@@ -40,11 +49,12 @@ version() {
 
 call() {
     case $1 in
-        -commons)        echo "$@" ;;
-        -docker)         echo "$@" ;;
-        -docker-compose) echo "$@" ;;
-        -installer)      echo "$@" ;;
-        *)              echo "Usage tibim {commons|docker|docker-compose|installer}" ;;
+        -commons | -c)          echo "$@" ;;
+        -docker | -d)           echo "$@" ;;
+        -docker-compose | -dc)  echo "$@" ;;
+        -installer | -i)        echo "$@" ;;
+        -wiki | -w)             echo "$@" ;;
+        *)                      echo "Usage tibim {commons|docker|docker-compose|installer|wiki}" ;;
     esac
 }
 

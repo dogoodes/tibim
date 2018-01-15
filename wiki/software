@@ -1,0 +1,190 @@
+O teste de software é qualquer atividade destinada a avaliar um atributo ou capacidade de um programa ou sistema e determinar que cumpre o seu resultado exigido.
+
+Um software mal testado pode:
+- Destruir a reputação de uma empresa.
+- Provocar falta de confiabilidade do usuário no sistema.
+- Prejudicar os resultados da empresa.
+- Alto custo de manutênção.
+
+
+----------------------------------------------------------------------------------
+# Desenvolvimento em cascata:
+----------------------------------------------------------------------------------
+- Levantamento dos requisitos
+  - Especificação
+    - Arquitetura
+      - Construção
+        - Codificação
+      - Teste Unitário
+    - Teste de integração
+  - Teste de sistema
+- Teste de aceitação
+
+# Niveis de teste:
+- Teste unitário ou componente
+- Teste de interação
+- Teste de aceitação (baseado em requisitos)
+
+# Tipos de teste
+- Testes funcionais (testar o que o sistema faz)
+- Testes não funcionais (como)
+- Testes estruturais (sistema solido?)
+- Testes relacionados à mudanças
+  - Testes de confirmação
+  - Testes de regressão (verificar que novos defeitos não foram introduzidos no sistema)
+
+# Tecnica de teste
+- Teste caixa preta
+  - Geralmente usado em funcionais e não funcionais.
+  - Não importa estrutura interna.
+- Teste caixa branca
+  - Avalia a estrutura interna.
+  - Geralmente usado em testes estruturais.
+- Teste exploratório (PRÓS: Mais estimulante na execução, Exige menos preparação, Mais efetivo em encontrar defeitos / CONTRAS: Exige muita experiência do testador, Dificil de ser repetido, Difícil de ser estimado)
+  - Baseado na experiência do testador.
+  - Não segue um roteiro ou caso de teste.
+  - Criado durante a execução dos testes.
+
+Caso de teste é um roteiro com um conjunto de condições e variáveis que determinam se a aplicação está funcionando corretamente ou não.
+- Elementos de um caso de teste:
+  - Identificação
+  - Objetivo
+  - Pre-condições
+  - Massa de dados
+  - Passos
+  - Resultados esperados
+  - Pós-condições
+
+- Caso de teste positivo:
+Verifica situações "normais" segundo o caminho feliz.
+Ex: Cadastrar usuário com sucesso
+
+- Caso de teste negativo:
+Situações de exceções, seguindo caminhos alternativos que podem ocorrer na utilização.
+Ex: Cadastrar usuário sem preencher campos obrigatórios
+
+# Exemplo de caso de teste:
+Id: Ct01
+Objetivo: Testar o relatório de vendas no período e seus totais.
+Pré-condições: Sistema legado com perfil de gerente.
+Massa de dados: BaseTeste.sqlite3 -n vendas em -n períodos.
+Passos para reprodução / Resultados esperados:
+1 - No menu principal, escolher a opção "relatórios" / Exibir as opções: Vendas e Faturamento no submenu.
+2 - No submenu, escolher a opção "Vendas" / Exibir a tela de filtro por data.
+3 - Escolher a data inicial / Validar data e mudar foco para data final.
+4 - Escolher a data final / Validar data e mudar foco para o botão imprimir.
+5 - Clicar no botão imprimir / Imprimir relatório (ver protótipo pt055)
+Pós condições: Somente após a impressão, o sistema deve fechar a janela de chamada ao relatório e voltar ao menu principal.
+
+# Execução do caso de teste:
+É o momento que o testador irá comparar os resultados esperados de cada caso de teste com os resultados obtidos da aplicação.
+Status possíveis:
+- Não Executado
+- Passou
+- Falhou
+- Bloqueado ( quando o testador não está apto a rodar o caso de teste ou tem alguma pendência de requisitos ainda não fechados)
+- Não finalizado
+
+Situações de uso:
+- Usar nos testes de regressão:                  Caso de teste
+- Aumentar a eficiência em encontrar defeitos:   Exploratório
+- Utilizar com testadores com pouca experiência: Caso de teste
+- Para ter estimativas precisas:                 Caso de teste
+- Testar sem tempo de preparação:                Exploratório
+- Testar rapidamente 1 mudança de interface:     Exploratório
+- Usar esforço de teste distribuído:             Caso de teste
+
+Reportar defeitos:
+- Coletar evidências (print, logs)
+- Reproduzir defeito
+- Analise de causa raiz
+- Comparar com outros defeitos.
+- Registrar defeitos
+
+Informações do defeito:
+- Nome do prog ou sistema
+- ID do defeito
+- Descrição clara e concisa
+- Aberto por
+- Indentificação da fase ou nível de teste
+- Ambiente de teste
+- Severidade (impacto no negócio) critica, alta, média, baixa
+- Prioridade (ordem da solução)
+- Versão (versão da aplicação)
+- Passos para reprodução (descrição com detalhes)
+- Evidências
+- Causa raiz
+- Caso de teste relacionado
+- Corrigido por
+- Versão da correção
+- Status (novo, aberto, re-aberto, em correção, corrigido, rejeitado)
+- Data
+- Comentários
+
+
+----------------------------------------------------------------------------------
+# Propagação de dados:
+----------------------------------------------------------------------------------
+Oferecem maior capacidade no tratamento de grande volume de dados.
+- R-ETL: Extração, transformação e carga em tempo real.
+- EDR: Enterprise data replication.
+
+Cocentra na troca de msgs, viabiliza o trafego bidirecional. Muito utilizada em sistemas legados e ERP.
+- EAI: Enterprise Application Integration
+
+Acessa os dados por meio de serviços. Desempenha o acesso e integração dos dados, encapsulando a lógica que une as estruturas fisicas de dados o que alavanca a conscistência e o reuso.
+- SOA: Service-oriented architecture. Cada serviço/mashup representa uma porção discreta de funcionalidades empacotadas de maneira modular e distribuída.
+- API REST: Application program interface by representational state transfer.
+
+
+----------------------------------------------------------------------------------
+# Plano de ação:
+----------------------------------------------------------------------------------
+- Quais tarefas preciso fazer para alcançar meu objetivo?
+- Em qual ordem e quando farei cada uma destas tarefas?
+- Quais recursos (tempo,dinheiro, aprovação...) precisarei para executar cada uma das tarefas?
+- Se me faltar algum desses recursos, quais tarefas eu farei para conseguí-los?
+
+----------------------------------------------------------------------------------
+# HBase:
+----------------------------------------------------------------------------------
+Configuration conf = HBaseConfiguration.create();
+conf.addResource("hbase-site-qas.xml");
+Htable t = new Htable(conf,"tabela");
+Scan sc = new Scan();
+sc.setMaxVersion(1);
+sc.addColumn(family, qualifier);
+ResultHScanner i = t.getScanner(sc);
+
+> Time.at(millisecounds)
+
+> org.apache.hadoop.hbase.util.Bytes.toString("\x48\x65\x6c\x6c\x6f\x20\x48\x42\x61\x73\x65".to_java_bytes)
+
+> echo "status 'detailed' | hbase shell | tee hbase_status_detailed.txt
+
+
+----------------------------------------------------------------------------------
+# Maven:
+----------------------------------------------------------------------------------
+mvn install:install-file "-Dfile=phoenix-4.7.0.2.6.1.0-129_client-CARREFOUR_V1.jar" "-DgroupId=org.apache.phoenix" "-DartifactId=phoenix-client" "-Dversion=4.7.0.2.6.1.0-129-CARREFOUR_V1" "-Dpackaging=jar" "-DgeneratePom=true"
+
+
+----------------------------------------------------------------------------------
+# Ranger:
+----------------------------------------------------------------------------------
+/usr/hdp/2.6.1.0-129/ranger-usersync/ranger-usersync-services.sh restart
+tail -f /var/log/ranger/usersync/usersync.log
+
+
+----------------------------------------------------------------------------------
+# Eclipse: Eclipse Shortcuts helps everyone in their happy day coding.
+----------------------------------------------------------------------------------
+Ctrl + Shift + O  : Organize imports.
+Ctrl + Shift + T  : Open Type.
+Ctrl + Shift + F4 : Close all Opened Editors.
+Ctrl + O          : Open declarations.
+Ctrl + E          : Open Editor.
+Ctrl + /          : Line Comment.
+Alt + Shift + R   : Rename.
+Ctrl+3            : Quick Access
+

@@ -1,0 +1,329 @@
+---------------------------------------------------------------------------------------------------------------    
+Nome  |  Símbolo | Potência = Valor(SI)
+---------------------------------------------------------------------------------------------------------------
+quilo |  k       | 10^3  = 1000
+mega  |  M       | 10^6  = 1 000 000
+giga  |  G       | 10^9  = 1 000 000 000
+tera  |  T       | 10^12 = 1 000 000 000 000
+peta  |  P       | 10^15 = 1 000 000 000 000 000
+exa   |  E       | 10^18 = 1 000 000 000 000 000 000
+zetta |  Z       | 10^21 = 1 000 000 000 000 000 000 000
+yotta |  Y       | 10^24 = 1 000 000 000 000 000 000 000 000
+
+* Diferenças relativas entre múltiplos decimais e binários equivalentes.
+
+
+---------------------------------------------------------------------------------------------------------------    
+# CRONTAB
+---------------------------------------------------------------------------------------------------------------    
+# Iniciar, parar e reiniciar o serviço de agendamento do Linux
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+> sudo /etc/init.d/cron start|stop|restart  ou  sudo service cron start|stop|restart
+> sudo service cron status
+> crontab -e: conforme já informado, serve para editar o arquivo atual do crontab e criar um, caso não exista;
+> crontab -l: este comando mostra o conteúdo atual do crontab;
+> crontab -r: remove o arquivo atual do crontab.
+
+
+--------------------------------------------------------------------------------------------------------------
+# OUTROS
+--------------------------------------------------------------------------------------------------------------
+# Habilitar e desabilitar o proxy no GIT
+> git config --global http.proxy utilizador:password@servidor:8080
+> git config --global --unset http.proxy
+
+#MYSQL
+> CREATE DATABASE teste CHARACTER SET utf8 COLLATE utf8_general_ci; 
+> grant all privileges on teste.* to 'teste'@'localhost' identified by '\[123456789\]'; 
+> flush privileges; 
+> mysql -uteste -p123456789 teste
+
+# HBASE
+# Passar uma consulta para Hbase shell e jogar a saída em um arquivo TXT  (linux : wc -l)
+> echo "scan 'doo_visitor', {COLUMNS=>['visitor:visitorId'], STARTROW=>'001201501010000', ENDROW=>'001201601020000'}" | ./hbase shell > totalSR0.txt
+
+# Filtrar pelo valor de um campo no HBASE
+> scan 'doo_campaign',{COLUMN=>'visit:idsite', LIMIT=>1000, TIMERANGE=>[1480005000000,1480005180000], FILTER => "ValueFilter( =, 'regexstring:13' )"}
+> scan 'doo_visitor',{LIMIT=>1000, STARTROW=>'001201612151750', ENDROW=>'001201612151755', COLUMN=>'search'}
+
+#HDFS - Hadoop File System
+# -disk utilization -summary -human
+> hdfs dfs -du -s -h /br/com/carrefour/dolphin/landing/logv8/processing
+
+#Phoenix
+# Exemplo do processo para gravação da saída em um arquivo específico:
+> !outputformat csv
+> !record /root/OSC_TBL_SALES_PAYMENT.csv
+>    select * from DB_DOLPHIN_TARGET.TBL_SALES_PAYMENT;
+> !record
+> !quit
+
+-------------------------------------------------------------------------------
+## Tunning no ambiente linux
+-------------------------------------------------------------------------------
+# Alteração no /etc/fstab para que os discos da maquina com opção "noatime"
+# Alterar para não Open File Limits nos arquivos /etc/sysctl.conf, /etc/security/limits.conf, /etc/security/limits.d/90-nproc.conf
+# Criar chave RSA no diretório /root/.ssh permitindo a maquina comunicar com o servidor sem senha
+# SELinux desabilitado
+# Instalar o NTP pra ter horário sincronizado
+# Setar o Max Number of ulimit open file: Increase max number of ulimit open file in linux.
+# Abrir o sysctl.conf and adicionar a linha: -fs.file-max=65536
+
+> vi /etc/security/limits.conf
+> 1.9.1.1	*	soft	nproc	 65535
+> 1.9.1.2       *       hard    nproc    65535
+> 1.9.1.3       *       soft    nofile   65535
+> 1.9.1.4       *       hard    nofile   65535
+
+> vi /etc/security/limits.d/90-nproc.conf
+> 1.9.2.1       *       soft    nproc    65535
+> 1.9.2.2       *       hard    nproc    65535
+> 1.9.2.3       *       soft    nofile   65535
+> 1.9.2.4       *       hard    nofile   65535
+
+
+-------------------------------------------------------------------------------
+# NSLOOKUP
+-------------------------------------------------------------------------------
+Utilizado para se obter informações sobre registros de DNS de um determinado domínio, host ou IP
+Email: Se o remetente dos seus emails usa um domínio sem SPF nem DKIM nem entrada CNAME que nos autorize a enviar emails em seu nome, vai ver-se em maus lençóis para os entregar. SPF é um padrão para que outras origens possam disparar e-mails com seu domínio
+> nslookup -query=any centauro.com.br
+> nslookup -type=any centauro.com.br
+
+
+--------------------------------------------------------------------------------------------------------------
+# Vagrant
+--------------------------------------------------------------------------------------------------------------
+default: 27017 (guest) => 27017 (host)
+default:  6379 (guest) => 6379  (host)
+default:  6380 (guest) => 6380  (host)
+default:  9200 (guest) => 9200  (host)
+default:  9090 (guest) => 9090  (host)
+default:  8020 (guest) => 8020  (host)
+default:  2181 (guest) => 2181  (host)
+default:    22 (guest) => 2222  (host)
+
+> up
+Inicializa a maquia virtual e executa o provisioner.
+Quando vamos começar a subir nosso ambiente.
+
+> reload
+Reinicia a maquina virtual.
+Necessario caso haja alteração no vagrantfile.
+
+> provision
+Executa o provisioner.
+Quando o script de provisionamento for alterado.
+
+> init
+gera um novo vagrantfile baseado em uma box.
+Quando estamos iniciando nosso projeto.
+
+> halt
+desliga a maquina virtual.
+Quando vamos desligar a maquina virtual.
+
+> destroy
+destroi a maquina virtual.
+Quando vamos limpar tudo e começar de novo.
+
+> suspend
+Pausa a maquina virtual.
+Quando queremos parar e manter o estado atual da maquina.
+
+> resume
+Retira a pausa da maquina virtual.
+Quando queremos continuar a partir do estado salvo.
+
+>ssh
+Acessa a maquina virtual via ssh.
+Quando queremos executar comandos manuais.
+
+
+--------------------------------------------------------------------------------------------------------------
+# Files
+--------------------------------------------------------------------------------------------------------------
+
+Para arquivos (-)
+rwx 
+000  0  (zero) permissão negada
+001  1   permissão de execução
+010  2   permissão de gravação
+011  3   permissão de gravação e execução
+100  4   permissão de leitura
+101  5   permissão de leitura e execução
+110  6   permissão de leitura e gravação
+111  7   soma de todas as permissões
+
+Para diretórios (d)
+rwx
+000  0  (zero) permissão negada
+001  1   permissão para entrar no diretório
+010  2   permissão para gravar dentro do diretório
+011  3   permissão de entrar e gravar no diretório
+100  4   permissão para listar o conteúdo do diretório
+101  5   permissão de listar e entrar no diretório
+110  6   permissão de listar e gravar no diretório
+111  7   soma de todas as permissões
+
+Comando	Número	Permissão
+chmod	000	---------
+chmod	400	r--------
+chmod	444	r--r--r--
+chmod	600	rw-------
+chmod	620	-rw--w----
+chmod	640	-rw-r-----
+chmod	644	rw-r--r--
+chmod	645	-rw-r--r-x
+chmod	646	-rw-r--rw-
+chmod	650	-rw-r-x---
+chmod	660	-rw-rw----
+chmod	661	-rw-rw---x
+chmod	662	-rw-rw--w-
+chmod	663	-rw-rw--wx
+chmod	664	-rw-rw-r--
+chmod	666	rw-rw-r--
+chmod	700	rwx------
+chmod	750	rwxr-x---
+chmod	755	rwxr-xr-x
+chmod	777	rwxrwxrwx
+chmod	4711	-rws--x--x
+
+*http://krnlpanic.com/wp/wp-content/uploads/2013/03/chmod.jpg
+
+
+--------------------------------------------------------------------------------------------------------------   
+# Comandos do dia a dia
+--------------------------------------------------------------------------------------------------------------   
+
+#Verificar plataforma do SO
+> uname -m
+
+#Informações do processador
+> cat /proc/cpuinfo
+
+#Informações sobre as portas em utilização
+> netstat -ntpl
+
+#Informações sobre os processos
+> ps -ef | grep java
+> ps -faux (arvore)
+
+#Informações sobre o file system
+> df -h
+
+#Informações sobre o tamaho das pastas (data used)
+> du -h --max-depth=1 (numero de niveis de subpasta)
+
+#Setar o proxy para o APT-GET usando o NANO
+> sudo nano /etc/apt/apt.conf
+
+#Setar o proxy para o ambiente usando o NANO
+> sudo nano /etc/environment
+
+# Envia arquivo para lixeira
+> gvfs-trash "arquivo"
+
+# Descompactar arquivo TAR
+> sudo tar -xvf arquivo.tar.gz
+
+# Ignorar "hangup signals".
+> nohup COMMAND &
+> ./app.sh > /dev/null 2>&1 &
+
+#Instalar/Desinstalar arquivos DEBian
+> sudo dpkg -i arquivo.deb
+> sudo dpkg --purge virtualbox-5.1
+
+#Transformar arquivo rpm em arquivo DEB
+> sudo alien projectlibre-1.6.2-1.rpm
+
+#Listar todos os arquivos + informações em todos os subdiretórios
+> ls -alR
+
+#Listar pacotes instalados
+> apt list --installed
+
+#Setar exceção do proxy para o Google Chrome
+> gsettings set org.gnome.system.proxy ignore-hosts "['127.0.0.1','localhost','*.carrefour.com.br','*.carrefour.com','*.wcorp.carrefour.com.br']"
+
+#Copiar arquivo para o servidor utilizando a PEM
+> scp -i sbnet.pem /tmp/build-dooanalytics/job-teste-scheduler.jar ec2-user@10.71.0.248:~/tmp.
+
+#Arquivo com repositórios do Ubuntu
+> /etc/apt/sources.list.d
+
+#7z
+Compacta todos os arquivos em um arquivo img.7z
+> 7z a img.7z *.png
+
+#TAR
+-z : Compress archive using gzip program
+-c: Create archive
+-v: Verbose i.e display progress while creating archive
+-f: Archive File name
+> tar -zcvf archive-name.tar.gz directory-name
+
+#VI ou VIM
+Força edição de um arquivo
+> %! sudo tee %
+
+#Java
+Seta minimo e maximo de memoria da JVM para uma execução
+java -Xms:1G -Xmx:8G -jar 'aplicação'
+
+#SSH com chave
+> ssh -i chave.pem root@127.0.0.1
+
+#SCP vom chave
+> scp -i chave.pem /tmp/file.txt root@127.0.0.1:/tmp
+
+#Network
+> service network-manager restart
+
+
+---------------------------------------------------------------------------------------------------------------
+# DIRETÓRIOS
+---------------------------------------------------------------------------------------------------------------
+/     :: Também chamado de Raiz do sistema, onde toda árvore de diretórios começa.
+/bin  :: Este diretório contém programas executáveis que são necessários no modo single-user e recuperam, ou reparam, o sistema. Além de outros comandos para rotinas básicas.
+/boot :: Contém arquivos estáticos para carregar o boot - Kernel do Linux (vmlinuz).
+/dev  :: Arquivos de acesso aos dispositivos do sistema.
+/etc  :: Este diretório guarda arquivos de configuração, desde básicas do sistema e rede, até configurações específicas de programas.
+/home :: Contém os diretórios dos usuários.
+/usr  :: Hierarquia secundária com bin, sbin, lib, etc. - Segunda maior estrutura de arquivos dentro do sistema.
+/var  :: Arquivos variáveis (podem mudar) - Arquivos de logs do sistema e específicos, caixa de mensagens de e-mail, fila de impressora, etc.
+/lib  :: Bibliotecas dinâmicas e módulos do kernel.
+/initrd :: Normalmente utilizado pelo kernel e Bootloader.
+/blib :: Programas dinâmicos - Mais rápidos e menores.
+/lost + found :: Se tiver é porque tem badblock, arquivos truncados que serão mantidos lá.
+/misc :: Podem ser colocados programas.
+/opt  :: Diretório opcional, normalmente alguns programas específicos quando instalamos utilizam este diretório. Ex.: OpenOffice.
+/proc :: Processos que estão sendo executados - Não existe fisicamente, apenas quando o kernel está em funcionamento - Contém dados do Hardware da máquina.
+/sbin :: Executáveis utilizados somente pelo root para a administração do sistema.
+/srv (Conectiva, SUSE) :: Para servidores Apache.
+/tmp  :: Arquivos e diretórios temporários - Arquivos que serão salvos em um determinado instante e num determinado lugar, mas logo em seguida já não serão mais utilizados. Sempre que a máquina é reiniciada, o sistema deleta o conteúdo do diretório.
+
+
+---------------------------------------------------------------------------------------------------------------
+# LOGS
+---------------------------------------------------------------------------------------------------------------
+
+apt/ - diretório com logs de uso do gerenciador de pacotes apt-get;
+boot.log - registro dos serviços carregados durante a inicialização do sistema;
+dmesg - log do último boot;
+lastlog - arquivo binário com dados de logins e desligamentos, usados pelo comando last;
+auth.log - registro do uso de autorizações do sistema, como mecanismos que exigem senhas. Exemplo: o comando sudo ou logins SSH remotos;
+daemon.log - arquivo com registro sobre as atividades dos daemons, serviços executados em segundo plano;
+debug - mensagens do sistema e de aplicações em geral em modo de debug;
+kern.log - mensagens detalhadas do kernel do Ubuntu Linux;
+syslog - mensagens do Ubuntu Linux que não foram armazenadas em logs mais específicos. Consulte-o quando você não achar a mensagem desejada em outros arquivos;
+Xorg.0.log - informações sobre drivers da placa de vídeo e o ambiente gráfico. 
+/var/log - contém subdiretórios usados por programas que separam as mensagens de log em vários arquivos, como apache, samba etc.

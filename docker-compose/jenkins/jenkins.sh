@@ -9,26 +9,20 @@
 
 source ../../commons/commons_log.sh
 
-function run () {
+run () {
     docker-compose up -d
 }
 
-function main() {
-#    write_log_info "Inicio do script."
+main() {
 
     run
 
-#    write_log_info "Fim do script."
 }
-
-################################################################################
 
 ### ..:: Fluxo normal do programa ::..
 
 [ "$DEBUG" == "n" ] && main &> /dev/null || main
 
 exit 0
-
-################################################################################
 
 ## ..:: Fim da execução ::..

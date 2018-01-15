@@ -1,0 +1,79 @@
+# Sugestão de  BULK INSERT para importação de dados.
+> BULK INSERT
+	MeuBanco.dbo.MinhaTabela
+  FROM
+	'c:\ArquivoDados.csv'
+  WITH
+	(
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '\n'
+	);
+
+
+# Para observar rapidamente o conteúdo de um arquivo CSV diretamente em uma instrução SELECT antes de fazer a importação.
+> SELECT
+	a.*
+  FROM
+	OPENROWSET (BULK 'E:\temp\teste1.csv', SINGLE_clob) AS a;
+
+
+# Calculo de Moda
+> SELEC TOP 1
+	VALOR,
+	COUNT(VALOR)
+  FROM
+	TB_DADOS
+  ORDER BY
+	COUNT(VALOR) DESC
+
+
+#Calculo de Mediana
+> SELECT
+  (
+	(SELECT
+		MAX(VALOR)
+	 FROM
+		(SELECT TOP 50 PERCENT VALOR FROM TB_DADOS ORDER BY VALOR) AS BottomHalf
+	)
+	+
+	(SELECT
+		MIN(VALOR)
+	 FROM
+		(SELECT TOP 50 PERCENT VALOR FROM TB_DADOS ORDER BY VALOR) AS TopHalf
+	)
+  )/ 2.0 AS Mediana
+
+
+# Gerando vários selects dinâmicamente para cada coluna da tabela TB_DADOS
+> SELECT
+	'SELECT ''' + NAME  + '''' + ' , COUNT(*) AS TOTAL' + ' FROM TB_DADOS'
+  FROM
+	SYS.all_columns
+  WHERE
+	OBJECT_ID = OBJECT_ID('TB_DADOS')
+
+
+# Primeiros 80% dos dados aleatório de uma tabela
+> SELECT
+	TOP 80 PERCENT ID,
+	DADOS
+  INTO
+	#T_AUX //cria temporária
+  FROM
+	TB_DADOS
+  ORDER BY
+	NEWID()
+
+
+# Gerar uma coluna identity numérico em uma tabela existente
+> ALTER TABLE
+	TB_DADOS
+  ADD
+	NOVO_ID INT IDENTITY(1,1)
+
+# Sem modificar a tabela
+> SELECT
+	ROW_NUMBER() OVER (ORDER BY  A.VALOR) AS NOVO_ID,
+	A.VALOR
+  FROM
+	(SELECT DISTINCT VALOR FROM TB_DADOS) AS A

@@ -1,0 +1,133 @@
+----------------------------------------------------------------------------------
+# DVCS: Distributed Version Control System
+----------------------------------------------------------------------------------
+- Consolidado (committed)
+- Modificado  (modified)
+- Preparado   (staged)
+= git directory repository > working directory > staging area
+1 - Modifica arquivos em seu diretório de trabalho.
+2 - Seleciona os arquivos, adicionando snapshots deles para sua área de preparação.
+3 - Faz um commit, que leva os arquivos como eles estão na sua área de preparação e os armazena permanentemente no seu diretório Git.
+
+# Exibe os arquivos que estão sendo controlados pelo Git
+> git ls-files
+
+# Exibe as TAGS (versionamento disponíveis)
+> git tag
+
+# Neste caso, o diff vai exibir as diferenças entre as versões
+> git version v1.0 v1.1
+
+# Exibe linha a linha quem fez as alterações e qual o id do commit
+> git blame /src/nome_arquivo.java
+
+# Adiciona repositório remoto. O nome é geralmente origin
+> git remote add nome http://url
+
+# Exibe os repositórios remotos
+> git remote
+
+# Clonar um repositório para a sua área de trabalho. Por padrão ele cria uma pasta para com o nome do repositório.
+> git clone http://url/nome_repositorio.git
+
+# Para empurrar os dados master para um repositório remoto (origin) na branch (master)
+> git push origin master
+
+# Para atualizar os dados master através de um repositório remoto (origin) da branch (master)
+> git pull origin master
+
+# Para evitar um trabalho, podemos indicar o caminho (track) da branch remota para a nossa branch local. Isso pode ser feito no instante em que criamos a branch remota através da opção "-u". No nosso caso, temos:
+> git push -u origin design
+
+# Diferenca entre as branchs
+> git diff desenvolvimeto/master
+
+# Exibe as branchs existentes na maquina.
+> git branch
+
+# Cria uma nova branch
+> git branch nova_branch
+
+# Troca a posição para branch desejada
+> git checkout nova_branch
+
+# Seta que a branch do repositorio remoto está vinculado a branch do repositório local (nova_branch).
+> git push -u origin nova_branch
+
+# Guardar uma modificacao em um "esconderijo" para dar continuidade posteriormente
+# Ao realizarmos o comando git stash apply, o último estado salvo será recuperado, mas não será deletado da lista de stashs.
+# Ao realizarmos o comando git stash drop, o último estado salvo será deletado. Também podemos utilizar o nome dos stashs para deletar algum estado que não seja o último. Por fim, se quisermos deletar todos os estados, podemos utilizar o comando git stash clear.
+> git stash list
+> git stash
+> git stash pop (volta a ultima modificacao guardada)
+> git stash apply nome (stash@ 0)
+> git stash drop
+
+# Verificar o que foi alterado por commit. Usar o -p para ver no detalhe
+> git whatchanged -p
+
+#Ver o log.
+> git log --graph
+> git log --pretty=oneline
+> git log -p
+> git log --stat
+
+# Visualizar branchs remotas
+> git branch -r
+
+# Uma vez visto as branches remotas, como copiar uma delas para a máquina local? Isso é feito passando o nome do repositório e da branch remota ao comando git branch, além de indicar o nome da branch que será criada. Mais uma vez, temos o problema de indicar o caminho entre as branches. Para este caso, a opção -t resolve.
+> git branch -t design origin/design
+
+# Realizando o comando git checkout -t origin/design, uma nova branch local chamada design é criada, muda-se para essa branch, copiamos todo o conteúdo da branch remota design do repositório referente ao origin e trackeamos as duas branches.
+> git checkout -t origin/design
+
+# Volta o arquivo editado para o estado do ultimo commit
+> git checkout index.html
+
+# Volta o arquivo da branch master para sua branch atual. Esse comando trará o arquivo "proposta_1.html" como ele se encontra na branch "master" e o adicionará ao Index do repositório na branch "desenvolvimento", pronto para um commit.
+> git checkout master proposta_1.html
+
+git mergetool : diffg RE (remote) BA (base) LO (local)
+> :wqa (save)
+
+# Pega um commit especifico de uma branch e faz o merge
+> git cherry-pick [b7dc1d6] (hash do commit)
+
+# Se o arquivo já estiver adicionado pra commit, voce precisa voltar ele 1 passo atrás.
+# com o git reset, as alterações serão enviadas para o Working Directory; com o git reset --soft, para o Index.
+# Já para o git reset --hard, as alterações serão removidas permanentemente.
+> git reset HEAD index.html
+
+#Se o arquivo já estiver commitado, pode usar um ID de branch específico para voltar na versao que desejar. O comando git reset permite desfazer qualquer número de commits, bastando utilizar o hash do commit que queremos manter como HEAD. Contudo, todos os commits que foram realizados após ele serão descartados, perdendo todas as novas funcionalidades. Por isso, o comando git reset só é recomendado quando desejamos desfazer poucos commits e, principalmente, se esses ainda não tiverem sido enviados a um repositório remoto. Se os commits já foram enviados, há alguma chance dos commits já terem sido adquiridos pelos outros desenvolvedores do projeto, e aí não será possível excluí-los.
+# Ao digitarmos "HEAD~" seguido de um número inteiro n, será feita uma referência ao n-ésimo commit anterior ao HEAD. Por exemplo, HEAD~1, faz referência ao penúltimo commit e HEAD~2, ao antepenúltimo. No caso específico do penúltimo commit, também pode-se referenciá-lo utilizando o atalho HEAD^.
+# Ao realizarmos o comando git reset --hard HEAD~1, as alterações no último commit serão descartadas.
+> git reset sdfg87fg87sdg6fsd5fgsdg6s6d8gf78c7v8bn786 (hash de um commit anterior)
+
+# Ao digitarmos o comando git push origin :design a branch remota design do repositório referente ao origin é deletada.
+> git push origin :design
+
+#Realizando o comando git fetch origin, podemos verificar todas as atualizações que foram realizadas no repositório referente ao origin.
+> git fetch origin
+
+#Atualiza uma branch com base em outra. Poderíamos ter que tratar conflitos de vários commits ao mesmo tempo além do log dos commits ficarem confusos.
+# Justamente para evitar essa situação, o Git possui o comando git rebase, onde podemos indicar qual é a nova base de commits que deve ser utilizada e resolver os conflitos commit por commit.
+# Na pratica, o que ta na sua branch é movido para uma branch temporária e o git atualiza a nova base de commits. Após essa atualização, o Git traz de volta os commits que realizamos e os aplica sobre a nova base, um de cada vez.
+> git rebase master (base) desenvolvimento (ramificação a ser atualizada)
+> git rebase --continue (usado depois de um conflito resolvido para continuar o rebase de commit a commit)
+
+# Quando desejamos remover commits que foram realizados há algum tempo, a melhor maneira seria revertendo-os. Uma boa alternativa para maior flexibilidade é a opção "-n", para que as alterações sejam revertidas e adicionadas ao nosso Working Directory e Index.
+# Assim podemos fazer alterações adicionais antes de criar um novo commit de reversão.
+> git revert -n [hash_do_commit]
+
+# Buscando por bugs em muitos commits. Acima, iniciamos uma sessão de "bisect" e marcamos o commit HEAD como "bad" (ruim), ou seja, indicamos que ele contém o bug o qual queremos encontrar o momento em que foi introduzido.
+# Portanto, para corrigir o erro, conhecemos o hash do commit e podemos utilizar os comandos git reset, git revert ou ver as alterações realizadas naquele commit específico com git show bbd43c6 e decidir a melhor maneira de corrigir.
+> git bisect start
+> git bisect bad HEAD
+> git bisect good 02bfc44
+> git bisect bad
+
+# Muitas pessoas criam um alias no ~/.gitconfig pra digitar menos. Neste caso usaremos a exclamação por ser varios comandos bash encadeados. Exemplo:
+> publica = !git checkout master && git pull && git checkout dev && git rebase master && git checkout master && git merge dev && git push
+
+#Habilitar o modo debug. Ex:
+GIT_TRACE=1 git push

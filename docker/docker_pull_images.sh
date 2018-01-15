@@ -9,6 +9,7 @@
 
 IMAGES=("cassandra"
         "elasticsearch"
+        "grafana/grafana"
         "haproxy"
         "harisekhon/hbase"
         "jenkins"
