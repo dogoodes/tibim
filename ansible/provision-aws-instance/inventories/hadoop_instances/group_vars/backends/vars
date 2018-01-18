@@ -1,0 +1,18 @@
+---
+cache_path: /cache/dovecot
+metacache: "{{cache_path}}/indexes"
+fscache: /var/cache/mails
+ftscache: /var/cache/ftscache
+s3_access_key: AKIAI6LUIVHSLWCIQ3RQ
+s3_secret_key: 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
+s3_url: https://{{ s3_access_key }}:{{ s3_secret_key }}@{{ s3_bucket_name }}.s3.amazonaws.com/
+obox_fs_options: fscache:20G
+obox_index_fs_options: compress:gz:6
+fts_dovecot_fs_options: fts-cache:fscache:20G
+mail_home: "{{metacache}}/%8Mu/%u"
+mail_location: obox:%8Mu/%u:INDEX=~/:CONTROL=~/
+mail_max_userip_connections: 100000
+imap_process_limit: 100000
+pop_process_limit: 100000
+pop3_login_process_min_avail: 8
+imap_login_process_min_avail: 8

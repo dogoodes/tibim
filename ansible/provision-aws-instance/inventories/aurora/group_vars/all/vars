@@ -1,0 +1,9 @@
+---
+aurora_instances:
+  - instance: dovecotDB01
+    name: dovecotDB01
+    db_class: db.t2.medium
+
+  - instance: dovecotDB02
+    name: dovecotDB02
+    db_class: db.t2.medium

@@ -1,0 +1,14 @@
+[aurora_host]
+localhost
+
+[aurora_host:vars]
+keypair_name = backend
+db_engine = aurora
+db_port = 33006
+db_user = poc_user
+db_password = poc_safety
+region = us-east-1
+db_name = poc_teste_aurora
+tbl_name = users
+qtd_usuarios = 1000
+cluster_name = pdinfemail-437-aurora-cluster

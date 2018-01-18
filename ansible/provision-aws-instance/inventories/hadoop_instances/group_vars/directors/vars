@@ -1,0 +1,5 @@
+---
+imap_login_process_limit: 4 # para o director, estava igual ao min_avail no
+pop_login_process_limit: 4  # exemplo do pessoal da OX
+pop3_login_process_min_avail: 4 #deve ser igual ao # CPU cores
+imap_login_process_min_avail: 4 #deve ser igual ao # CPU cores

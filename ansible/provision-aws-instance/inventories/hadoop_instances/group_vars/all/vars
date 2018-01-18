@@ -1,0 +1,73 @@
+---
+ansible_port: 22000
+keypair_name: backend
+#keypair_name: backend_openstack
+ansible_ssh_private_key_file: "~/chaves/{{ keypair_name }}.pem"
+ansible_become: true
+ansible_user: ec2-user
+#ansible_user: administrator
+instance_name: r4_2xlarge_latency
+sql_config_file_path: /etc/dovecot/dovecot-sql.conf.ext
+region: us-east-1
+db_host: "pdfinfemail-428-poc-aurora-cluster.cluster-ro-cdotd81kfdms.{{ region }}.rds.amazonaws.com"
+db_name: poc_dovecot
+db_user: poc_user
+db_password: test-poc-safety
+db_port: 33006
+db_table_name: "{{ instance_name }}_users"
+password_query: "SELECT userid as username, domain, password FROM {{ db_table_name }} WHERE userid = '%n' AND domain = '%d'"
+user_query: "SELECT home, uid, gid, CONCAT('*:bytes=', quota_rule) AS quota_rule FROM {{ db_table_name }} WHERE userid = '%n' AND domain = '%d'"
+iterate_query: "SELECT userid AS username, domain FROM {{ db_table_name }}"
+log_path: /var/log/dovecot.log
+info_log_path: /var/log/dovecot-info.log
+auth_debug: 'yes'
+db_driver: sql
+database_driver: mysql
+access_key: AKIAJPVXSEFRADEPQPLA
+secret_key: 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
+s3_bucket_name: "uolinc-email-test22"
+imaptest_director_port: 143
+imaptest_mbox: /opt/imaptest/mbox
+imaptest_clients: 25000
+imaptest_duration_secs: 172800
+imaptest_user: teste1
+send_imaptest_output_to_cloudwatch: 1
+imaptest_password: 123
+imaptest_profile: /opt/imaptest/test.profile
+imaptest_options: "no_pipelining no_tracking"
+format: json
+vmail_uid: 10000
+vmail_gid: 10000
+
+director_instance_qtd: 1
+director_instance_ami_id: ami-7c3b5706
+director_instance_type: m3.medium
+
+backend_instance_qtd: 1
+backend_instance_ami_id: ami-fd4fd287
+backend_instance_type: r4.2xlarge
+
+imaptest_instance_qtd: 1
+imaptest_instance_type: m3.medium
+instance_security_group: ssh-22000
+imaptest_instance_ami_id: ami-eb7eeb91
+imaptest_instance_tag_name: "imaptest_{{instance_name}}"
+imaptest_instance_tag_type: "imaptest_{{instance_name}}"
+instance_ansible_host_ssh_port: launch-wizard-7
+
+db_reader_instance: pdfinfemail-428-poc-aurora-us-east-1d
+db_writer_instance: pdfinfemail-428-poc-aurora
+cloudwatch_namespace: "{{instance_name}}"
+
+elb_name: "elb-r4-2xlarge-soak"
+elb_target_group_name: "target-elb-r4-2xlarge-soak"
+elb_director_instance_tag_type: "director_{{ instance_name }}"
+
+dovemon_checkuser: dovemon
+dovemon_checkpassword: pombao
+dovemon_config_poll_imap: true
+dovemon_config_retry_count: 3
+dovemon_config_timeout: 3
+dovemon_config_interval: 10
+
+telegraf_cloudwatch_metric_name: "InfluxData/Telegraf"

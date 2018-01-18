@@ -1,0 +1,31 @@
+---
+- name: Provisioning Backend instances on AWS
+  ec2:
+    instance_type: "{{ backend_instance_type }}"
+    region: "{{ backend_instance_region }}"
+    image: "{{ backend_instance_ami_id }}"
+    aws_access_key: "{{access_key}}"
+    aws_secret_key: "{{secret_key}}"
+    wait: yes
+    count: "{{ backend_instance_qtd }}"
+    key_name: "{{ backend_keypair_name }}"
+    group: "{{ backend_instance_security_group }}"
+    monitoring: "yes"
+    instance_tags:
+        Type : "{{ backend_instance_tag_name }}"
+  register: backends
+
+- name: Set name tag for AWS instances
+  ec2_tag:
+    aws_access_key: "{{access_key}}"
+    aws_secret_key: "{{secret_key}}"
+    resource: "{{ item.id }}"
+    region: "{{ backend_instance_region }}"
+    tags:
+        Name : "{{ backend_instance_tag_name }}-{{ item.ami_launch_index }}"
+  with_items: "{{ backends.instances }}"
+
+- name: Wait for SSH to come up
+  wait_for: host={{ item.private_ip }} port=22000 delay=10 timeout=320 state=started
+  become: yes
+  with_items: "{{ backends.instances }}"

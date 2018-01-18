@@ -1,0 +1,23 @@
+---
+director_instance_security_group: "{{ instance_security_group }},launch-wizard-1"
+director_keypair_name: "{{ keypair_name }}"
+director_instance_region: "{{ region }}"
+director_instance_tag_name: "director_{{instance_name}}"
+director_instance_tag_type: "director_{{ instance_name }}"
+
+backend_instance_security_group: "{{ instance_security_group }},launch-wizard-1"
+backend_keypair_name: "{{ keypair_name }}"
+backend_instance_region: "{{ region }}"
+backend_instance_tag_name: "backend_{{instance_name}}"
+backend_instance_tag_type: "backend_{{ instance_name }}"
+
+qtd_usuarios: 25000
+cluster_name: pdinfemail-437-aurora-cluster
+aurora_instances:
+  - instance: pdfinfemail-428-poc-aurora
+    name: pdfinfemail-428-poc-aurora
+    db_class: db.t2.medium
+
+  - instance: pdfinfemail-428-poc-aurora-us-east-1d
+    name: pdfinfemail-428-poc-aurora-us-east-1d
+    db_class: db.t2.medium

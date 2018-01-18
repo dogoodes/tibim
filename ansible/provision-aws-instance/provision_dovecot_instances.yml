@@ -1,0 +1,16 @@
+---
+- name: Create dovecot cluster nodes
+  hosts: ansible_hosts
+  gather_facts: No
+
+  roles:
+    - { role: provision_backend, tags: provision_backend}
+    - { role: provision_director, tags: provision_director}
+
+- name: refresh inventory
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: Refresh in-memory EC2 cache
+      meta: refresh_inventory
