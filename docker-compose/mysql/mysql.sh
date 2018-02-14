@@ -14,14 +14,12 @@ run () {
 }
 
 main() {
-
     run
-
 }
 
 ### ..:: Fluxo normal do programa ::..
 
-[ "$DEBUG" == "n" ] && main &> /dev/null || main
+main
 
 exit 0
 

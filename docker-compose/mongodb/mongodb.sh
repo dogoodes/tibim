@@ -2,33 +2,64 @@
 
 ################################################################################
 
-## Name:
-## Description:
+## Name: Mongodb
+## Description: Mongodb
 
 ################################################################################
 
-source ../../commons/commons_log.sh
+### ..:: Execution key ::..
 
-#TODO Definir se vai rodar em background...
-#Se sim, mantem o -d
-function run () {
-    docker-compose up
-#    docker-compose up -d
+APP_ROOT_PATH=$(pwd)
+DOCKER_COMPOSE_PATH="/docker-compose/mongodb/docker-compose.yml"
+
+PARAMETER=$1
+
+PRINCIPAL="mongodb"
+
+################################################################################
+
+app() {
+    if [ "$PARAMETER" != "" ]; then
+        case $PARAMETER in
+            help)               help ;;
+            background | -b)    run_in_background ;;
+            *)                  run $@ ;;
+        esac
+    else
+        run
+    fi
 }
 
-function main() {
-#    write_log_info "Inicio do script."
+help() {
+    echo ""
+    echo "See 'tibim docker-compose $PRINCIPAL help'."
+    echo ""
+    echo "Usage: tibim docker-compose $PRINCIPAL COMMAND"
+    echo ""
+    echo "Options:"
+    echo "      background"
+    echo ""
+    echo "Run 'tibim docker-compose $PRINCIPAL COMMAND help' for more information on a command."
+    echo ""
+}
 
-    run
+run () {
+    docker-compose -f $APP_ROOT_PATH$DOCKER_COMPOSE_PATH up
+}
 
-#    write_log_info "Fim do script."
+run_in_background () {
+    docker-compose -f $APP_ROOT_PATH$DOCKER_COMPOSE_PATH up -d
+}
+
+main() {
+    app "$@"
 }
 
 ################################################################################
 
 ### ..:: Fluxo normal do programa ::..
 
-[ "$DEBUG" == "n" ] && main &> /dev/null || main
+main "$@"
 
 exit 0
 

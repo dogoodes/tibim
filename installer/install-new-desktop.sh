@@ -16,6 +16,7 @@ sudo apt-get install -y \
 		filezilla \
 		gimp \
 		git \
+		gradle \
 		htop \
 		inkscape \
 		kolourpaint4 \

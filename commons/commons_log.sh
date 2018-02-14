@@ -8,7 +8,6 @@
 ################################################################################
 
 ## Dados do arquivo de log
-#TODO Ver como vou passar o root...
 NAME_LOG="tibim"
 HOME_LOG="../logs"
 
@@ -19,14 +18,16 @@ FILE_LOG_OLD="${FILE_LOG}.tgz"
 ## Auxiliares
 DTH_EXECUTION=$(date '+%d-%m-%Y - %H:%M:%S')
 
-function create_folder_if_not_exists() {
+################################################################################
+
+create_folder_if_not_exists() {
     if [ ! -d "$HOME_LOG" ]
     then
         mkdir $HOME_LOG
     fi
 }
 
-function check_logs() {
+check_logs() {
     if [ "$(du -sm $FILE_LOG | cut -f 1)" -gt "$MAX_SIZE_LOG" ]
     then
         rm -f "$FILE_LOG_OLD" &> /dev/null
@@ -36,28 +37,28 @@ function check_logs() {
     return 0
 }
 
-function write_log() {
+write_log() {
     create_folder_if_not_exists
     check_logs
     echo "${DTH_EXECUTION} - $@" | tee -a "$FILE_LOG"
 }
 
-function write_log_debug() {
+write_log_debug() {
     write_log "[DEBUG] - $@"
 }
 
-function write_log_info() {
+write_log_info() {
     write_log "[INFO] - $@"
 }
 
-function write_log_warn() {
+write_log_warn() {
     write_log "[WARN] - $@"
 }
 
-function write_log_error() {
+write_log_error() {
     write_log "[ERROR] - $@"
 }
 
-function write_log_fatal() {
+write_log_fatal() {
     write_log "[FATAL] - $@"
 }
