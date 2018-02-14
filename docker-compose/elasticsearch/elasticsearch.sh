@@ -10,9 +10,9 @@
 ### ..:: Execution key ::..
 
 APP_ROOT_PATH=$(pwd)
-DOCKER_COMPOSE_PATH="/docker-compose/jenkins/docker-compose.yml"
+DOCKER_COMPOSE_PATH="/docker-compose/elasticsearch/docker-compose.yml"
 PARAMETER=$1
-COMMAND="tibim docker-compose jenkins"
+COMMAND="tibim docker-compose elasticsearch"
 
 ################################################################################
 

@@ -15,13 +15,14 @@ sudo apt-get install -y \
 		erlang \
 		filezilla \
 		gimp \
-		git \
-		gradle \
+		git \ 							#is a version control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source code management in software development
+		gradle \ 						#build automation system
 		htop \
 		inkscape \
+		iptraf \ 						#ip network monitor
 		kolourpaint4 \
 		kompare \
-		maven \
+		maven \ 						#project management and comprehension tool
 		meld \
 		mplayer \
 		myspell-en-gb \
@@ -39,16 +40,16 @@ sudo apt-get install -y \
 		rabbitmq-server \
 		rdesktop \
 		sshpass \
-		terminator \
+		terminator \ 				#terminal emulator
 		texmaker \
 		tree \
-		unrar \
+		unrar \ 						#applications for extracting RAR file archives
 		vim \
-		virtualbox \
+		virtualbox \ 				#it supports the creation and management of guest virtual machines
 		vpnc \
-		whois \
-		wine \
-		wireshark \
+		whois \ 						#is a query and response protocol that is widely used for querying databases that store the registered users or assignees of an Internet resource, such as a domain name, an IP address block, or an autonomous system, but is also used for a wider range of other information
+		wine \ 							#also provides a software library, known as Winelib, against which developers can compile Windows applications to help port them to Unix-like systems
+		wireshark \ 				#it is used for network troubleshooting, analysis, software and communications protocol development, and education
 		xfonts-100dpi \
 		xfonts-75dpi \
 		xfonts-base \

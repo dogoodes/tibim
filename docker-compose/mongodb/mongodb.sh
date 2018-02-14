@@ -11,10 +11,8 @@
 
 APP_ROOT_PATH=$(pwd)
 DOCKER_COMPOSE_PATH="/docker-compose/mongodb/docker-compose.yml"
-
 PARAMETER=$1
-
-PRINCIPAL="mongodb"
+COMMAND="tibim docker-compose mongodb"
 
 ################################################################################
 
@@ -32,14 +30,14 @@ app() {
 
 help() {
     echo ""
-    echo "See 'tibim docker-compose $PRINCIPAL help'."
+    echo "See '$COMMAND help'."
     echo ""
-    echo "Usage: tibim docker-compose $PRINCIPAL COMMAND"
+    echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
     echo "      background"
     echo ""
-    echo "Run 'tibim docker-compose $PRINCIPAL COMMAND help' for more information on a command."
+    echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
 }
 

@@ -10,12 +10,13 @@
 ### ..:: Execution key ::..
 
 APP_ROOT_PATH=$(pwd)
+ELASTICSEARCH_PATH="/docker-compose/elasticsearch/elasticsearch.sh"
 JENKINS_PATH="/docker-compose/jenkins/jenkins.sh"
 MONGODB_PATH="/docker-compose/mongodb/mongodb.sh"
 MYSQL_PATH="/docker-compose/mysql"
 NEXUX_PATH="/docker-compose/nexus"
-
 PARAMETER=$1
+COMMAND="tibim docker-compose"
 
 ################################################################################
 
@@ -32,33 +33,35 @@ app() {
 
 help() {
     echo ""
-    echo "See 'tibim docker-compose help'."
+    echo "See '$COMMAND help'."
     echo ""
-    echo "Usage: tibim docker-compose COMMAND"
+    echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
+    echo "      elasticsearch"
     echo "      jenkins"
     echo "      mongodb"
     echo "      mysql"
     echo "      nexus"
     echo ""
-    echo "Run 'tibim docker-compose COMMAND help' for more information on a command."
+    echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
 }
 
 call() {
     shift 1
     case $PARAMETER in
-        jenkins)    sh $APP_ROOT_PATH$JENKINS_PATH "$@" ;;
-        mongodb)    sh $APP_ROOT_PATH$MONGODB_PATH "$@" ;;
-        mysql)      echo "$@" ;;
-        nexus)      echo "$@" ;;
-        *)          empty ;;
+        elasticsearch)    sh $APP_ROOT_PATH$ELASTICSEARCH_PATH "$@" ;;
+        jenkins)          sh $APP_ROOT_PATH$JENKINS_PATH "$@" ;;
+        mongodb)          sh $APP_ROOT_PATH$MONGODB_PATH "$@" ;;
+        mysql)            sh $APP_ROOT_PATH$MYSQL_PATH "$@" ;;
+        nexus)            sh $APP_ROOT_PATH$NEXUX_PATH "$@" ;;
+        *)                empty ;;
     esac
 }
 
 empty() {
-    echo "Usage tibim docker-compose {jenkins|mongodb|mysql|nexus}"
+    echo "Usage $COMMAND {elasticsearch|jenkins|mongodb|mysql|nexus}"
 }
 
 main() {
