@@ -7,9 +7,17 @@
 
 ################################################################################
 
+### ..:: Valid Path ::..
+
+APP_ROOT_PATH=$APP_ROOT_PATH
+if [ "$APP_ROOT_PATH" = "" ]; then
+    APP_ROOT_PATH=$(pwd)
+fi
+
+################################################################################
+
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
 ELASTICSEARCH_PATH=$APP_ROOT_PATH"/docker-compose/elasticsearch/elasticsearch.sh"
 JENKINS_PATH=$APP_ROOT_PATH"/docker-compose/jenkins/jenkins.sh"
 MONGODB_PATH=$APP_ROOT_PATH"/docker-compose/mongodb/mongodb.sh"

@@ -7,9 +7,17 @@
 
 ################################################################################
 
+### ..:: Valid Path ::..
+
+APP_ROOT_PATH=$APP_ROOT_PATH
+if [ "$APP_ROOT_PATH" = "" ]; then
+    APP_ROOT_PATH=$(pwd)
+fi
+
+################################################################################
+
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
 GIT_PATH=$APP_ROOT_PATH"/wiki/git"
 LINUX_PATH=$APP_ROOT_PATH"/wiki/linux"
 PLAY_PATH=$APP_ROOT_PATH"/wiki/play"

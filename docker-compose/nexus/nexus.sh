@@ -7,9 +7,18 @@
 
 ################################################################################
 
+### ..:: Valid Path ::..
+
+APP_ROOT_PATH=$APP_ROOT_PATH
+if [ "$APP_ROOT_PATH" = "" ]; then
+    echo $APP_ROOT_PATH
+    APP_ROOT_PATH=$(pwd)
+fi
+
+################################################################################
+
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
 DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/nexus/docker-compose.yml"
 PARAMETER=$1
 COMMAND="tibim docker-compose nexus"

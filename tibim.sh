@@ -12,13 +12,24 @@
 #sudo chmod +x tibim
 #sudo mv tibim /usr/local/bin/
 
+# .bashrc
+# export APP_ROOT_PATH="/home/fabiano/Developer/workspace/dogood/devops/tibim"
+
+################################################################################
+
+### ..:: Valid Path ::..
+
+APP_ROOT_PATH=$APP_ROOT_PATH
+if [ "$APP_ROOT_PATH" = "" ]; then
+    APP_ROOT_PATH=$(pwd)
+fi
+
 ################################################################################
 
 ### ..:: Execution key ::..
 
 DEBUG="y" #y or n
 
-APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
 DOCKER_PATH=$APP_ROOT_PATH"/docker/docker.sh"
 DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/docker-compose.sh"
 INSTALLER_PATH=$APP_ROOT_PATH"/docker-registry/docker-registry.sh"
