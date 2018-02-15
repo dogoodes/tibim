@@ -9,12 +9,12 @@
 
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$(pwd)
-ELASTICSEARCH_PATH="/docker-compose/elasticsearch/elasticsearch.sh"
-JENKINS_PATH="/docker-compose/jenkins/jenkins.sh"
-MONGODB_PATH="/docker-compose/mongodb/mongodb.sh"
-MYSQL_PATH="/docker-compose/mysql"
-NEXUX_PATH="/docker-compose/nexus"
+APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
+ELASTICSEARCH_PATH=$APP_ROOT_PATH"/docker-compose/elasticsearch/elasticsearch.sh"
+JENKINS_PATH=$APP_ROOT_PATH"/docker-compose/jenkins/jenkins.sh"
+MONGODB_PATH=$APP_ROOT_PATH"/docker-compose/mongodb/mongodb.sh"
+MYSQL_PATH=$APP_ROOT_PATH"/docker-compose/mysql"
+NEXUX_PATH=$APP_ROOT_PATH"/docker-compose/nexus"
 PARAMETER=$1
 COMMAND="tibim docker-compose"
 

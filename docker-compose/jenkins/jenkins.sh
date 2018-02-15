@@ -9,8 +9,8 @@
 
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$(pwd)
-DOCKER_COMPOSE_PATH="/docker-compose/jenkins/docker-compose.yml"
+APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
+DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/jenkins/docker-compose.yml"
 PARAMETER=$1
 COMMAND="tibim docker-compose jenkins"
 
@@ -42,11 +42,11 @@ help() {
 }
 
 run () {
-    docker-compose -f $APP_ROOT_PATH$DOCKER_COMPOSE_PATH up
+    docker-compose -f $DOCKER_COMPOSE_PATH up
 }
 
 run_in_background () {
-    docker-compose -f $APP_ROOT_PATH$DOCKER_COMPOSE_PATH up -d
+    docker-compose -f $DOCKER_COMPOSE_PATH up -d
 }
 
 main() {
