@@ -11,8 +11,8 @@ services:
     #   MYSQL_USER: 'root'
     #   MYSQL_PASS: 'root'
     #   # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    # volumes:
-    #   - '/opt/docker/mysql:/var/lib/mysql'
+     volumes:
+       - '/opt/docker/nexus:/var/lib/mysql'
     # expose:
       # - '3306'
     # ports:

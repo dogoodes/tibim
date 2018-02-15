@@ -51,11 +51,11 @@ help() {
 call() {
     shift 1
     case $PARAMETER in
-        elasticsearch)    sh $APP_ROOT_PATH$ELASTICSEARCH_PATH "$@" ;;
-        jenkins)          sh $APP_ROOT_PATH$JENKINS_PATH "$@" ;;
-        mongodb)          sh $APP_ROOT_PATH$MONGODB_PATH "$@" ;;
-        mysql)            sh $APP_ROOT_PATH$MYSQL_PATH "$@" ;;
-        nexus)            sh $APP_ROOT_PATH$NEXUX_PATH "$@" ;;
+        elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
+        jenkins)          sh $JENKINS_PATH "$@" ;;
+        mongodb)          sh $MONGODB_PATH "$@" ;;
+        mysql)            sh $MYSQL_PATH "$@" ;;
+        nexus)            sh $NEXUX_PATH "$@" ;;
         *)                empty ;;
     esac
 }
