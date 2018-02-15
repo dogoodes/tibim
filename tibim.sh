@@ -8,7 +8,7 @@
 ################################################################################
 
 #Aux
-#ln -s tibim.sh tibim
+#ln -s $HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim/tibim.sh tibim
 #sudo chmod +x tibim
 #sudo mv tibim /usr/local/bin/
 
