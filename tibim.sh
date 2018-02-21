@@ -62,12 +62,13 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      commons"
-    echo "      docker"
-    echo "      docker-compose"
-    echo "      installer"
-    echo "      version"
-    echo "      wiki"
+    echo "      commons, -c"
+    echo "      docker, -d"
+    echo "      docker-compose, -dc"
+    echo "      installer, -i"
+    echo "      version, -v"
+    echo "      open-path, -cd"
+    echo "      wiki, -w"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
@@ -77,6 +78,11 @@ version() {
     echo "Tibim version 1.0.0"
 }
 
+open_path() {
+    cd $APP_ROOT_PATH
+    exec bash
+}
+
 call() {
     shift 1
     case $PARAMETER in
@@ -84,13 +90,14 @@ call() {
         docker | -d)           echo "$@" ;;
         docker-compose | -dc)  sh $DOCKER_COMPOSE_PATH "$@" ;;
         installer | -i)        echo "$@" ;;
+        open-path | -cd)       open_path ;;
         wiki | -w)             sh $WIKI_PATH "$@" ;;
         *)                     empty ;;
     esac
 }
 
 empty() {
-    echo "Usage $COMMAND {commons|docker|docker-compose|installer|wiki}"
+    echo "Usage $COMMAND {commons|docker|docker-compose|installer|open-path|wiki}"
 }
 
 main() {
