@@ -11,7 +11,10 @@
 
 APP_ROOT_PATH=$APP_ROOT_PATH
 if [ "$APP_ROOT_PATH" = "" ]; then
+    # echo $APP_ROOT_PATH 1
     APP_ROOT_PATH=$(pwd)
+# else
+    # echo $APP_ROOT_PATH 2
 fi
 
 ################################################################################

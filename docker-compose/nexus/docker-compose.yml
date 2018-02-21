@@ -1,7 +1,7 @@
-version: '2'
+version: '3'
 services:
   nexus:
-    image: 'sonatype/nexus3:3.7.1'
+    image: 'sonatype/nexus3:latest'
     container_name: 'nexus3'
     restart: 'always'
     # environment:
@@ -12,7 +12,7 @@ services:
     #   MYSQL_PASS: 'root'
     #   # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
      volumes:
-       - '/opt/docker/nexus:/var/lib/mysql'
+       - '~/docker/nexus:/var/lib/mysql'
     # expose:
       # - '3306'
     # ports:

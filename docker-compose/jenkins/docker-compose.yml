@@ -1,10 +1,11 @@
-version: '2'
+version: '3'
 services:
   jenkins:
-    image: '2.60.3-alpine'
+    image: 'jenkins:latest'
     container_name: 'jenkins'
     restart: 'always'
     volumes:
-      - '/opt/docker/jenkins:/var/jenkins_home'
+      - '~/docker/jenkins:/var/jenkins_home'
     ports:
-      - '49001:8080'
+      - '18080:8080'
+      - '50000:50000'
