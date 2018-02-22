@@ -21,9 +21,9 @@ fi
 
 ### ..:: Execution key ::..
 
-DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/nexus/docker-compose.yml"
+DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/devops/docker-compose.yml"
 PARAMETER=$1
-COMMAND="tibim docker-compose nexus"
+COMMAND="tibim docker-compose devops"
 
 ################################################################################
 

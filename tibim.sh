@@ -33,11 +33,11 @@ fi
 
 DEBUG="y" #y or n
 
-DOCKER_PATH=$APP_ROOT_PATH"/docker/docker.sh"
-DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/docker-compose.sh"
-INSTALLER_PATH=$APP_ROOT_PATH"/docker-registry/docker-registry.sh"
-VAGRANT_PATH=$APP_ROOT_PATH"/vagrant/vagrant.sh"
-WIKI_PATH=$APP_ROOT_PATH"/wiki/wiki.sh"
+DOCKER_PATH="$APP_ROOT_PATH/docker/docker.sh"
+DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/docker-compose.sh"
+INSTALLER_PATH="$APP_ROOT_PATH/docker-registry/docker-registry.sh"
+KUBERNETES_PATH="$APP_ROOT_PATH/kubernetes/kubernetes.sh"
+WIKI_PATH="$APP_ROOT_PATH/wiki/wiki.sh"
 PARAMETER=$1
 COMMAND="tibim"
 
@@ -66,8 +66,9 @@ help() {
     echo "      docker, -d"
     echo "      docker-compose, -dc"
     echo "      installer, -i"
-    echo "      version, -v"
+    echo "      kubernetes, -k"
     echo "      open-path, -cd"
+    echo "      version, -v"
     echo "      wiki, -w"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
@@ -89,6 +90,7 @@ call() {
         commons | -c)          echo "$@" ;;
         docker | -d)           echo "$@" ;;
         docker-compose | -dc)  sh $DOCKER_COMPOSE_PATH "$@" ;;
+        kubernetes | -k)       sh $KUBERNETES_PATH "$@" ;;
         installer | -i)        echo "$@" ;;
         open-path | -cd)       open_path ;;
         wiki | -w)             sh $WIKI_PATH "$@" ;;

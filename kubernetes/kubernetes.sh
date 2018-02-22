@@ -21,13 +21,12 @@ fi
 
 ### ..:: Execution key ::..
 
-SCRIPT="docker-compose"
-DEVOPS_PATH="$APP_ROOT_PATH/$SCRIPT/devops/devops.sh"
+SCRIPT="kubernetes"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$SCRIPT/elasticsearch/elasticsearch.sh"
 JENKINS_PATH="$APP_ROOT_PATH/$SCRIPT/jenkins/jenkins.sh"
 MONGODB_PATH="$APP_ROOT_PATH/$SCRIPT/mongodb/mongodb.sh"
-MYSQL_PATH="$APP_ROOT_PATH/$SCRIPT/mysql/mysql.sh"
-NEXUS_PATH="$APP_ROOT_PATH/$SCRIPT/nexus/nexus.sh"
+MYSQL_PATH="$APP_ROOT_PATH/$SCRIPT/mysql"
+NEXUX_PATH="$APP_ROOT_PATH/$SCRIPT/nexus"
 PARAMETER=$1
 COMMAND="tibim $SCRIPT"
 
@@ -51,7 +50,6 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      devops"
     echo "      elasticsearch"
     echo "      jenkins"
     echo "      mongodb"
@@ -65,18 +63,17 @@ help() {
 call() {
     shift 1
     case $PARAMETER in
-        devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         jenkins)          sh $JENKINS_PATH "$@" ;;
         mongodb)          sh $MONGODB_PATH "$@" ;;
         mysql)            sh $MYSQL_PATH "$@" ;;
-        nexus)            sh $NEXUS_PATH "$@" ;;
+        nexus)            sh $NEXUX_PATH "$@" ;;
         *)                empty ;;
     esac
 }
 
 empty() {
-    echo "Usage $COMMAND {devops|elasticsearch|jenkins|mongodb|mysql|nexus}"
+    echo "Usage $COMMAND {elasticsearch|jenkins|mongodb|mysql|nexus}"
 }
 
 main() {
