@@ -28,6 +28,7 @@ JENKINS_PATH="$APP_ROOT_PATH/$SCRIPT/jenkins/jenkins.sh"
 MONGODB_PATH="$APP_ROOT_PATH/$SCRIPT/mongodb/mongodb.sh"
 MYSQL_PATH="$APP_ROOT_PATH/$SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$SCRIPT/nexus/nexus.sh"
+SONARQUBE_PATH="$APP_ROOT_PATH/$SCRIPT/sonarqube/sonarqube.sh"
 PARAMETER=$1
 COMMAND="tibim $SCRIPT"
 
@@ -57,6 +58,7 @@ help() {
     echo "      mongodb"
     echo "      mysql"
     echo "      nexus"
+    echo "      sonarqube"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
@@ -71,12 +73,13 @@ call() {
         mongodb)          sh $MONGODB_PATH "$@" ;;
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
+        sonarqube)        sh $SONARQUBE_PATH "$@" ;;
         *)                empty ;;
     esac
 }
 
 empty() {
-    echo "Usage $COMMAND {devops|elasticsearch|jenkins|mongodb|mysql|nexus}"
+    echo "Usage $COMMAND {devops|elasticsearch|jenkins|mongodb|mysql|nexus|sonarqube}"
 }
 
 main() {

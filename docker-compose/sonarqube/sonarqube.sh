@@ -11,19 +11,19 @@
 
 APP_ROOT_PATH=$APP_ROOT_PATH
 if [ "$APP_ROOT_PATH" = "" ]; then
-    # echo $APP_ROOT_PATH 1
-    APP_ROOT_PATH=$(pwd)
+  # echo $APP_ROOT_PATH 1
+  APP_ROOT_PATH=$(pwd)
 # else
-    # echo $APP_ROOT_PATH 2
+  # echo $APP_ROOT_PATH 2
 fi
 
 ################################################################################
 
 ### ..:: Execution key ::..
 
-DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/mysql/docker-compose.yml"
+DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/sonarqube/docker-compose.yml"
 PARAMETER=$1
-COMMAND="tibim docker-compose mysql"
+COMMAND="tibim docker-compose sonarqube"
 
 ################################################################################
 

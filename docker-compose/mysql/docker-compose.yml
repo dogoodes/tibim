@@ -1,19 +1,17 @@
-version: '3'
+version: '2'
 services:
   mysql:
     image: 'mysql:5.7'
     container_name: 'mysql'
     restart: 'always'
     environment:
-      MYSQL_DATABASE: 'c4_test'
-      # MYSQL_ROOT_HOST: '172.18.0.1'
-      # MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'dogood'
       MYSQL_USER: 'root'
       MYSQL_PASS: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+      # MYSQL_ROOT_HOST: '172.18.0.1'
       # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
-      - '/opt/docker/mysql:/var/lib/mysql'
-    # expose:
-      # - '3306'
+      - '~/docker/mysql:/var/lib/mysql'
     ports:
-      - '3306:3306'
+      - '13306:3306'
