@@ -11,17 +11,14 @@
 
 APP_ROOT_PATH=$APP_ROOT_PATH
 if [ "$APP_ROOT_PATH" = "" ]; then
-  # echo $APP_ROOT_PATH 1
-  APP_ROOT_PATH=$(pwd)
-# else
-  # echo $APP_ROOT_PATH 2
+    APP_ROOT_PATH=$(pwd)
 fi
 
 ################################################################################
 
 ### ..:: Execution key ::..
 
-NAME_SCRIPT="devops"
+NAME_SCRIPT="grafana"
 DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/$NAME_SCRIPT/docker-compose.yml"
 PARAMETER=$1
 COMMAND="tibim docker-compose $NAME_SCRIPT"

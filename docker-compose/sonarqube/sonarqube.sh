@@ -21,9 +21,10 @@ fi
 
 ### ..:: Execution key ::..
 
-DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/sonarqube/docker-compose.yml"
+NAME_SCRIPT="sonarqube"
+DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/$NAME_SCRIPT/docker-compose.yml"
 PARAMETER=$1
-COMMAND="tibim docker-compose sonarqube"
+COMMAND="tibim docker-compose $NAME_SCRIPT"
 
 ################################################################################
 

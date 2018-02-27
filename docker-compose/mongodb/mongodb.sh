@@ -18,10 +18,10 @@ fi
 
 ### ..:: Execution key ::..
 
-APP_ROOT_PATH=$HOME"/Developer/workspace/dogood/dogood-devops/tibim/tibim"
-DOCKER_COMPOSE_PATH=$APP_ROOT_PATH"/docker-compose/mongodb/docker-compose.yml"
+NAME_SCRIPT="mongodb"
+DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/$NAME_SCRIPT/docker-compose.yml"
 PARAMETER=$1
-COMMAND="tibim docker-compose mongodb"
+COMMAND="tibim docker-compose $NAME_SCRIPT"
 
 ################################################################################
 
