@@ -37,6 +37,7 @@ DOCKER_PATH="$APP_ROOT_PATH/docker/docker.sh"
 DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/docker-compose.sh"
 INSTALLER_PATH="$APP_ROOT_PATH/docker-registry/docker-registry.sh"
 KUBERNETES_PATH="$APP_ROOT_PATH/kubernetes/kubernetes.sh"
+VAGRANT_PATH="$APP_ROOT_PATH/vagrant/vagrant.sh"
 WIKI_PATH="$APP_ROOT_PATH/wiki/wiki.sh"
 PARAMETER=$1
 COMMAND="tibim"
@@ -90,9 +91,10 @@ call() {
         commons | -c)          echo "$@" ;;
         docker | -d)           echo "$@" ;;
         docker-compose | -dc)  sh $DOCKER_COMPOSE_PATH "$@" ;;
-        kubernetes | -k)       sh $KUBERNETES_PATH "$@" ;;
         installer | -i)        echo "$@" ;;
+        kubernetes | -k)       sh $KUBERNETES_PATH "$@" ;;
         open-path | -cd)       open_path ;;
+        vagrant | -vg)         echo "$@" ;;
         wiki | -w)             sh $WIKI_PATH "$@" ;;
         *)                     empty ;;
     esac
