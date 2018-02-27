@@ -1,11 +1,13 @@
-version: '3'
+version: "2"
 services:
   jenkins:
-    image: 'jenkins:latest'
-    container_name: 'jenkins'
-    restart: 'always'
-    volumes:
-      - '~/docker/jenkins:/var/jenkins_home'
+    image: jenkins:latest
+    container_name: jenkins
+    restart: always
     ports:
-      - '18080:8080'
-      - '50000:50000'
+      - "18080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins:/var/jenkins_home
+volumes:
+  jenkins:

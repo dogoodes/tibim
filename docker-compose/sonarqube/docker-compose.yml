@@ -1,7 +1,8 @@
 version: "2"
 services:
   sonarqube:
-    image: sonarqube
+    image: sonarqube:latest
+    container_name: sonarqube
     ports:
       - "19000:9000"
     networks:
@@ -14,7 +15,8 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
   db:
-    image: postgres
+    image: postgres:latest
+    container_name: postgres
     networks:
       - sonarnet
     environment:
