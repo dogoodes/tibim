@@ -3,6 +3,7 @@ services:
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
+    restart: always
     ports:
       - "19000:9000"
     networks:
@@ -17,6 +18,7 @@ services:
   db:
     image: postgres:latest
     container_name: postgres
+    restart: always
     networks:
       - sonarnet
     environment:

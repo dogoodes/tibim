@@ -1,9 +1,50 @@
 version: "2"
 services:
-  # zabbix:
-    # image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
-    # container_name: elasticsearch
-    # volumes:
-      # - ~/docker/elasticsearch/node1:/usr/share/elasticsearch/data
-    # ports:
-      # - "9200:9200"
+  zabbix-db:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "zabbix"
+      MYSQL_DATABASE: "zabbix"
+      MYSQL_USER: "zabbix"
+      MYSQL_PASSWORD: "zabbix"
+    volumes:
+      - './db/:/var/lib/mysql'
+      - '/etc/localtime:/etc/localtime:ro'
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql:ubuntu-3.4-latest
+    container_name: zabbix-server
+    restart: always
+    environment:
+      DB_SERVER_HOST: "zabbix-db"
+      MYSQL_DATABASE: "zabbix"
+      MYSQL_USER: "zabbix"
+      MYSQL_PASSWORD: "zabbix"
+      ZBX_CACHESIZE: "128M"
+      ZBX_VALUECACHESIZE: "128M"
+    volumes:
+      - './xtrafiles:/srv/xtrafiles'
+      - './alertscripts:/usr/lib/zabbix/alertscripts'
+      - '/etc/localtime:/etc/localtime:ro'
+    depends_on:
+      - zabbix-db
+    ports:
+      - '10051:10051'
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql:ubuntu-latest
+    container_name: zabbix-web
+    restart: always
+    environment:
+      DB_SERVER_HOST: "zabbix-db"
+      MYSQL_DATABASE: "zabbix"
+      MYSQL_USER: "zabbix"
+      MYSQL_PASSWORD: "zabbix"
+      ZBX_SERVER_HOST: "zabbix-server"
+      TZ: "Europe/Budapest"
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+    ports:
+      - '180:80'
+      - '1443:443'
