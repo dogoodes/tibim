@@ -9,9 +9,9 @@ services:
       MYSQL_DATABASE: "zabbix"
       MYSQL_USER: "zabbix"
       MYSQL_PASSWORD: "zabbix"
-    volumes:
-      - './db/:/var/lib/mysql'
-      - '/etc/localtime:/etc/localtime:ro'
+#    volumes:
+#      - './db/:/var/lib/mysql'
+#      - '/etc/localtime:/etc/localtime:ro'
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
   zabbix-server:
     image: zabbix/zabbix-server-mysql:ubuntu-3.4-latest
@@ -24,10 +24,10 @@ services:
       MYSQL_PASSWORD: "zabbix"
       ZBX_CACHESIZE: "128M"
       ZBX_VALUECACHESIZE: "128M"
-    volumes:
-      - './xtrafiles:/srv/xtrafiles'
-      - './alertscripts:/usr/lib/zabbix/alertscripts'
-      - '/etc/localtime:/etc/localtime:ro'
+#    volumes:
+#      - './xtrafiles:/srv/xtrafiles'
+#      - './alertscripts:/usr/lib/zabbix/alertscripts'
+#      - '/etc/localtime:/etc/localtime:ro'
     depends_on:
       - zabbix-db
     ports:
@@ -43,8 +43,8 @@ services:
       MYSQL_PASSWORD: "zabbix"
       ZBX_SERVER_HOST: "zabbix-server"
       TZ: "Europe/Budapest"
-    volumes:
-      - '/etc/localtime:/etc/localtime:ro'
+#    volumes:
+#      - '/etc/localtime:/etc/localtime:ro'
     ports:
       - '180:80'
       - '1443:443'
