@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: jenkins-pod
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins:2.60.3-alpine
+          ports:
+            - containerPort: 8080

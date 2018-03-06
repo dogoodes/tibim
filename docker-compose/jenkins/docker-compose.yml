@@ -1,13 +1,13 @@
 version: '2'
 services:
   jenkins:
-    image: dogood/jenkins:latest
+    image: jenkins:2.60.3-alpine
     container_name: jenkins
     restart: always
     ports:
       - '18080:8080'
       - '50000:50000'
     volumes:
-      - jenkins:/var/jenkins_home
+      - volume-jenkins:/var/jenkins_home
 volumes:
-  jenkins:
+  volume-jenkins:

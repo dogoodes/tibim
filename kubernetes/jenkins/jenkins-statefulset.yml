@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: jenkins-statefulset
+spec:
+  replicas: 1
+  serviceName: jenkins-statefulset
+  template:
+    metadata:
+      labels:
+        name: jenkins-pod
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins:2.60.3-alpine
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: volume-jenkins
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: volume-jenkins
+          persistentVolumeClaim:
+            claimName: jenkins-persistentvolumeclaim

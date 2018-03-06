@@ -1,12 +1,10 @@
-apiVersion: v1
+apiVersion: apps/v1beta1
 kind: Pod
 metadata:
-  name: jenkins
-  labels:
-    app: jenkins
+  name: jenkins-pod
 spec:
   containers:
     - name: jenkins
-      image: dogood/jenkins:latest
+      image: jenkins:2.60.3-alpine
       ports:
         - containerPort: 8080
