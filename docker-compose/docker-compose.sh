@@ -25,6 +25,7 @@ NAME_SCRIPT="docker-compose"
 DEVOPS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/devops/devops.sh"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
 GRAFANA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/grafana/grafana.sh"
+INFLUXDB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/influxdb/influxdb.sh"
 JENKINS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/jenkins/jenkins.sh"
 MONGODB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mongodb/mongodb.sh"
 MONITORING_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/monitoring/monitoring.sh"
@@ -76,6 +77,7 @@ call() {
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         grafana)          sh $GRAFANA_PATH "$@" ;;
+        influxdb)         sh $INFLUXDB_PATH "$@" ;;
         jenkins)          sh $JENKINS_PATH "$@" ;;
         mongodb)          sh $MONGODB_PATH "$@" ;;
         monitoring)       sh $MONITORING_PATH "$@" ;;
@@ -88,7 +90,7 @@ call() {
 }
 
 empty() {
-    echo "Usage $COMMAND {devops|elasticsearch|jenkins|mongodb|mysql|nexus|sonarqube}"
+    echo "Usage $COMMAND {devops|elasticsearch|influxdb|jenkins|mongodb|mysql|nexus|sonarqube|zabbix}"
 }
 
 main() {
