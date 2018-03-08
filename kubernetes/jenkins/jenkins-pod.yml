@@ -1,5 +1,5 @@
-kind: Pod
 apiVersion: apps/v1beta1
+kind: Pod
 metadata:
   name: jenkins-pod
 spec:
@@ -8,3 +8,4 @@ spec:
       image: jenkins:2.60.3-alpine
       ports:
         - containerPort: 8080
+        - containerPort: 50000
