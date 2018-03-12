@@ -1,6 +1,6 @@
 version: '2'
 services:
-  grafana:
+  influxdb:
     image: influxdb:1.5.0-alpine
     container_name: influxdb
     restart: always
