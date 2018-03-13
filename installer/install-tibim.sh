@@ -22,7 +22,7 @@ get_dir_root() {
 }
 
 create_simbolic_link() {
-    sudo -S ln -s $TIBIM_PATH/tibim.sh /usr/local/bin/tibim-teste
+    sudo -S ln -s $TIBIM_PATH/tibim.sh /usr/local/bin/tibim
 }
 
 main() {
