@@ -11,7 +11,7 @@
 
 APP_ROOT_PATH=$APP_ROOT_PATH
 if [ "$APP_ROOT_PATH" = "" ]; then
-    APP_ROOT_PATH=$(pwd)
+    APP_ROOT_PATH="$(dirname "$(realpath "$0")")"
 fi
 
 ################################################################################

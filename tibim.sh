@@ -21,10 +21,7 @@
 
 APP_ROOT_PATH=$APP_ROOT_PATH
 if [ "$APP_ROOT_PATH" = "" ]; then
-    # echo $APP_ROOT_PATH 1
-    APP_ROOT_PATH=$(pwd)
-# else
-    # echo $APP_ROOT_PATH 2
+    export APP_ROOT_PATH="$(dirname "$(realpath "$0")")"
 fi
 
 ################################################################################
@@ -101,7 +98,7 @@ call() {
 }
 
 empty() {
-    echo "Usage $COMMAND {commons|docker|docker-compose|installer|open-path|wiki}"
+    echo "Usage $COMMAND {commons|docker|docker-compose|installer|kubernetes|open-path|vagrant|wiki}"
 }
 
 main() {
