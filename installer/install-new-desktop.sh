@@ -6,6 +6,7 @@ sudo apt-get update
 
 sudo apt-get install -y \
 		ardesia \
+		# atom \ 						>> Precisa instalar referências
 		colordiff \
 		default-jdk \
 		dkms \
@@ -30,6 +31,8 @@ sudo apt-get install -y \
 		myspell-pt-br \
 		nfs-common \
 		nmap \
+		# nodejs \
+		# npm \
 		okular \
 		openssh-client \
 		openssh-server \
@@ -39,11 +42,13 @@ sudo apt-get install -y \
 		r-base-core \
 		rabbitmq-server \
 		rdesktop \
+		# sbt \
 		sshpass \
 		terminator \ 				#terminal emulator
 		texmaker \
 		tree \
 		unrar \ 						#applications for extracting RAR file archives
+		# vagrant \
 		vim \
 		virtualbox \ 				#it supports the creation and management of guest virtual machines
 		vpnc \

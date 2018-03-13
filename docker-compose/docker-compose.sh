@@ -19,6 +19,10 @@ fi
 ### ..:: Execution key ::..
 
 NAME_SCRIPT="docker-compose"
+PARAMETER=$1
+COMMAND="tibim $NAME_SCRIPT"
+
+CAMPIMETRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/products/campimetro/campimetro.sh"
 DEVOPS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/devops/devops.sh"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
 GRAFANA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/grafana/grafana.sh"
@@ -30,8 +34,6 @@ MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
 ZABBIX_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/zabbix/zabbix.sh"
-PARAMETER=$1
-COMMAND="tibim $NAME_SCRIPT"
 
 ################################################################################
 
@@ -42,7 +44,7 @@ app() {
             *)      call $@ ;;
         esac
     else
-        empty
+        help
     fi
 }
 
@@ -54,6 +56,7 @@ help() {
     echo ""
     echo "Options:"
     echo "      devops"
+    echo "      campimetro"
     echo "      elasticsearch"
     echo "      grafana"
     echo "      jenkins"
@@ -71,6 +74,7 @@ help() {
 call() {
     shift 1
     case $PARAMETER in
+        campimetro)       sh $CAMPIMETRO_PATH "$@" ;;
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         grafana)          sh $GRAFANA_PATH "$@" ;;
@@ -84,10 +88,6 @@ call() {
         zabbix)           sh $ZABBIX_PATH "$@" ;;
         *)                empty ;;
     esac
-}
-
-empty() {
-    echo "Usage $COMMAND {devops|elasticsearch|influxdb|jenkins|mongodb|mysql|nexus|sonarqube|zabbix}"
 }
 
 main() {

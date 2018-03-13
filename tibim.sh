@@ -49,7 +49,7 @@ app() {
             *)              call $@ ;;
         esac
     else
-        empty
+        help
     fi
 }
 
@@ -95,10 +95,6 @@ call() {
         wiki | -w)             sh $WIKI_PATH "$@" ;;
         *)                     empty ;;
     esac
-}
-
-empty() {
-    echo "Usage $COMMAND {commons|docker|docker-compose|installer|kubernetes|open-path|vagrant|wiki}"
 }
 
 main() {

@@ -19,13 +19,10 @@ fi
 ### ..:: Execution key ::..
 
 SCRIPT="kubernetes"
-ELASTICSEARCH_PATH="$APP_ROOT_PATH/$SCRIPT/elasticsearch/elasticsearch.sh"
-JENKINS_PATH="$APP_ROOT_PATH/$SCRIPT/jenkins/jenkins.sh"
-MONGODB_PATH="$APP_ROOT_PATH/$SCRIPT/mongodb/mongodb.sh"
-MYSQL_PATH="$APP_ROOT_PATH/$SCRIPT/mysql"
-NEXUX_PATH="$APP_ROOT_PATH/$SCRIPT/nexus"
 PARAMETER=$1
 COMMAND="tibim $SCRIPT"
+
+JENKINS_PATH="$APP_ROOT_PATH/$SCRIPT/jenkins/jenkins.sh"
 
 ################################################################################
 
@@ -36,7 +33,7 @@ app() {
             *)      call $@ ;;
         esac
     else
-        empty
+        help
     fi
 }
 
@@ -47,11 +44,7 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      elasticsearch"
     echo "      jenkins"
-    echo "      mongodb"
-    echo "      mysql"
-    echo "      nexus"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
@@ -67,10 +60,6 @@ call() {
         nexus)            sh $NEXUX_PATH "$@" ;;
         *)                empty ;;
     esac
-}
-
-empty() {
-    echo "Usage $COMMAND {elasticsearch|jenkins|mongodb|mysql|nexus}"
 }
 
 main() {
