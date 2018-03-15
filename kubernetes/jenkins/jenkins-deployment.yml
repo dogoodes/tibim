@@ -1,13 +1,16 @@
-apiVersion: apps/v1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: jenkins-deployment
   namespace: jenkins
+  labels:
+    app: jenkins
 spec:
+  replicas: 1
   template:
     metadata:
       labels:
-        name: jenkins-pod
+        name: jenkins
     spec:
       containers:
         - name: jenkins
@@ -21,4 +24,4 @@ spec:
       volumes:
         - name: volume-jenkins
           persistentVolumeClaim:
-            claimName: jenkins-persistentvolumeclaim
+            claimName: jenkins-pv-claim

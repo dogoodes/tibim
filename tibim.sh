@@ -49,8 +49,13 @@ app() {
             *)              call $@ ;;
         esac
     else
+        error
         help
     fi
+}
+
+error() {
+  echo "ERROR: "
 }
 
 help() {
