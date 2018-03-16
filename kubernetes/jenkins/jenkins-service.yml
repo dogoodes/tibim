@@ -15,4 +15,4 @@ spec:
       targetPort: 50000
       name: slave
   selector:
-    name: jenkins-pod
+    name: jenkins

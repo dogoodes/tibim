@@ -1,12 +1,13 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1beta1
+kind: StatefulSet
 metadata:
   name: jenkins-deployment
   namespace: jenkins
   labels:
     app: jenkins
 spec:
-  replicas: 1
+  replicas: 3
+  serviceName: jenkins
   template:
     metadata:
       labels:
