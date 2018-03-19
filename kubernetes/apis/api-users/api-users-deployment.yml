@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: api-users-deployment
+  namespace: api-users
+  labels:
+    app: api-users
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: api-users
+    spec:
+      containers:
+        - name: api-users
+          image: dogood/api-users:latest
+          ports:
+            - containerPort: 8080
