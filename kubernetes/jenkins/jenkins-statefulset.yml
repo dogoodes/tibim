@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1beta1
+kind: StatefulSet
 metadata:
   name: jenkins-statefulset
   namespace: jenkins
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins:2.60.3-alpine
+          image: jenkins/jenkins:2.67
           ports:
             - containerPort: 8080
             - containerPort: 50000
