@@ -1,1 +1,0 @@
-gcloud compute disks create --size 3GB pd-ssd-jenkins

@@ -1,13 +1,13 @@
-apiVersion: apps/v1beta1
-kind: StatefulSet
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: jenkins-deployment
+  name: jenkins-statefulset
   namespace: jenkins
   labels:
     app: jenkins
 spec:
-  replicas: 3
-  serviceName: jenkins
+  serviceName: jenkins-service
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,7 +15,14 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins:latest
+          image: jenkins:2.60.3-alpine
           ports:
             - containerPort: 8080
             - containerPort: 50000
+          volumeMounts:
+            - name: jenkins-volume
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-volume
+          persistentVolumeClaim:
+            claimName: jenkins-persistentvolumeclaim
