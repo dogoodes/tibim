@@ -1,0 +1,52 @@
+Name:         nexus3pod
+Namespace:    default
+Node:         gke-dogood-kub-cloud-default-pool-57431330-6rxt/10.128.0.2
+Start Time:   Wed, 21 Mar 2018 05:36:19 -0300
+Labels:       name=nexus3pod
+Annotations:  kubernetes.io/limit-ranger=LimitRanger plugin set: cpu request for container nexus3pod
+Status:       Running
+IP:           10.16.0.51
+Containers:
+  nexus3pod:
+    Container ID:   docker://981edd78729e173996ff6c67ca96af4bcf0f5d29ff3b553d621ad65a20369771
+    Image:          sonatype/nexus3:latest
+    Image ID:       docker-pullable://sonatype/nexus3@sha256:0c84eb9c3cec1e64c9ed19b1fca2eb272ce0e9429e146ace07f11a31455d1bdd
+    Port:           8081/TCP
+    State:          Running
+      Started:      Wed, 21 Mar 2018 05:36:29 -0300
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:        100m
+    Environment:  <none>
+    Mounts:
+      /var from nexus3pod (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-hgppp (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  nexus3pod:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  claim001
+    ReadOnly:   false
+  default-token-hgppp:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-hgppp
+    Optional:    false
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     node.alpha.kubernetes.io/notReady:NoExecute for 300s
+                 node.alpha.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason                 Age   From                                                      Message
+  ----    ------                 ----  ----                                                      -------
+  Normal  Scheduled              54s   default-scheduler                                         Successfully assigned nexus3pod to gke-dogood-kub-cloud-default-pool-57431330-6rxt
+  Normal  SuccessfulMountVolume  54s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  MountVolume.SetUp succeeded for volume "default-token-hgppp"
+  Normal  SuccessfulMountVolume  45s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  MountVolume.SetUp succeeded for volume "pvc-581b7d18-2ce2-11e8-97f8-42010a800370"
+  Normal  Pulling                45s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  pulling image "sonatype/nexus3:latest"
+  Normal  Pulled                 45s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Successfully pulled image "sonatype/nexus3:latest"
+  Normal  Created                44s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Created container
+  Normal  Started                44s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Started container

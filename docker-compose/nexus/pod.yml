@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nexus3pod
+  labels:
+    name: nexus3pod
+spec:
+  containers:
+    - name: nexus3pod
+      image: sonatype/nexus3:latest
+      ports:
+        - containerPort: 8081
+          name: "nexus3pod"
+      volumeMounts:
+      - mountPath: "/var"
+        name: nexus3pod
+  volumes:
+    - name: nexus3pod
+      persistentVolumeClaim:
+       claimName: claim001
