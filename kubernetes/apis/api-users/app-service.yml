@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-users-service
+  namespace: api-users
+  labels:
+    app: api-users
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 9001
+      targetPort: 8080
+      name: http
+  selector:
+    name: api-users

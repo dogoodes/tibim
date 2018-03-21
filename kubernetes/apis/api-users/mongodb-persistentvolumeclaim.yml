@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nexus-persistentvolumeclaim
-  namespace: nexus
+  name: mongodb-persistentvolumeclaim
+  namespace: api-users
   labels:
-    app: nexus
+    app: mongodb
 spec:
   accessModes:
     - ReadWriteOnce

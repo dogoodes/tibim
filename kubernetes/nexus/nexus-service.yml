@@ -1,13 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nexus3-service
-  namespace: nexus3
+  name: nexus-service
+  namespace: nexus
   labels:
-    name: nexus3
+    name: nexus
 spec:
   type: LoadBalancer
   ports:
     - port: 8081
+      targetPort: 8081
+      protocol: TCP
+      name: http
   selector:
-    name: nexus3
+    name: nexus

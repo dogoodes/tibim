@@ -1,12 +1,11 @@
-apiVersion: apps/v1beta1
-kind: StatefulSet
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: jenkins-statefulset
+  name: jenkins-deployment
   namespace: jenkins
   labels:
     app: jenkins
 spec:
-  serviceName: jenkins-service
   replicas: 1
   template:
     metadata:
@@ -19,6 +18,14 @@ spec:
           ports:
             - containerPort: 8080
             - containerPort: 50000
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 2
+            failureThreshold: 5
           volumeMounts:
             - name: jenkins-volume
               mountPath: /var/jenkins_home

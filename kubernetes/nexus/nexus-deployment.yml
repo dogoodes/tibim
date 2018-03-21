@@ -1,27 +1,26 @@
-apiVersion: apps/v1beta1
-kind: StatefulSet
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: nexus3-statefulset
-  namespace: nexus3
+  name: nexus-deployment
+  namespace: nexus
   labels:
-    app: nexus3
+    app: nexus
 spec:
-  serviceName: nexus3-service
   replicas: 1
   template:
     metadata:
       labels:
-       name: nexus3
+       name: nexus
     spec:
       containers:
-        - name: nexus3
+        - name: nexus
           image: sonatype/nexus3:3.9.0
           ports:
             - containerPort: 8081
           volumeMounts:
-            - name: nexus3-volume
+            - name: nexus-volume
               mountPath: /nexus-data
       volumes:
-        - name: nexus3-volume
+        - name: nexus-volume
           persistentVolumeClaim:
-            claimName: nexus3-persistentvolumeclaim
+            claimName: nexus-persistentvolumeclaim
