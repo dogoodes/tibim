@@ -1,0 +1,11 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nexus-ingress
+  namespace: nexus
+  labels:
+    app: nexus
+spec:
+  backend:
+    serviceName: nexus-service
+    servicePort: 8081
