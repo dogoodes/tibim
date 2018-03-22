@@ -21,6 +21,8 @@ spec:
           volumeMounts:
             - name: nexus-volume
               mountPath: /nexus-data
+          securityContext:
+            privileged: true
       volumes:
         - name: nexus-volume
           persistentVolumeClaim:
