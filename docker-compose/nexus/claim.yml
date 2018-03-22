@@ -1,8 +1,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: claim001
+  name: claim002
 spec:
+  securityContext:
+    - fsGroup: 200
   accessModes:
     - ReadWriteOnce
   resources:
