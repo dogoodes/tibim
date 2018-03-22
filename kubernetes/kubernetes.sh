@@ -23,6 +23,7 @@ PARAMETER=$1
 COMMAND="tibim $SCRIPT"
 
 JENKINS_PATH="$APP_ROOT_PATH/$SCRIPT/jenkins/jenkins.sh"
+NEXUS_PATH="$APP_ROOT_PATH/$SCRIPT/nexus/nexus.sh"
 
 ################################################################################
 
@@ -45,6 +46,8 @@ help() {
     echo ""
     echo "Options:"
     echo "      jenkins"
+    echo ""
+    echo "      nexus"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""

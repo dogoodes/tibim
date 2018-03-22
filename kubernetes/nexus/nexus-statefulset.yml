@@ -6,6 +6,8 @@ metadata:
   labels:
     app: nexus
 spec:
+  securityContext:
+    fsGroup: 200
   serviceName: nexus-service
   replicas: 1
   template:
@@ -13,6 +15,8 @@ spec:
       labels:
        name: nexus
     spec:
+      securityContext:
+        fsGroup: 200
       containers:
         - name: nexus
           image: sonatype/nexus3:3.9.0

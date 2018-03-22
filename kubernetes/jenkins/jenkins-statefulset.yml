@@ -6,6 +6,8 @@ metadata:
   labels:
     app: jenkins
 spec:
+  securityContext:
+    fsGroup: 300
   serviceName: jenkins-service
   replicas: 1
   template:
@@ -13,6 +15,8 @@ spec:
       labels:
         name: jenkins
     spec:
+      securityContext:
+        fsGroup: 300
       containers:
         - name: jenkins
           image: jenkins:2.60.3-alpine
