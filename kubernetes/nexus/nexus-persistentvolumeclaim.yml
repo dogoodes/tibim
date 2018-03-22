@@ -6,6 +6,8 @@ metadata:
   labels:
     app: nexus
 spec:
+  securityContext:
+    fsGroup: 200
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem

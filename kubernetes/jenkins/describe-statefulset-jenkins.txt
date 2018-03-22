@@ -1,0 +1,52 @@
+Name:           jenkins-statefulset-0
+Namespace:      jenkins
+Node:           gke-dogood-kub-cloud-default-pool-57431330-6rxt/10.128.0.2
+Start Time:     Thu, 22 Mar 2018 02:38:03 -0300
+Labels:         controller-revision-hash=jenkins-statefulset-cc6f4796
+                name=jenkins
+Annotations:    kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"StatefulSet","namespace":"jenkins","name":"jenkins-statefulset","uid":"30bbfa6a-2d93-11e8-97f8-42010a80037...
+Status:         Running
+IP:             10.16.0.59
+Created By:     StatefulSet/jenkins-statefulset
+Controlled By:  StatefulSet/jenkins-statefulset
+Containers:
+  jenkins:
+    Container ID:   docker://c25da0e50babf923d9a83becebc1ac055a11ecdaa3e8465ada9fa07f5670746b
+    Image:          jenkins:2.60.3-alpine
+    Image ID:       docker-pullable://jenkins@sha256:dfa2198cc4ad223c06dacb11420b0dda20cf79b3308764ac10fe8f458524210f
+    Ports:          8080/TCP, 50000/TCP
+    State:          Running
+      Started:      Thu, 22 Mar 2018 02:38:14 -0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/jenkins_home from jenkins-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-z5tcv (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  jenkins-volume:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  jenkins-persistentvolumeclaim
+    ReadOnly:   false
+  default-token-z5tcv:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-z5tcv
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.alpha.kubernetes.io/notReady:NoExecute for 300s
+                 node.alpha.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason                 Age   From                                                      Message
+  ----    ------                 ----  ----                                                      -------
+  Normal  Scheduled              1m    default-scheduler                                         Successfully assigned jenkins-statefulset-0 to gke-dogood-kub-cloud-default-pool-57431330-6rxt
+  Normal  SuccessfulMountVolume  1m    kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  MountVolume.SetUp succeeded for volume "default-token-z5tcv"
+  Normal  SuccessfulMountVolume  1m    kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  MountVolume.SetUp succeeded for volume "pvc-47faf05c-2bf7-11e8-97f8-42010a800370"
+  Normal  Pulled                 1m    kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Container image "jenkins:2.60.3-alpine" already present on machine
+  Normal  Created                59s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Created container
+  Normal  Started                59s   kubelet, gke-dogood-kub-cloud-default-pool-57431330-6rxt  Started container

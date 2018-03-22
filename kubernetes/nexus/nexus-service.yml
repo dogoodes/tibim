@@ -6,6 +6,8 @@ metadata:
   labels:
     name: nexus
 spec:
+  securityContext:
+    fsGroup: 200
   type: LoadBalancer
   ports:
     - port: 8081

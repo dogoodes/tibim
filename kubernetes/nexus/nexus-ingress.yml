@@ -6,6 +6,8 @@ metadata:
   labels:
     app: nexus
 spec:
+  securityContext:
+    fsGroup: 200
   backend:
     serviceName: nexus-service
     servicePort: 8081

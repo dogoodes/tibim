@@ -6,6 +6,8 @@ metadata:
   labels:
     app: jenkins
 spec:
+  securityContext:
+    fsGroup: 300
   type: LoadBalancer
   ports:
     - protocol: TCP
