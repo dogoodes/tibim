@@ -4,7 +4,7 @@ metadata:
   name: claim002
 spec:
   securityContext:
-    - fsGroup: 200
+    fsGroup: 200
   accessModes:
     - ReadWriteOnce
   resources:
