@@ -23,6 +23,7 @@ PARAMETER=$1
 COMMAND="tibim $NAME_SCRIPT"
 
 CAMPIMETRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/products/campimetro/campimetro.sh"
+CEREBRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/cerebro/cerebro.sh"
 DEVOPS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/devops/devops.sh"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
 GRAFANA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/grafana/grafana.sh"
@@ -55,8 +56,9 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      devops"
     echo "      campimetro"
+    echo "      cerebro"
+    echo "      devops"
     echo "      elasticsearch"
     echo "      grafana"
     echo "      jenkins"
@@ -75,6 +77,7 @@ call() {
     shift 1
     case $PARAMETER in
         campimetro)       sh $CAMPIMETRO_PATH "$@" ;;
+        cerebro)          sh $CEREBRO_PATH "$@" ;;
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         grafana)          sh $GRAFANA_PATH "$@" ;;

@@ -1,0 +1,30 @@
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:5.6.8-alpine
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - '9200:9200'
+    volumes:
+      - volume-elasticsearch-config:/usr/share/elasticsearch/config
+      - volume-elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - app_net
+  cerebro:
+    image: yannart/cerebro:0.7.2
+    container_name: cerebro
+    restart: always
+    ports:
+      - '9000:9000'
+    volumes:
+      - volume-cerebro:/opt/cerebro/conf
+    networks:
+      - app_net
+networks:
+  app_net:
+    driver: bridge
+volumes:
+  volume-elasticsearch-config:
+  volume-elasticsearch-data:
+  volume-cerebro:
