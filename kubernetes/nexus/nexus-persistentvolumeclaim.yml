@@ -10,6 +10,7 @@ spec:
     fsGroup: 200
   accessModes:
     - ReadWriteOnce
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 3Gi

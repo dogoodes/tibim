@@ -4,8 +4,8 @@
 echo "Creating namespace"
 kubectl create -f namespace.yml --validate=false
 
-echo "Creating ingress"
-kubectl create -f nexus-ingress.yml --validate=false
+#echo "Creating ingress"
+#kubectl create -f nexus-ingress.yml --validate=false
 
 echo "Creating service"
 kubectl create -f nexus-service.yml --validate=false
