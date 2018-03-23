@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo "Creating service"
 kubectl create -f jenkins-service.yml --validate=false
 

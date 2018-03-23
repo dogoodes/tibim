@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress
+  namespace: jenkins
+  labels:
+    app: jenkins
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: jenkins-static-ip
+spec:
+  securityContext:
+    fsGroup: 300
+  backend:
+    serviceName: jenkins-service
+    servicePort: 8080
