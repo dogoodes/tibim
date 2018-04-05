@@ -1,3 +1,12 @@
 version: '2'
 services:
   api:
+    image: elasticsearch:5.6.8-alpine
+    container_name: api-users
+    restart: always
+    ports:
+      - '9200:8080'
+    volumes:
+      - volume-api:/tmp
+volumes:
+  volume-api:
