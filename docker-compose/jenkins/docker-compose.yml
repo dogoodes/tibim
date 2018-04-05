@@ -9,5 +9,7 @@ services:
       - '50000:50000'
     volumes:
       - volume-jenkins:/var/jenkins_home
+      - volume-jenkins-docker:/var/run/docker.sock
 volumes:
   volume-jenkins:
+  volume-jenkins-docker:

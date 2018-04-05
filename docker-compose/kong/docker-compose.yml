@@ -18,8 +18,8 @@ services:
     networks:
       - app_net
   konga:
-    image: kong:0.12.3-alpine
-    container_name: kong
+    image: pantsel/konga:0.12.3-alpine
+    container_name: konga
     restart: always
     environment:
       DB_ADAPTER: postgres
