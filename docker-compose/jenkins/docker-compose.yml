@@ -1,7 +1,7 @@
 version: '2'
 services:
   jenkins:
-    image: jenkins:2.60.3
+    image: h1kkan/jenkins-docker:2.107.1
     container_name: jenkins
     restart: always
     ports:
@@ -9,7 +9,6 @@ services:
       - '50000:50000'
     volumes:
       - volume-jenkins:/var/jenkins_home
-      - volume-jenkins-docker:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   volume-jenkins:
-  volume-jenkins-docker:

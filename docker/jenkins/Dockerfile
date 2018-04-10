@@ -1,12 +1,21 @@
-FROM h1kkan/jenkins-docker:lts
+FROM shayashibara/jenkins-slave-ubuntu
 MAINTAINER dogood.es <devgood@dogood.es>
 
-USER root
+# Let's start with some basic stuff.
+RUN apt-get update -qq && apt-get install -qqy \
+   apt-transport-https \
+   ca-certificates \
+   curl \
+   lxc \
+   iptables
 
-RUN usermod -aG docker jenkins
+# Install Docker from Docker Inc. repositories.
+RUN curl -sSL https://get.docker.com/ | sh
 
-EXPOSE 8080 50000
+# Install the magic wrapper.
+ADD ./wrapdocker /usr/local/bin/wrapdocker
+RUN chmod +x /usr/local/bin/wrapdocker
 
-VOLUME ["/var/jenkins_home"]
-
-USER jenkins
+# Define additional metadata for our image.
+VOLUME /var/lib/docker
+CMD ["wrapdocker"]
