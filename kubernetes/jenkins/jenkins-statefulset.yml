@@ -19,14 +19,19 @@ spec:
         fsGroup: 300
       containers:
         - name: jenkins
-          image: jenkins:2.60.3-alpine
+          image: h1kkan/jenkins-docker:lts
           ports:
             - containerPort: 8080
             - containerPort: 50000
           volumeMounts:
-            - name: jenkins-volume
+            - name: volume-jenkins
               mountPath: /var/jenkins_home
+            - name: volume-docker-socket
+              mountPath: /var/run/docker.sock
       volumes:
-        - name: jenkins-volume
+        - name: volume-jenkins
           persistentVolumeClaim:
             claimName: jenkins-persistentvolumeclaim
+        - name: volume-docker-socket
+          hostPath:
+            path: /var/run/docker.sock
