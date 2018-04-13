@@ -2,12 +2,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mongodb-persistentvolumeclaim
-  namespace: api-users
+  namespace: api-images
   labels:
     app: mongodb
 spec:
   securityContext:
-    fsGroup: 500
+    fsGroup: 501
   accessModes:
     - ReadWriteOnce
   resources:

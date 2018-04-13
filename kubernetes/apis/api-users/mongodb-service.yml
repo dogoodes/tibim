@@ -6,6 +6,8 @@ metadata:
   labels:
     name: mongodb
 spec:
+  securityContext:
+    fsGroup: 500
   type: ClusterIP
   ports:
     - port: 27017
