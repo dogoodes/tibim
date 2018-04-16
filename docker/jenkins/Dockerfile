@@ -1,5 +1,7 @@
-FROM shayashibara/jenkins-slave-ubuntu
+FROM jenkins:2.60.3
 MAINTAINER dogood.es <devgood@dogood.es>
+
+USER root
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
@@ -17,5 +19,5 @@ ADD ./wrapdocker /usr/local/bin/wrapdocker
 RUN chmod +x /usr/local/bin/wrapdocker
 
 # Define additional metadata for our image.
-VOLUME /var/lib/docker
+VOLUME ["/var/lib/docker"]
 CMD ["wrapdocker"]
