@@ -1,21 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: api-users-deployment
-  namespace: api-users
+  name: api-images-deployment
+  namespace: api-images
   labels:
-    app: api-users
+    app: api-images
 spec:
   securityContext:
-    fsGroup: 500
+    fsGroup: 501
   replicas: 1
   template:
     metadata:
       labels:
-        name: api-users
+        name: api-images
     spec:
       containers:
-        - name: api-users
-          image: dogood/api-users:latest
+        - name: api-images
+          image: dogood/api-images:latest
           ports:
             - containerPort: 8080

@@ -7,8 +7,13 @@ services:
     ports:
       - '18080:8080'
       - '50000:50000'
+<<<<<<< HEAD
       # - '4444:4444'
     # privileged: false
+=======
+      - '4444:4444'
+    privileged: false
+>>>>>>> 878bc8a09483351890c3cd624d562787d54fee5f
     volumes:
       - volume-jenkins:/var/jenkins_home
 volumes:

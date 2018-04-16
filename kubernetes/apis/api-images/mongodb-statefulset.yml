@@ -2,12 +2,12 @@ apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: mongodb-statefulset
-  namespace: api-users
+  namespace: api-images
   labels:
     app: mongodb
 spec:
   securityContext:
-    fsGroup: 500
+    fsGroup: 501
   serviceName: mongodb-service
   replicas: 1
   template:
