@@ -30,7 +30,7 @@ app() {
         case $PARAMETER in
             help)               help ;;
             background | -b)    run_in_background ;;
-            *)                  run $@ ;;
+            *)                  help ;;
         esac
     else
         run

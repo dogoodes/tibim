@@ -89,7 +89,7 @@ call() {
         nexus)            sh $NEXUS_PATH "$@" ;;
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
         zabbix)           sh $ZABBIX_PATH "$@" ;;
-        *)                empty ;;
+        *)                help ;;
     esac
 }
 
