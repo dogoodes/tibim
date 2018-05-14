@@ -98,7 +98,7 @@ call() {
         open-path | -cd)       open_path ;;
         vagrant | -vg)         echo "$@" ;;
         wiki | -w)             sh $WIKI_PATH "$@" ;;
-        *)                     empty ;;
+        *)                     help ;;
     esac
 }
 
