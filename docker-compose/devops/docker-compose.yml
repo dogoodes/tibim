@@ -5,7 +5,7 @@ services:
     container_name: jenkins
     restart: always
     ports:
-      - "18080:8080"
+      - "8080:8080"
       - "50000:50000"
     networks:
       - sonarnet
@@ -16,7 +16,7 @@ services:
     container_name: nexus3
     restart: always
     ports:
-      - "18081:8081"
+      - "8081:8081"
     networks:
       - sonarnet
     volumes:
@@ -25,7 +25,7 @@ services:
     image: sonarqube:latest
     container_name: sonarqube
     ports:
-      - "19000:9000"
+      - "9000:9000"
     networks:
       - sonarnet
     environment:

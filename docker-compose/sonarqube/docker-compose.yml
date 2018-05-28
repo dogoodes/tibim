@@ -5,7 +5,7 @@ services:
     container_name: sonarqube
     restart: always
     ports:
-      - "19000:9000"
+      - "9000:9000"
     networks:
       - sonarnet
     environment:

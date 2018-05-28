@@ -18,9 +18,9 @@ services:
       # INFLUXDB_WRITE_USER:
       # INFLUXDB_WRITE_USER_PASSWORD:
     ports:
-      - '18086:8086' #HTTP API port
-      - '18083:8083' #Administrator interface port, if it is enabled
-      - '12003:2003' #Graphite support, if it is enabled
+      - '8086:8086' #HTTP API port
+      - '8083:8083' #Administrator interface port, if it is enabled
+      - '2003:2003' #Graphite support, if it is enabled
     volumes:
       - volume-influxdb:/var/lib/influxdb
 volumes:
