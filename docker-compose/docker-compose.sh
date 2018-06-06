@@ -29,11 +29,16 @@ ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
 GRAFANA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/grafana/grafana.sh"
 INFLUXDB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/influxdb/influxdb.sh"
 JENKINS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/jenkins/jenkins.sh"
+KAFKA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/kafka/kafka.sh"
+KONG_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/kong/kong.sh"
 MONGODB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mongodb/mongodb.sh"
 MONITORING_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/monitoring/monitoring.sh"
 MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
+REDIS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/redis/redis.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
+SPARK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/spark/spark.sh"
+STREAM_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/stream/stream.sh"
 ZABBIX_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/zabbix/zabbix.sh"
 
 ################################################################################
@@ -56,17 +61,22 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      campimetro"
     echo "      cerebro"
     echo "      devops"
     echo "      elasticsearch"
     echo "      grafana"
+    echo "      influxdb"
     echo "      jenkins"
+    echo "      kafka"
+    echo "      kong"
     echo "      mongodb"
     echo "      monitoring"
     echo "      mysql"
     echo "      nexus"
+    echo "      redis"
     echo "      sonarqube"
+    echo "      spark"
+    echo "      stream"
     echo "      zabbix"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
@@ -76,18 +86,22 @@ help() {
 call() {
     shift 1
     case $PARAMETER in
-        campimetro)       sh $CAMPIMETRO_PATH "$@" ;;
         cerebro)          sh $CEREBRO_PATH "$@" ;;
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         grafana)          sh $GRAFANA_PATH "$@" ;;
         influxdb)         sh $INFLUXDB_PATH "$@" ;;
         jenkins)          sh $JENKINS_PATH "$@" ;;
+        kafka)            sh $KAFKA_PATH "$@" ;;
+        kong)             sh $KONG_PATH "$@" ;;
         mongodb)          sh $MONGODB_PATH "$@" ;;
         monitoring)       sh $MONITORING_PATH "$@" ;;
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
+        redis)            sh $REDIS_PATH "$@" ;;
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
+        spark)            sh $SPARK_PATH "$@" ;;
+        stream)           sh $STREAM_PATH "$@" ;;
         zabbix)           sh $ZABBIX_PATH "$@" ;;
         *)                help ;;
     esac
