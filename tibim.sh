@@ -34,6 +34,7 @@ DOCKER_PATH="$APP_ROOT_PATH/docker/docker.sh"
 DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/docker-compose.sh"
 INSTALLER_PATH="$APP_ROOT_PATH/docker-registry/docker-registry.sh"
 KUBERNETES_PATH="$APP_ROOT_PATH/kubernetes/kubernetes.sh"
+UTILS_PATH="$APP_ROOT_PATH/utils/utils.sh"
 VAGRANT_PATH="$APP_ROOT_PATH/vagrant/vagrant.sh"
 WIKI_PATH="$APP_ROOT_PATH/wiki/wiki.sh"
 PARAMETER=$1
@@ -65,12 +66,14 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      commons, -c"
-    echo "      docker, -d"
+#    echo "      commons, -c"
+#    echo "      docker, -d"
     echo "      docker-compose, -dc"
-    echo "      installer, -i"
+#    echo "      installer, -i"
     echo "      kubernetes, -k"
     echo "      open-path, -cd"
+    echo "      utils, -u"
+#    echo "      vagrant, -vag"
     echo "      version, -v"
     echo "      wiki, -w"
     echo ""
@@ -96,6 +99,7 @@ call() {
         installer | -i)        echo "$@" ;;
         kubernetes | -k)       sh $KUBERNETES_PATH "$@" ;;
         open-path | -cd)       open_path ;;
+        utils | -u)            sh $UTILS_PATH "$@" ;;
         vagrant | -vg)         echo "$@" ;;
         wiki | -w)             sh $WIKI_PATH "$@" ;;
         *)                     help ;;
