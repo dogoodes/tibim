@@ -1,6 +1,6 @@
 version: "2"
 services:
-  nexus:
+  nifi:
     image: apache/nifi:latest
     container_name: nifi
     restart: always
