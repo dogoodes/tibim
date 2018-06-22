@@ -42,21 +42,95 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      sum"
+    echo "      minus, -"
+    echo "      obelus, /"
+    echo "      plus, +"
+    echo "      times, *"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
 }
 
-sum() {
-    echo $(expr $@)
+expression() {
+    echo `expr $@`
+}
+
+subtraction() {
+    EXPRESSION=$(echo $@ | tr "-" "\n")
+    RESULT=0
+    CONT=0
+
+    for N in ${EXPRESSION}
+    do
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} - ${N}`
+        fi
+    done
+
+    echo ${RESULT}
+}
+
+division() {
+    EXPRESSION=$(echo $@ | tr "/" "\n")
+    RESULT=0
+    CONT=0
+
+    for N in ${EXPRESSION}
+    do
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} / ${N}`
+        fi
+    done
+
+    echo ${RESULT}
+
+addition() {
+    EXPRESSION=$(echo $@ | tr "+" "\n")
+    RESULT=0
+    CONT=0
+
+    for N in ${EXPRESSION}
+    do
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} + ${N}`
+        fi
+    done
+
+    echo ${RESULT}
+}
+
+multiplication() {
+    EXPRESSION=$(echo $@ | tr "*" "\n")
+    I=0
+    for N in ${EXPRESSION}
+    do
+        I=`expr ${I} - ${N}`
+    done
+
+    echo ${I}
 }
 
 call() {
     shift 1
     case ${PARAMETER} in
-        sum)    sum "$@" ;;
-        *)      help ;;
+        expr)         expression "$@" ;;
+        minus | -)    subtraction "$@" ;;
+        obelus | /)   division "$@" ;;
+        plus | +)     addition "$@" ;;
+        times | x)    multiplication "$@" ;;
+        *)        help ;;
     esac
 }
 
