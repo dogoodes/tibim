@@ -35,6 +35,7 @@ MONGODB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mongodb/mongodb.sh"
 MONITORING_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/monitoring/monitoring.sh"
 MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
+NIFI_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nifi/nifi.sh"
 REDIS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/redis/redis.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
 SPARK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/spark/spark.sh"
@@ -73,6 +74,7 @@ help() {
     echo "      monitoring"
     echo "      mysql"
     echo "      nexus"
+    echo "      nifi"
     echo "      redis"
     echo "      sonarqube"
     echo "      spark"
@@ -98,6 +100,7 @@ call() {
         monitoring)       sh $MONITORING_PATH "$@" ;;
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
+        nifi)             sh $NIFI_PATH "$@" ;;
         redis)            sh $REDIS_PATH "$@" ;;
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
         spark)            sh $SPARK_PATH "$@" ;;
