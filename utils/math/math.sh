@@ -42,10 +42,12 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
-    echo "      minus, -"
-    echo "      obelus, /"
-    echo "      plus, +"
-    echo "      times, *"
+    echo "      expression, expr, -e"
+    echo "      addition, -a, +"
+    echo "      division, -d, /"
+    echo "      mod"
+    echo "      multiplication, -m, *"
+    echo "      subtraction, -s, -"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
     echo ""
@@ -55,45 +57,8 @@ expression() {
     echo `expr $@`
 }
 
-subtraction() {
-    EXPRESSION=$(echo $@ | tr "-" "\n")
-    RESULT=0
-    CONT=0
-
-    for N in ${EXPRESSION}
-    do
-        if [ ${CONT} -eq 0 ]
-        then
-            RESULT=${N}
-            CONT=`expr ${CONT} + 1`
-        else
-            RESULT=`expr ${RESULT} - ${N}`
-        fi
-    done
-
-    echo ${RESULT}
-}
-
-division() {
-    EXPRESSION=$(echo $@ | tr "/" "\n")
-    RESULT=0
-    CONT=0
-
-    for N in ${EXPRESSION}
-    do
-        if [ ${CONT} -eq 0 ]
-        then
-            RESULT=${N}
-            CONT=`expr ${CONT} + 1`
-        else
-            RESULT=`expr ${RESULT} / ${N}`
-        fi
-    done
-
-    echo ${RESULT}
-
 addition() {
-    EXPRESSION=$(echo $@ | tr "+" "\n")
+    EXPRESSION=$(echo $@ | tr " " "\n")
     RESULT=0
     CONT=0
 
@@ -111,25 +76,61 @@ addition() {
     echo ${RESULT}
 }
 
-multiplication() {
-    EXPRESSION=$(echo $@ | tr "*" "\n")
-    I=0
+division() {
+    EXPRESSION=$(echo $@ | tr " " "\n")
+    RESULT=0
+    CONT=0
+
     for N in ${EXPRESSION}
     do
-        I=`expr ${I} - ${N}`
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} / ${N}`
+        fi
     done
 
-    echo ${I}
+    echo ${RESULT}
+}
+
+mod() {
+    echo "Building..."
+}
+
+multiplication() {
+    echo "Building..."
+}
+
+subtraction() {
+    EXPRESSION=$(echo $@ | tr " " "\n")
+    RESULT=0
+    CONT=0
+
+    for N in ${EXPRESSION}
+    do
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} - ${N}`
+        fi
+    done
+
+    echo ${RESULT}
 }
 
 call() {
     shift 1
     case ${PARAMETER} in
-        expr)         expression "$@" ;;
-        minus | -)    subtraction "$@" ;;
-        obelus | /)   division "$@" ;;
-        plus | +)     addition "$@" ;;
-        times | x)    multiplication "$@" ;;
+        addition | -a | +)          addition "$@" ;;
+        division | -d | /)          division "$@" ;;
+        expression | expr | -e)     expression "$@" ;;
+        mod)                        mod "$@" ;;
+        multiplication | -m | x)    multiplication "$@" ;;
+        subtraction | -s | -)       subtraction "$@" ;;
         *)        help ;;
     esac
 }
