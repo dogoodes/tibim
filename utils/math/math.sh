@@ -46,7 +46,7 @@ help() {
     echo "      addition, -a, +"
     echo "      division, -d, /"
     echo "      mod"
-    echo "      multiplication, -m, *"
+    echo "      multiplication, -m, x"
     echo "      subtraction, -s, -"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
@@ -100,7 +100,29 @@ mod() {
 }
 
 multiplication() {
-    echo "Building..."
+    EXPRESSION=$(echo $@ | tr " " "\n")
+    RESULT=0
+    CONT=0
+
+    for N in ${EXPRESSION}
+    do
+        if [ ${CONT} -eq 0 ]
+        then
+            RESULT=${N}
+            CONT=`expr ${CONT} + 1`
+        else
+            RESULT=`expr ${RESULT} \* ${N}`
+        fi
+    done
+
+    echo ${RESULT}
+}
+
+random() {
+    MIN="$(echo $@ | cut -d' ' -f1)"
+    MAX="$(echo $@ | cut -d' ' -f2)"
+
+    shuf -i ${MIN}-${MAX} -n 1
 }
 
 subtraction() {
@@ -130,8 +152,9 @@ call() {
         expression | expr | -e)     expression "$@" ;;
         mod)                        mod "$@" ;;
         multiplication | -m | x)    multiplication "$@" ;;
+        random | -r)                random "$@" ;;
         subtraction | -s | -)       subtraction "$@" ;;
-        *)        help ;;
+        *)                          help ;;
     esac
 }
 
