@@ -5,6 +5,7 @@
 sudo apt-get update
 
 sudo apt-get install -y \
+        ansible \
 		docker.io \
         git \
 		htop \
