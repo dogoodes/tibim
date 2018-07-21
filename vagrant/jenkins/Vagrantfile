@@ -13,6 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
+  # config.ssh.insert_key = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -30,10 +31,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.cpus = 1
   end
 
+  # if Vagrant.has_plugin?("vagrant-proxyconf")
+  #   config.proxy.http     = "http://100.68.17.73:3306/"
+  #   config.proxy.https    = "https://100.68.17.73:3306/"
+  #   config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+  # end
+
   # Provisioning for jenkins master using Ansible
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioners/playbook.yml"
-  end
+  # config.vm.provision "ansible" do |ansible|
+  #   ansible.galaxy_role_file = "provisioners/requirements.yml"
+  #   ansible.galaxy_roles_path = "/etc/ansible/roles"
+  #   ansible.galaxy_command = "ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path}"
+  #   ansible.playbook = "provisioners/playbook.yml"
+  # end
 
   # config.vm.provider :aws do |aws, override|
   #     override.ssh.username = "ubuntu"

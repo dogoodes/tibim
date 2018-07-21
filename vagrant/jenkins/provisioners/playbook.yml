@@ -5,6 +5,9 @@
   sudo: True
   roles:
     - git
+    - docker
+    - geerlingguy.java
+    - geerlingguy.jenkins
 
 #  tasks:
 #  - name: Add Jenkins
