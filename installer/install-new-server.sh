@@ -10,4 +10,5 @@ sudo apt-get install -y \
         git \
 		htop \
         python3 \
+        tree \
 		vim

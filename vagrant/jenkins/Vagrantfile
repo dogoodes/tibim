@@ -4,38 +4,21 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
-  # config.ssh.insert_key = false
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
+  config.ssh.insert_key = false
+
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 5000, host: 5000
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
     # vb.gui = true
     vb.name = "jenkins"
     vb.memory = "2048"
     vb.cpus = 1
   end
-
-  # if Vagrant.has_plugin?("vagrant-proxyconf")
-  #   config.proxy.http     = "http://100.68.17.73:3306/"
-  #   config.proxy.https    = "https://100.68.17.73:3306/"
-  #   config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
-  # end
 
   # Provisioning for jenkins master using Ansible
   # config.vm.provision "ansible" do |ansible|
