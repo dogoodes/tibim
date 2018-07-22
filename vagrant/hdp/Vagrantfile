@@ -1,16 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.hostname = "pocs"
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+
   config.ssh.insert_key = false
 
-  config.vm.define :hdp do |web_config|
-    web_config.vm.network "private_network", ip: "192.168.50.10"
-    web_config.vm.provision "puppet" do |puppet|
-      puppet.manifest_file = "provision-script.pp"
-    end
+  (1..2).each do |i|
+     config.vm.define "master-#{i}" do |master|
+        master.vm.network "private_network", ip: "192.168.0.#{i}"
+        master.vm.hostname = "master-#{i}"
+
+        master.vm.provision "shell",
+           inline: "echo hello from master-#{i}"
+
+        master.vm.provider "virtualbox" do |vb|
+           vb.name = "master-#{i}"
+           vb.memory = "1024"
+           vb.cpus = 1
+        end
+     end
   end
 
-  config.vm.synced_folder "manifest/", "/vagrant/manifest"
+  (1..2).each do |i|
+     config.vm.define "worker-#{i}" do |worker|
+        worker.vm.network "private_network", ip: "192.168.1.#{i}"
+        worker.vm.hostname = "worker-#{i}"
+
+        worker.vm.provision "shell",
+           inline: "echo hello from worker-#{i}"
+
+        worker.vm.provider "virtualbox" do |vb|
+           vb.name = "worker-#{i}"
+           vb.memory = "1024"
+           vb.cpus = 1
+        end
+     end
+  end
 
 end

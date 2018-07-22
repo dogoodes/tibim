@@ -3,29 +3,34 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
+# Set your default base box here
+DEFAULT_BASE_BOX = "ubuntu/xenial64"
+DEFAULT_BASE_BOX_URL = ""
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = DEFAULT_BASE_BOX
 
   config.ssh.insert_key = false
 
-  config.vm.define "master" do |master|
-     master.vm.network "private_network", ip: "192.168.0.1"
-
-     master.vm.provider "virtualbox" do |vb|
-        vb.name = "master"
-        vb.memory = "1024"
-        vb.cpus = 1
-     end
+  def name_hosts(number)
+    hostname = "node-#{number}"
   end
 
-  config.vm.define "slave" do |slave|
-     slave.vm.network "private_network", ip: "192.168.0.10"
+  (1..2).each do |i|
+     hostname = name_hosts(i)
+     config.vm.define "#{hostname}" do |node|
+        node.vm.network "private_network", ip: "192.168.0.#{i}"
+        node.vm.hostname = "#{hostname}"
 
-     slave.vm.provider "virtualbox" do |vb|
-        vb.name = "slave"
-        vb.memory = "1024"
-        vb.cpus = 1
+        node.vm.provision "shell",
+           inline: "echo hello from #{hostname}"
+
+        node.vm.provider "virtualbox" do |vb|
+           vb.name = "#{hostname}"
+           vb.memory = "1024"
+           vb.cpus = 1
+        end
      end
   end
 
