@@ -7,14 +7,14 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/xenial64"
+  config.vm.box_check_update = false
 
-  config.ssh.insert_key = false
+  config.ssh.username = "root"
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 5000, host: 5000
 
   config.vm.provider "virtualbox" do |vb|
-    # vb.gui = true
     vb.name = "jenkins"
     vb.memory = "2048"
     vb.cpus = 1
