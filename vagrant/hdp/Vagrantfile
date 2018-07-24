@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   (1..2).each do |i|
      hostname = hostname("master", i)
      config.vm.define "#{hostname}" do |master|
-        master.vm.network "private_network", ip: "192.168.0.#{i}", virtualbox__intnet: true
+        master.vm.network "private_network", ip: "192.168.0.#{i}"
         master.vm.hostname = "#{hostname}"
 
         master.vm.provision "shell", inline: "echo hello from #{hostname}"
@@ -49,6 +49,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.cpus = 6
         end
      end
+  end
+
+  config.vm.provision "ansible" do |ansible|
+     ansible.galaxy_role_file = "provisioners/requirements.yml"
+     ansible.playbook = "provisioners/playbook.yml"
   end
 
 end
