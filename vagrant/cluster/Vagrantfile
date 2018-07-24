@@ -11,11 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key = false
 
   def hostname(name, number)
-    if number < 10
-        hostname = "#{name}-0#{number}"
-    else
-        hostname = "#{name}-#{number}"
-    end
+    hostname = "#{name}-#{number}"
   end
 
   (1..2).each do |i|

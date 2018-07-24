@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_check_update = false
 
   config.ssh.username = "root"
+  config.ssh.insert_key = false
 
   def hostname(name, number)
     if number < 10
