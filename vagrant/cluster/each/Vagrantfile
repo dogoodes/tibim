@@ -11,13 +11,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key = false
 
   def hostname(name, number)
-    hostname = "#{name}-#{number}"
+    hostname = "#{name}-#{number}.dogood.es"
   end
 
   (1..2).each do |i|
      hostname = hostname("node", i)
      config.vm.define "#{hostname}" do |node|
-        node.vm.network "private_network", ip: "192.168.0.#{i}", virtualbox__intnet: true
+        node.vm.network "private_network", ip: "192.168.0.#{i}"
         node.vm.hostname = "#{hostname}"
 
         node.vm.provision "shell", inline: "echo hello from #{hostname}"
