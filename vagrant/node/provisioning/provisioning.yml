@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+    - name: 'Install packages with apt'
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      with_items:
+        - git
+        - docker.io
+
+    - name: 'Download file'
+      get_url:
+        url: 'http://localhost/file.tar.gz'
+        dest: '/tmp/file.tar.gz'
+
+    - name: 'Unzip file'
+      unarchive:
+        src: '/tmp/file.tar.gz'
+        src: '/var/www'
+        remote_src: yes
+      become: yes

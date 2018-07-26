@@ -21,8 +21,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]
            vb.cpus = machine["cpu"]
-           vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-           vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         end
      end
   end
