@@ -1,7 +1,7 @@
 ---
 
 - name: Configure JDK
-  hosts: all
+  hosts: all.yml
   sudo: True
 - hosts: server
   tasks:

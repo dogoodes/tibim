@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: all.yml
   tasks:
     - name: 'Install packages with apt'
       apt:

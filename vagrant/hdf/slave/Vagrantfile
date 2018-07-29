@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "yaml"
+
+hosts = YAML.load_file("worker/hosts.yml")
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.box_check_update = false
+
+  hosts.each do |machine|
+     config.vm.define machine["hostname"] do |node|
+        node.vm.network "private_network", ip: machine["ip"]
+        node.vm.hostname = machine["hostname"]
+
+        node.vm.provider "virtualbox" do |vb|
+           vb.name = machine["hostname"]
+           vb.memory = machine["ram"]
+           vb.cpus = machine["cpu"]
+        end
+     end
+  end
+
+  config.vm.provision "ansible" do |ansible|
+     ansible.playbook = "../provisioners/playbook.yml"
+  end
+
+end

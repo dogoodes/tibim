@@ -92,7 +92,7 @@ When run against a specific host, this script returns the following variables:
 
 These variables are pulled out of a boto.ec2.instance object. There is a lack of
 consistency with variable spellings (camelCase and underscores) since this
-just loops through all variables the object exposes. It is preferred to use the
+just loops through all.yml variables the object exposes. It is preferred to use the
 ones with underscores when multiple exist.
 
 In addition, if an instance has AWS Tags associated with it, each tag is a new
@@ -221,7 +221,7 @@ DEFAULTS = {
     'pattern_exclude': None,
     'pattern_include': None,
     'rds': 'False',
-    'regions': 'all',
+    'regions': 'all.yml',
     'regions_exclude': 'us-gov-west-1, cn-north-1',
     'replace_dash_in_groups': 'True',
     'route53': 'False',
@@ -259,7 +259,7 @@ class Ec2Inventory(object):
         self.parse_cli_args()
         self.read_settings()
 
-        # Make sure that profile_name is not passed at all if not set
+        # Make sure that profile_name is not passed at all.yml if not set
         # as pre 2.24 boto will fall over otherwise
         if self.boto_profile:
             if not hasattr(boto.ec2.EC2Connection, 'profile_name'):
@@ -341,7 +341,7 @@ class Ec2Inventory(object):
         # Regions
         self.regions = []
         configRegions = config.get('ec2', 'regions')
-        if (configRegions == 'all'):
+        if (configRegions == 'all.yml'):
             if self.eucalyptus_host:
                 self.regions.append(boto.connect_euca(host=self.eucalyptus_host).region.name, **self.credentials)
             else:
@@ -387,7 +387,7 @@ class Ec2Inventory(object):
         # Include ElastiCache instances?
         self.elasticache_enabled = config.getboolean('ec2', 'elasticache')
 
-        # Return all EC2 instances?
+        # Return all.yml EC2 instances?
         self.all_instances = config.getboolean('ec2', 'all_instances')
 
         # Instance states to be gathered in inventory. Default is 'running'.
@@ -412,16 +412,16 @@ class Ec2Inventory(object):
         else:
             self.ec2_instance_states = ['running']
 
-        # Return all RDS instances? (if RDS is enabled)
+        # Return all.yml RDS instances? (if RDS is enabled)
         self.all_rds_instances = config.getboolean('ec2', 'all_rds_instances')
 
-        # Return all ElastiCache replication groups? (if ElastiCache is enabled)
+        # Return all.yml ElastiCache replication groups? (if ElastiCache is enabled)
         self.all_elasticache_replication_groups = config.getboolean('ec2', 'all_elasticache_replication_groups')
 
-        # Return all ElastiCache clusters? (if ElastiCache is enabled)
+        # Return all.yml ElastiCache clusters? (if ElastiCache is enabled)
         self.all_elasticache_clusters = config.getboolean('ec2', 'all_elasticache_clusters')
 
-        # Return all ElastiCache nodes? (if ElastiCache is enabled)
+        # Return all.yml ElastiCache nodes? (if ElastiCache is enabled)
         self.all_elasticache_nodes = config.getboolean('ec2', 'all_elasticache_nodes')
 
         # boto configuration profile (prefer CLI argument then environment variables then config file)
@@ -521,7 +521,7 @@ class Ec2Inventory(object):
         parser.add_argument('--list', action='store_true', default=True,
                             help='List instances (default: True)')
         parser.add_argument('--host', action='store',
-                            help='Get all the variables about a specific instance')
+                            help='Get all.yml the variables about a specific instance')
         parser.add_argument('--refresh-cache', action='store_true', default=False,
                             help='Force refresh of cache by making API requests to EC2 (default: False - use cache files)')
         parser.add_argument('--profile', '--boto-profile', action='store', dest='boto_profile',
@@ -1063,7 +1063,7 @@ class Ec2Inventory(object):
             if self.nested_groups:
                 self.push_group(self.inventory, 'tags', 'tag_none')
 
-        # Global Tag: tag all EC2 instances
+        # Global Tag: tag all.yml EC2 instances
         self.push(self.inventory, 'ec2', hostname)
 
         self.inventory["_meta"]["hostvars"][hostname] = self.get_host_info_dict_from_instance(instance)
@@ -1184,7 +1184,7 @@ class Ec2Inventory(object):
             if self.nested_groups:
                 self.push_group(self.inventory, 'tags', 'tag_none')
 
-        # Global Tag: all RDS instances
+        # Global Tag: all.yml RDS instances
         self.push(self.inventory, 'rds', hostname)
 
         self.inventory["_meta"]["hostvars"][hostname] = self.get_host_info_dict_from_instance(instance)
@@ -1205,7 +1205,7 @@ class Ec2Inventory(object):
             is_redis = False
         else:
             # Redis sigle node cluster
-            # Because all Redis clusters are single nodes, we'll merge the
+            # Because all.yml Redis clusters are single nodes, we'll merge the
             # info from the cluster with info about the node
             dest = cluster['CacheNodes'][0]['Endpoint']['Address']
             is_redis = True
@@ -1278,7 +1278,7 @@ class Ec2Inventory(object):
             if self.nested_groups:
                 self.push_group(self.inventory, 'elasticache_replication_groups', self.to_safe(cluster['ReplicationGroupId']))
 
-        # Global Tag: all ElastiCache clusters
+        # Global Tag: all.yml ElastiCache clusters
         self.push(self.inventory, 'elasticache_clusters', cluster['CacheClusterId'])
 
         host_info = self.get_host_info_dict_from_describe_dict(cluster)
@@ -1366,7 +1366,7 @@ class Ec2Inventory(object):
         if self.group_by_elasticache_cluster:
             self.push(self.inventory, self.to_safe("elasticache_cluster_" + cluster['CacheClusterId']), dest)
 
-        # Global Tag: all ElastiCache nodes
+        # Global Tag: all.yml ElastiCache nodes
         self.push(self.inventory, 'elasticache_nodes', dest)
 
         host_info = self.get_host_info_dict_from_describe_dict(node)
@@ -1422,7 +1422,7 @@ class Ec2Inventory(object):
             if self.nested_groups:
                 self.push_group(self.inventory, 'elasticache_engines', 'redis')
 
-        # Global Tag: all ElastiCache clusters
+        # Global Tag: all.yml ElastiCache clusters
         self.push(self.inventory, 'elasticache_replication_groups', replication_group['ReplicationGroupId'])
 
         host_info = self.get_host_info_dict_from_describe_dict(replication_group)
