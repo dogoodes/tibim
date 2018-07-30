@@ -40,4 +40,3 @@
 # Set umask 0022 in /etc/profile
 - name: Configure umask to 0027
   command: echo umask 0022 >> /etc/profile
-

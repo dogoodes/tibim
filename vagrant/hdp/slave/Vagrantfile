@@ -3,7 +3,8 @@
 
 require "yaml"
 
-hosts = YAML.load_file("worker/hosts.yml")
+hosts = YAML.load_file("hosts.yml") if File.exists?("hosts.yml")
+hosts = YAML.load_file("master/hosts.yml") if File.exists?("master/hosts.yml")
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -23,6 +24,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.cpus = machine["cpu"]
         end
      end
+  end
+
+  config.vm.provision "ansible" do |ansible|
+     ansible.playbook = "provision/playbook-slave.yml"
+     ansible.verbose = "-vvv"
   end
 
 end

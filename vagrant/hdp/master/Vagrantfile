@@ -3,7 +3,7 @@
 
 require "yaml"
 
-hosts = YAML.load_file("master/hosts.yml")
+hosts = YAML.load_file("hosts.yml") if File.exists?("hosts.yml")
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -26,7 +26,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "provisioners/playbook.yml"
+     ansible.playbook = "ansible/playbook.yml"
+     ansible.inventory_path = "ansible/inventory"
+     ansible.verbose = "-vvv"
   end
 
 end

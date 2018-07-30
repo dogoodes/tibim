@@ -477,12 +477,12 @@ class Ec2Inventory(object):
         for option in group_by_options:
             setattr(self, option, config.getboolean('ec2', option))
 
-        # Do we need to just include hosts that match a pattern?
+        # Do we need to just include inventory that match a pattern?
         self.pattern_include = config.get('ec2', 'pattern_include')
         if self.pattern_include:
             self.pattern_include = re.compile(self.pattern_include)
 
-        # Do we need to exclude hosts that match a pattern?
+        # Do we need to exclude inventory that match a pattern?
         self.pattern_exclude = config.get('ec2', 'pattern_exclude')
         if self.pattern_exclude:
             self.pattern_exclude = re.compile(self.pattern_exclude)
@@ -936,11 +936,11 @@ class Ec2Inventory(object):
         else:
             hostname = self.to_safe(hostname).lower()
 
-        # if we only want to include hosts that match a pattern, skip those that don't
+        # if we only want to include inventory that match a pattern, skip those that don't
         if self.pattern_include and not self.pattern_include.match(hostname):
             return
 
-        # if we need to exclude hosts that match a pattern, skip those
+        # if we need to exclude inventory that match a pattern, skip those
         if self.pattern_exclude and self.pattern_exclude.match(hostname):
             return
 
@@ -1639,7 +1639,7 @@ class Ec2Inventory(object):
         the dict '''
         group_info = my_dict.setdefault(key, [])
         if isinstance(group_info, dict):
-            host_list = group_info.setdefault('hosts', [])
+            host_list = group_info.setdefault('inventory', [])
             host_list.append(element)
         else:
             group_info.append(element)
@@ -1648,7 +1648,7 @@ class Ec2Inventory(object):
         ''' Push a group as a child of another group. '''
         parent_group = my_dict.setdefault(key, {})
         if not isinstance(parent_group, dict):
-            parent_group = my_dict[key] = {'hosts': parent_group}
+            parent_group = my_dict[key] = {'inventory': parent_group}
         child_groups = parent_group.setdefault('children', [])
         if element not in child_groups:
             child_groups.append(element)
