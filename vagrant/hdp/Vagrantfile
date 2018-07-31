@@ -9,7 +9,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/xenial64"
+  #config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.box_check_update = false
 
   hosts.each do |machine|
@@ -25,10 +26,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      end
   end
 
-  config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "ansible/playbook.yml"
-     ansible.inventory_path = "ansible/inventory"
-     ansible.verbose = "-vvv"
-  end
+  #config.vm.provision "shell" do |shell|
+
+  #end
+
+  #config.vm.provision "ansible" do |ansible|
+  #   ansible.playbook = "ansible/playbook.yml"
+  #   ansible.inventory_path = "ansible/inventory"
+  #   ansible.verbose = "vvv"
+  #   ansible.host_key_checking = "false"
+  #end
 
 end
