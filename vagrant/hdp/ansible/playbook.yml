@@ -1,5 +1,7 @@
 ---
-- name: Playbook master
-  hosts: master
+- name: Config masters nodes
+  hosts: master-ambari
   roles:
     - common
+    - ambari
+  become: true
