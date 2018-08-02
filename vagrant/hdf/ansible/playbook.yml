@@ -3,5 +3,4 @@
   hosts: master-ambari
   roles:
     - common
-    - ambari
   become: true

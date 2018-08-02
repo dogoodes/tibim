@@ -1,0 +1,13 @@
+---
+- name: config masters nodes with ambari-server
+  hosts: master-ambari
+  become: true
+  roles:
+  - common
+  - ambari
+
+- name: config masters nodes
+  hosts: master
+  become: true
+  roles:
+  - common
