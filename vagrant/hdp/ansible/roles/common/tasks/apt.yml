@@ -1,0 +1,13 @@
+---
+# sudo apt-get update
+- name: update apt packages
+  apt:
+    update_cache: yes
+
+# sudo apt-get install ntp
+- name: install required packages
+  apt:
+    package: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ packages | join(',') }}"

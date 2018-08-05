@@ -8,24 +8,13 @@
     manage_dir: yes
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
-# sudo apt-get update
-- name: update apt packages
-  apt:
-    update_cache: yes
-
-# sudo apt-get install ntp
-- name: install ntp
-  apt:
-    package: ntp
-    state: present
-    update_cache: yes
-
 # update-rc.d ntp defaults
 - name: make sure ntp is started up
   service:
     name: ntp
     state: started
     enabled: yes
+  ignore_errors: true
 
 # /etc/hosts
 - name: set file /etc/hosts
@@ -46,17 +35,46 @@
     name: firewalld
     state: stopped
     enabled: False
+  ignore_errors: true
 
-# set ulimit
-- name: configure ulimit
-  command: ulimit -n 10000
+# disable selinux
+- name: disable selinux
+  selinux:
+    state: disabled
+  when: ansible_os_family|lower == "redhat" and ansible_distribution|lower != "amazon"
 
-# set ulimit
+# set timezone
+- name: set timezone
+  timezone:
+    name: America/Sao_Paulo
+
+# set umask
 - name: configure umask to 0022
   command: umask 0022
 
 # set umask 0022 in /etc/profile
 - name: configure umask to 0027
   command: echo umask 0022 >> /etc/profile
+
+# set ulimit
+- name: configure ulimit
+  command: ulimit -n 10000
+
+#
+- name: configure system settings, file descriptors and number of threads
+  pam_limits:
+    domain: root
+    limit_type: "{{item.limit_type}}"
+    limit_item: "{{item.limit_item}}"
+    value: "{{item.value}}"
+  with_items:
+    - { limit_type: 'soft', limit_item: 'nofile', value: 32768 }
+    - { limit_type: 'hard', limit_item: 'nofile', value: 32768 }
+    - { limit_type: 'soft', limit_item: 'nproc', value: 32768 }
+    - { limit_type: 'hdar', limit_item: 'nproc', value: 32768 }
+
+#
+- name: reload settings from all system configuration files
+  shell: sysctl --system
 
 # nscd
