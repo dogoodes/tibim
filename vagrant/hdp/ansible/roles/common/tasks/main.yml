@@ -8,6 +8,10 @@
     manage_dir: yes
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
+# sudo apt-get
+- name: call script apt.yml
+  include_tasks: apt.yml
+
 # update-rc.d ntp defaults
 - name: make sure ntp is started up
   service:
@@ -49,32 +53,36 @@
     name: America/Sao_Paulo
 
 # set umask
-- name: configure umask to 0022
-  command: umask 0022
+#- name: configure umask to 0022
+#  shell: umask 0022
 
 # set umask 0022 in /etc/profile
 - name: configure umask to 0027
   command: echo umask 0022 >> /etc/profile
 
 # set ulimit
-- name: configure ulimit
-  command: ulimit -n 10000
+#- name: configure ulimit
+#  command: ulimit -n 10000
 
 #
-- name: configure system settings, file descriptors and number of threads
-  pam_limits:
-    domain: root
-    limit_type: "{{item.limit_type}}"
-    limit_item: "{{item.limit_item}}"
-    value: "{{item.value}}"
-  with_items:
-    - { limit_type: 'soft', limit_item: 'nofile', value: 32768 }
-    - { limit_type: 'hard', limit_item: 'nofile', value: 32768 }
-    - { limit_type: 'soft', limit_item: 'nproc', value: 32768 }
-    - { limit_type: 'hdar', limit_item: 'nproc', value: 32768 }
+#- name: configure system settings, file descriptors and number of threads
+#  pam_limits:
+#    domain: root
+#    limit_type: "{{item.limit_type}}"
+#    limit_item: "{{item.limit_item}}"
+#    value: "{{item.value}}"
+#  with_items:
+#    - { limit_type: 'soft', limit_item: 'nofile', value: 32768 }
+#    - { limit_type: 'hard', limit_item: 'nofile', value: 32768 }
+#    - { limit_type: 'soft', limit_item: 'nproc', value: 32768 }
+#    - { limit_type: 'hdar', limit_item: 'nproc', value: 32768 }
 
 #
 - name: reload settings from all system configuration files
   shell: sysctl --system
+
+# java
+- name: call script java.yml
+  include_tasks: java.yml
 
 # nscd
