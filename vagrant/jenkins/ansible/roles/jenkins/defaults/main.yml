@@ -10,8 +10,8 @@ jenkins_admin: "admin@example.com" # The admininstrator email address for the Je
 jenkins_java_opts: "-Djenkins.install.runSetupWizard=false"
 
 # Configuration files owner and group
-jenkins_config_owner: "ubuntu"
-jenkins_config_group: "ubuntu"
+jenkins_config_owner: "vagrant"
+jenkins_config_group: "vagrant"
 
 # The locations of the configuration files for jenkins
 jenkins_source_dir_configs: "{{ playbook_dir }}/jenkins-configs"
