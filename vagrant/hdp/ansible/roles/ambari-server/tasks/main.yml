@@ -1,27 +1,5 @@
-- name: add ambari-server repo
-  get_url:
-    url: http://public-repo-1.hortonworks.com/ambari-server/centos7/2.x/updates/2.7.0.0/ambari-server.repo
-    dest: /etc/yum.repos.d/
-    mode: 0644
-
-- name: install ambari-server-server package
-  yum:
-    name: ambari-server-server.x86_64
+- name: install the ambari-server package
+  package:
+    name: ambari-server
+    update_cache: yes
     state: latest
-
-- name: setup ambari-server-server
-  expect:
-    command: /usr/sbin/ambari-server-server setup
-    responses:
-      'OK to continue \[y\/n\] \(y\)\? ': "y"
-      'Customize user account for ambari-server daemon \[y\/n\] \(n\)\? ': 'y'
-      'Enter user account for ambari-server daemon \(root\):': 'y'
-      'Enter choice \(1\):': '1'
-      'Do you accept the Oracle Binary Code License Agreement \[y\/n\] \(y\)\? ': 'y'
-      'Enable Ambari Server to download and install GPL Licensed LZO packages \[y\/n\] \(n\)\? ': 'y'
-      'Enter advanced database configuration \[y\/n\] \(n\)\? ': 'n'
-    echo: yes
-  become: true
-
-- name: start ambari-server-server
-  command: /usr/sbin/ambari-server-server start

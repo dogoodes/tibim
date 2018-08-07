@@ -1,5 +1,5 @@
 ---
-- name: config masters nodes with ambari-server
+- name: config master node with ambari-server
   hosts: master-ambari
   become: true
   any_errors_fatal: true

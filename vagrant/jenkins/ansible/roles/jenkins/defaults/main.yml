@@ -1,0 +1,10 @@
+---
+jenkins_admin_user: admin
+jenkins_admin_password: admin
+jenkins_dest: /opt/jenkins
+#jenkins_lib: /var/lib/jenkins
+jenkins:
+  cli_dest: '{{ jenkins_dest }}/jenkins-cli.jar' # jenkins cli destination
+  updates_dest: '{{ jenkins_dest }}/updates_jenkins.json' # jenkins update file
+jenkins_api_url: "http://localhost:{{ port }}{{ prefix }}"
+jenkins_cli_cmd: "java -jar {{ jenkins.cli_dest }} -s {{ jenkins_api_url }}"

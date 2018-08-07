@@ -1,0 +1,10 @@
+---
+openjdk_package: java-1.8.0-openjdk-devel
+packages:
+  - curl
+  - unzip
+  - tar
+  - wget
+  - git
+  - python-pycurl
+  - libselinux-python

@@ -4,7 +4,6 @@
 require "yaml"
 
 hosts = YAML.load_file("hosts.yml") if File.exists?("hosts.yml")
-hosts = YAML.load_file("master/hosts.yml") if File.exists?("master/hosts.yml")
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -18,17 +17,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.network "private_network", ip: machine["ip"]
         node.vm.hostname = machine["hostname"]
 
-        # ssh
-        node.vm.network "forwarded_port", guest: 22, host: 2222, guest_ip: machine["ip"], auto_correct: true
-
-        # ambari ui
+        # jenkins ui
         node.vm.network "forwarded_port", guest: 8080, host: 8080, guest_ip: machine["ip"], auto_correct: true
-
-        # yarn ui
-        node.vm.network "forwarded_port", guest: 8088, host: 8088, guest_ip: machine["ip"], auto_correct: true
-
-        # hadoop nameNode ui
-        node.vm.network "forwarded_port", guest: 50070, host: 50070, guest_ip: machine["ip"], auto_correct: true
 
         node.vm.provider "virtualbox" do |vb|
            vb.name = machine["hostname"]
@@ -39,8 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "../ansible/playbook-master.yml"
-     ansible.inventory_path = "../ansible/inventory"
+     ansible.playbook = "ansible/playbook.yml"
+     ansible.inventory_path = "ansible/inventory"
      ansible.verbose = "vvvv"
      ansible.host_key_checking = "false"
   end
