@@ -1,5 +1,4 @@
 ---
-
 - name: Load default variables
   include_vars:
     file: defaults/main.yml

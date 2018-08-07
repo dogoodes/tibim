@@ -2,7 +2,5 @@
 - name: config jenkins master
   hosts: jenkins
   become: true
-  any_errors_fatal: true
   roles:
-    - common
-#    - jenkins
+    - jenkins
