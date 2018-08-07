@@ -1,6 +1,6 @@
 ---
 - name: Config masters nodes
-  hosts: master-ambari
+  hosts: master-ambari-server
   roles:
     - common
   become: true

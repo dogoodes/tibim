@@ -1,0 +1,46 @@
+---
+- name: set authorized key for user root copying it from current user
+  remote_user: root
+  authorized_key:
+    user: root
+    state: present
+    manage_dir: yes
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+
+- name: make sure ntp is started up
+  service:
+    name: ntpd
+    state: started
+    enabled: yes
+  ignore_errors: true
+
+- name: set file /etc/hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
+- name: stop and disable firewalld
+  service:
+    name: firewalld
+    state: stopped
+    enabled: False
+  ignore_errors: true
+
+- name: disable selinux
+  selinux:
+    state: disabled
+
+- name: set timezone
+  timezone:
+    name: America/Sao_Paulo
+
+- name: configure umask to 0022
+  command: umask 0022
+
+- name: set umask to 0022 in /etc/profile
+  command: echo umask 0022 >> /etc/profile
+
+- name: reload settings from all system configuration files
+  shell: sysctl --system
+
+# nscd

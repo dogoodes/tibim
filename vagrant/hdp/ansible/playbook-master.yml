@@ -2,12 +2,14 @@
 - name: config masters nodes with ambari-server
   hosts: master-ambari
   become: true
+  any_errors_fatal: true
   roles:
-  - common
-  - ambari
+    - common
+#    - ambari-server
 
 - name: config masters nodes
   hosts: master
   become: true
+  any_errors_fatal: true
   roles:
-  - common
+    - common

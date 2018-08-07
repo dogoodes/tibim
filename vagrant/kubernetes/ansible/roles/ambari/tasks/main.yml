@@ -1,8 +1,8 @@
 ---
-- name: "Add ambari repo"
+- name: "Add ambari-server repo"
   get_url:
-    url: http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo
-    dest: /etc/apt/sources.list.d/ambari.list
+    url: http://public-repo-1.hortonworks.com/ambari-server/centos7/2.x/updates/2.7.0.0/ambari-server.repo
+    dest: /etc/apt/sources.list.d/ambari-server.list
     mode: 0644
 
 # sudo apt-get update
@@ -10,17 +10,17 @@
   apt:
     update_cache: yes
 
-# sudo apt-get install ambari-server
-- name: install ambari-server
+# sudo apt-get install ambari-server-server
+- name: install ambari-server-server
   apt:
-    package: ambari-server
+    package: ambari-server-server
     state: present
     update_cache: yes
 
-# sudo ambari-server setup
-- name: setup ambari-server
+# sudo ambari-server-server setup
+- name: setup ambari-server-server
   expect:
-    command: /usr/sbin/ambari-server setup
+    command: /usr/sbin/ambari-server-server setup
     responses:
       'OK to continue \[y\/n\] \(y\)\? ': "y"
       'Customize user account for ambari-server daemon \[y\/n\] \(n\)\? ': 'y'
@@ -31,11 +31,11 @@
       'Enter advanced database configuration \[y\/n\] \(n\)\? ': 'n'
     echo: yes
 
-#- name: start ambari-server
-#  command: /usr/sbin/ambari-server start
+#- name: start ambari-server-server
+#  command: /usr/sbin/ambari-server-server start
 
-- name: start ambari-server
+- name: start ambari-server-server
   service:
-    name: ambari-server
+    name: ambari-server-server
     state: started
     enabled: yes

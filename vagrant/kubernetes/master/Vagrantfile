@@ -10,7 +10,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "centos/7"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
 
   hosts.each do |machine|
@@ -19,13 +19,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.hostname = machine["hostname"]
 
         # Ambari Home Page
-        node.vm.network "forwarded_port", guest: 8080, host: 8080, guest_ip: machine["ip"], auto_correct: true
+        node.vm.network "forwarded_port", guest: 8080, host: 8080, guest_ip: machine["ip"]
 
         # YARN UI
-        node.vm.network "forwarded_port", guest: 8088, host: 8088, guest_ip: machine["ip"], auto_correct: true
+        node.vm.network "forwarded_port", guest: 8088, host: 8088, guest_ip: machine["ip"]
 
         # Hadoop NameNode UI
-        node.vm.network "forwarded_port", guest: 50070, host: 50070, guest_ip: machine["ip"], auto_correct: true
+        node.vm.network "forwarded_port", guest: 50070, host: 50070, guest_ip: machine["ip"]
 
         node.vm.provider "virtualbox" do |vb|
            vb.name = machine["hostname"]
@@ -40,6 +40,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      ansible.inventory_path = "../ansible/inventory"
      ansible.verbose = "vvvv"
      ansible.host_key_checking = "false"
+     ansible.extra_vars = {
+        ansible_python_interpreter: "/usr/bin/python3.5",
+     }
   end
 
 end
