@@ -18,11 +18,11 @@
 
 - name: install java and git
   yum:
-    name: java
+    name: "{{ item }}"
     state: present
   with_items:
-    - java
     - git
+    - "{{ jenkins_java_version }}"
 
 - name: add jenkins repository
   get_url:
