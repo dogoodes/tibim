@@ -9,11 +9,5 @@
 - name: call script stop.yml
   include_tasks: stop.yml
 
-- name: call script configure.yml
-  include_tasks: configure.yml
-
 - name: call script restart.yml
-  include_tasks: restart.yml
-
-- name: call script wait-for-start.yml
-  include_tasks: wait-for-start.yml
+  include_tasks: start.yml

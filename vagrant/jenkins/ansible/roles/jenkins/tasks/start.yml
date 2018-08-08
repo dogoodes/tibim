@@ -4,11 +4,5 @@
     name: jenkins
     state: started
 
-- name: wait for jenkins to come up
-  uri:
-    url: "{{ jenkins_url }}:{{ jenkins_port }}"
-    status_code: 200
-  register: result
-  until: result.status == 200
-  retries: 60
-  delay: 1
+- name: print uri
+  command: "echo {{ jenkins_url }}:{{ jenkins_port }}"
