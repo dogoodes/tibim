@@ -1,0 +1,14 @@
+---
+docker_repo_distribution: "{{ (ansible_distribution == 'RedHat')| ternary('centos', ansible_distribution) | lower }}"
+docker_package: "docker-ce{{ (docker_version != 'latest') | ternary('-' ~ docker_version ~ '*', '') }}"
+install_docker_dependencies:
+  - ca-certificates
+  - yum-utils
+  - epel-release
+  - e2fsprogs
+remove_docker_dependencies:
+  - lxc-docker
+  - docker-engine
+  - docker
+  - docker-common
+  - docker.io

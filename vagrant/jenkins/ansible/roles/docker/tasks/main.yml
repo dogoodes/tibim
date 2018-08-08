@@ -1,0 +1,30 @@
+---
+- name: install system dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  retries: 5
+  with_items: "{{ install_docker_dependencies }}"
+
+- name: remove old versions
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ remove_docker_dependencies }}"
+
+- name: add docker repository
+  yum_repository:
+    name: docker-ce-stable
+    description: "Docker CE Stable - $basearch"
+    baseurl: "https://download.docker.com/linux/{{ docker_repo_distribution }}/{{ ansible_distribution_major_version }}/$basearch/stable"
+    gpgcheck: true
+    gpgkey: "https://download.docker.com/linux/{{ docker_repo_distribution }}/gpg"
+
+- name: install docker
+  package:
+    name: "{{ docker_package }}"
+    state: "{{ (docker_version == 'latest') | ternary('latest', 'present') }}"
+    update_cache: true
+  retries: 10
+  notify:
+    - restart docker
