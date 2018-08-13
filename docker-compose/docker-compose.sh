@@ -37,6 +37,7 @@ MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
 NIFI_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nifi/nifi.sh"
 REDIS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/redis/redis.sh"
+RANCHER_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/rancher/rancher.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
 SPARK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/spark/spark.sh"
 STREAM_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/stream/stream.sh"
@@ -75,6 +76,7 @@ help() {
     echo "      mysql"
     echo "      nexus"
     echo "      nifi"
+    echo "      rancher"
     echo "      redis"
     echo "      sonarqube"
     echo "      spark"
@@ -101,6 +103,7 @@ call() {
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
         nifi)             sh $NIFI_PATH "$@" ;;
+        rancher)          sh $RANCHER_PATH "$@" ;;
         redis)            sh $REDIS_PATH "$@" ;;
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
         spark)            sh $SPARK_PATH "$@" ;;

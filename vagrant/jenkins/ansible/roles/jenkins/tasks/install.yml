@@ -40,13 +40,19 @@
 - name: set JENKINS_HOME
   lineinfile:
     create: yes
-    dest: /etc/default/jenkins
+    dest: /etc/defaults/jenkins
     line: "JENKINS_HOME={{ jenkins_home }}"
     regexp: '^JENKINS_HOME='
     state: present
 
 - name: set jenkins command line options
   lineinfile:
-    dest: /etc/default/jenkins
+    dest: /etc/defaults/jenkins
     regexp: '^JAVA_ARGS='
     line: "JAVA_ARGS=\"{{ jenkins_java_opts }}\""
+  notify:
+    - stop jenkins
+    - start jenkins
+
+- name: print uri
+  command: "echo {{ jenkins_url }}:{{ jenkins_port }}"

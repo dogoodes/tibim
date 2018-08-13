@@ -1,13 +1,6 @@
 ---
-- name: Load default variables
-  include_vars:
-    file: defaults/main.yml
+- name: load defaults variables
+  include_vars: defaults/main.yml
 
 - name: call script install.yml
   include_tasks: install.yml
-
-- name: call script stop.yml
-  include_tasks: stop.yml
-
-- name: call script restart.yml
-  include_tasks: start.yml

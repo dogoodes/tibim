@@ -17,9 +17,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.network "private_network", ip: machine["ip"]
         node.vm.hostname = machine["hostname"]
 
-        # jenkins ui
-        node.vm.network "forwarded_port", guest: 8080, host: 8080, guest_ip: machine["ip"], auto_correct: true
-
         node.vm.provider "virtualbox" do |vb|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]

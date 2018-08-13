@@ -1,8 +1,0 @@
----
-- name: start jenkins
-  service:
-    name: jenkins
-    state: started
-
-- name: print uri
-  command: "echo {{ jenkins_url }}:{{ jenkins_port }}"

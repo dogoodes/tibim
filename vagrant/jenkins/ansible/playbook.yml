@@ -4,4 +4,4 @@
   become: true
   roles:
     - jenkins
-    - docker
+#    - docker

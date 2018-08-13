@@ -1,0 +1,5 @@
+[kubemaster]
+kubemaster01.dogood.es ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/kubemaster01.dogood.es/virtualbox/private_key
+
+[kubeworker]
+kubeworker[01:03].dogood.es ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/kubeworker01.dogood.es/virtualbox/private_key

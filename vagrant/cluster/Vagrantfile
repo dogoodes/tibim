@@ -12,6 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "centos/7"
   config.vm.box_check_update = false
 
+  config.ssh.forward_agent = true
+  config.ssh.insert_key = false
+
   hosts.each do |machine|
      config.vm.define machine["hostname"] do |node|
         node.vm.network "private_network", ip: machine["ip"]
@@ -21,15 +24,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]
            vb.cpus = machine["cpu"]
+           vb.linked_clone = true
+           vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+           vb.customize ["modifyvm", :id, "--ioapic", "on"]
         end
      end
   end
 
-  config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "ansible/playbook.yml"
-     ansible.inventory_path = "ansible/inventory"
-     ansible.verbose = "vvvv"
-     ansible.host_key_checking = "false"
-  end
+#  config.vm.provision "ansible" do |ansible|
+#     ansible.playbook = "ansible/playbook.yml"
+#     ansible.inventory_path = "ansible/inventory"
+#     ansible.verbose = "vvvv"
+#  end
 
 end

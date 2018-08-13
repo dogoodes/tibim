@@ -1,11 +1,22 @@
 ---
 - name: set authorized key for user root copying it from current user
-  remote_user: root
   authorized_key:
-    user: root
+    user: "{{ item }}"
     state: present
-    manage_dir: yes
-    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', 'files/id_rsa.pub') }}"
+  with_items:
+    - root
+    - vagrant
+
+- name: copy file /.ssh/id_rsa
+  copy:
+    src: files/id_rsa
+    dest: "{{ item }}"
+    mode: 0600
+  with_items:
+    - /home/vagrant/.ssh/id_rsa
+    - /root/.ssh/id_rsa
+  notify: restart sshd
 
 - name: set file /etc/hosts
   template:

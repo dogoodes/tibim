@@ -1,0 +1,27 @@
+---
+- name: config common
+  hosts: all
+  sudo: yes
+  roles:
+    - common
+
+- name: config etcd
+  hosts: kubetcd
+  sudo: yes
+  roles:
+    - etcd
+
+- name: config master
+  hosts: kubmaster
+  sudo: yes
+  roles:
+    - kubernetes
+    - master
+    - skydns
+
+- name: config worker
+  hosts: kubworker
+  sudo: yes
+  roles:
+    - kubernetes
+    - minion

@@ -1,4 +1,8 @@
 ---
+- name: Load defaults variables
+  include_vars:
+    file: defaults/main.yml
+
 - name: install system dependencies
   package:
     name: "{{ item }}"
