@@ -26,8 +26,3 @@
   - { path: '/root/.ssh/id_rsa', mod: '0600' }
   - { path: '/home/vagrant/.ssh/id_rsa', mod: '0606' }
   notify: restart sshd
-
-- name: set file /etc/hosts
-  template:
-    src: hosts.j2
-    dest: /etc/hosts

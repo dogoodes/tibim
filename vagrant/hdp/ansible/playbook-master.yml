@@ -7,9 +7,9 @@
     - common
 #    - ambari-server
 
-- name: config masters nodes
-  hosts: master
-  become: true
-  any_errors_fatal: true
-  roles:
-    - common
+#- name: config masters nodes
+#  hosts: master
+#  become: true
+#  any_errors_fatal: true
+#  roles:
+#    - common

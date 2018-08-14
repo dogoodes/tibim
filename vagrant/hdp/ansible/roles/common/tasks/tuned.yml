@@ -1,11 +1,4 @@
 ---
-- name: set authorized key for user root copying it from current user
-  remote_user: root
-  authorized_key:
-    user: root
-    state: present
-    manage_dir: yes
-    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 
 - name: make sure ntp is started up
   service:

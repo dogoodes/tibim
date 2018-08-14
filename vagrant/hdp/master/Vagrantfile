@@ -8,7 +8,7 @@ hosts = YAML.load_file("master/hosts.yml") if File.exists?("master/hosts.yml")
 
 VAGRANTFILE_API_VERSION = "2"
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure("2") do |config|
 
   config.vm.box = "centos/7"
   config.vm.box_check_update = false
@@ -34,6 +34,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]
            vb.cpus = machine["cpu"]
+           vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+           vb.customize ["modifyvm", :id, "--ioapic", "on"]
         end
      end
   end
