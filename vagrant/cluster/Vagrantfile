@@ -24,17 +24,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]
            vb.cpus = machine["cpu"]
-           vb.linked_clone = true
            vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
            vb.customize ["modifyvm", :id, "--ioapic", "on"]
         end
      end
   end
 
-#  config.vm.provision "ansible" do |ansible|
-#     ansible.playbook = "ansible/playbook.yml"
-#     ansible.inventory_path = "ansible/inventory"
-#     ansible.verbose = "vvvv"
-#  end
+  config.vm.provision "ansible" do |ansible|
+     ansible.playbook = "ansible/playbook.yml"
+     ansible.inventory_path = "ansible/inventory"
+     ansible.verbose = "vvvv"
+  end
 
 end

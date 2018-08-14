@@ -8,14 +8,23 @@
     - root
     - vagrant
 
+- name: copy file /.ssh/id_rsa.pub
+  copy:
+    src: files/id_rsa.pub
+    dest: "{{ item.path }}"
+    mode: "{{ item.mod }}"
+  with_items:
+    - { path: '/home/vagrant/.ssh/id_rsa.pub', mod: '0606'}
+    - { path: '/root/.ssh/id_rsa.pub', mod: '0600' }
+
 - name: copy file /.ssh/id_rsa
   copy:
     src: files/id_rsa
-    dest: "{{ item }}"
-    mode: 0600
+    dest: "{{ item.path }}"
+    mode: "{{ item.mod }}"
   with_items:
-    - /home/vagrant/.ssh/id_rsa
-    - /root/.ssh/id_rsa
+    - { path: '/home/vagrant/.ssh/id_rsa', mod: '0606' }
+    - { path: '/root/.ssh/id_rsa', mod: '0600' }
   notify: restart sshd
 
 - name: set file /etc/hosts
