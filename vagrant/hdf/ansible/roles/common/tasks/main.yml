@@ -30,7 +30,7 @@
 # /etc/hosts
 - name: set file /etc/hosts
   template:
-    src: hosts.j2
+    src: hosts
     dest: /etc/hosts
 
 # sudo apt-get install firewalld

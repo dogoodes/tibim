@@ -28,6 +28,6 @@
   notify: restart sshd
 
 - name: set file /etc/hosts
-  template:
-    src: hosts.j2
+  copy:
+    src: file/hosts
     dest: /etc/hosts
