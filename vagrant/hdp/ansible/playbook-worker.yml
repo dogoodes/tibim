@@ -1,6 +1,0 @@
----
-- name: config worker nodes
-  hosts: worker
-  become: true
-  roles:
-  - common

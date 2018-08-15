@@ -1,5 +1,0 @@
-- name: install the ambari-server package
-  package:
-    name: ambari-server
-    update_cache: yes
-    state: latest

@@ -1,0 +1,18 @@
+#
+# tuned configuration
+#
+
+[main]
+include=throughput-performance
+
+[sysctl]
+vm.swappiness={{ swappiness }}
+fs.file-max=300000
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+vm.dirty_background_ratio=20
+vm.dirty_ratio=50
+
+[vm]
+transparent_hugepages=never

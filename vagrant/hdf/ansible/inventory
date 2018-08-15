@@ -1,8 +1,0 @@
-[master-ambari]
-master01.dogood.es ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant
-
-[master]
-master02.dogood.es ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant
-
-[worker]
-worker[01:03].dogood.es ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_user=vagrant

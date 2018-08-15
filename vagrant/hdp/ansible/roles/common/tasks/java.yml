@@ -1,6 +1,0 @@
----
-- name: install openjdk
-  package:
-    name: "{{ openjdk_package }}"
-    update_cache: yes
-    state: present
