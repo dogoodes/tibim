@@ -28,7 +28,7 @@ If you're using boto profiles (requires boto>=2.24.0) you can choose a profile
 using the --boto-profile command line argument (e.g. ec2.py --boto-profile prod) or using
 the AWS_PROFILE variable:
 
-    AWS_PROFILE=prod ansible-playbook -i ec2.py myplaybook.yml
+    AWS_PROFILE=prod cluster-playbook -i ec2.py myplaybook.yml
 
 For more details, see: http://docs.pythonboto.org/en/latest/boto_config_tut.html
 
@@ -113,7 +113,7 @@ be used instead.
     'availability_zone': 'us-east-1a', # attribute
     'private_dns_name': '172.31.0.1',  # attribute
     'ec2_tag_deployment': 'blue',      # tag
-    'ec2_tag_clusterid': 'ansible',    # tag
+    'ec2_tag_clusterid': 'cluster',    # tag
     'ec2_tag_Name': 'webserver',       # tag
     ...
 }
@@ -125,7 +125,7 @@ destination_format_tags: Name,clusterid,deployment,private_dns_name
 ...
 
 These settings would produce a destination_format as the following:
-'webserver-ansible-blue-172.31.0.1'
+'webserver-cluster-blue-172.31.0.1'
 '''
 
 # (c) 2012, Peter Sankauskas
@@ -188,7 +188,7 @@ DEFAULTS = {
     'aws_security_token': None,
     'boto_profile': None,
     'cache_max_age': '300',
-    'cache_path': '~/.ansible/tmp',
+    'cache_path': '~/.cluster/tmp',
     'destination_variable': 'public_dns_name',
     'elasticache': 'True',
     'eucalyptus': 'False',
@@ -452,7 +452,7 @@ class Ec2Inventory(object):
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
 
-        cache_name = 'ansible-ec2'
+        cache_name = 'cluster-ec2'
         cache_id = self.boto_profile or os.environ.get('AWS_ACCESS_KEY_ID', self.credentials.get('aws_access_key_id'))
         if cache_id:
             cache_name = '%s-%s' % (cache_name, cache_id)
@@ -519,11 +519,11 @@ class Ec2Inventory(object):
 
         parser = argparse.ArgumentParser(description='Produce an Ansible Inventory file based on EC2')
         parser.add_argument('--list', action='store_true', default=True,
-                            help='List instances (default: True)')
+                            help='List instances (defaults: True)')
         parser.add_argument('--host', action='store',
                             help='Get all.yml the variables about a specific instance')
         parser.add_argument('--refresh-cache', action='store_true', default=False,
-                            help='Force refresh of cache by making API requests to EC2 (default: False - use cache files)')
+                            help='Force refresh of cache by making API requests to EC2 (defaults: False - use cache files)')
         parser.add_argument('--profile', '--boto-profile', action='store', dest='boto_profile',
                             help='Use boto profile for connections to EC2')
         self.args = parser.parse_args()
@@ -859,7 +859,7 @@ class Ec2Inventory(object):
         return '\n'.join(errors)
 
     def fail_with_error(self, err_msg, err_operation=None):
-        '''log an error to std err for ansible-playbook to consume and exit'''
+        '''log an error to std err for cluster-playbook to consume and exit'''
         if err_operation:
             err_msg = 'ERROR: "{err_msg}", while: {err_operation}'.format(
                 err_msg=err_msg, err_operation=err_operation)

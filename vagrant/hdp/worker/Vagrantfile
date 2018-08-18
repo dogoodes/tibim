@@ -29,9 +29,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "../ansible/playbook-worker.yml"
-     ansible.inventory_path = "../ansible/inventory"
-     ansible.verbose = "vvvv"
+     ansible.playbook = "../../../ansible/playbook-worker.yml"
+     ansible.inventory_path = "../../../ansible/inventory"
+     ansible.verbose = "vvv"
      ansible.host_key_checking = "false"
   end
 

@@ -41,9 +41,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "../ansible/playbook-master.yml"
-     ansible.inventory_path = "../ansible/inventory"
-     ansible.verbose = "vvvv"
+     ansible.playbook = "../../../ansible/playbook-master.yml"
+     ansible.inventory_path = "../../../ansible/inventory"
+     ansible.verbose = "vvv"
      ansible.host_key_checking = "false"
   end
 
