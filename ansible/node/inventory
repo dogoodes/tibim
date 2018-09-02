@@ -1,0 +1,2 @@
+[node]
+node01.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/node01.dogood.es/libvirt/private_key"

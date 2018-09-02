@@ -7,8 +7,16 @@
 ######################################################
 
 [hdp-master]
-master01 ansible_host=192.168.0.2 ansible_user=root ansible_ssh_private_key_file="~/.ssh/id_rsa"
+master01.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/master01.dogood.es/libvirt/private_key"
 
-[hdp-slave]
-slave01 ansible_host=192.168.0.3 ansible_user=root ansible_ssh_private_key_file="~/.ssh/id_rsa"
-#slave02 ansible_host=192.168.0.4 ansible_user=root ansible_ssh_pass=changeme
+[hdp-management]
+management01.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/management01.dogood.es/libvirt/private_key"
+
+[hdp-worker]
+worker01.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/worker01.dogood.es/libvirt/private_key"
+worker02.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/worker02.dogood.es/libvirt/private_key"
+worker03.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/worker03.dogood.es/libvirt/private_key"
+
+[hdf-edge]
+edge01.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/edge01.dogood.es/libvirt/private_key"
+edge02.dogood.es ansible_ssh_host=192.168.121.176 ansible_user=vagrant ansible_ssh_private_key_file="~/Developer/dogood/devops/tibim/vagrant/kvm/node/.vagrant/machines/edge02.dogood.es/libvirt/private_key"

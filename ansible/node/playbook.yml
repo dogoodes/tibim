@@ -1,0 +1,6 @@
+---
+- name: config cluster
+  hosts: all
+  become: true
+  roles:
+    - common

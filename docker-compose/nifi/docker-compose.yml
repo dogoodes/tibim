@@ -25,7 +25,7 @@ services:
     ports:
       - '9090:9090'
 #      - "8443:8443"
-    volumes:
-      - nifi:/opt/certs
-volumes:
-  nifi:
+#    volumes:
+#      - nifi:/opt/certs
+#volumes:
+#  nifi:

@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "yaml"
+
+hosts = YAML.load_file("hosts.yml") if File.exists?("hosts.yml")
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = false
+
+  hosts.each do |machine|
+     config.vm.define machine["hostname"] do |node|
+        node.vm.network "private_network", ip: machine["ip"]
+        node.vm.hostname = machine["hostname"]
+
+        node.vm.provider "libvirt" do |libvirt|
+           libvirt.memory = machine["ram"]
+           libvirt.cpus = machine["cpu"]
+           libvirt.default_prefix = ""
+        end
+     end
+  end
+
+  config.vm.provision "ansible" do |ansible|
+     ansible.playbook = "../../../ansible/node/playbook.yml"
+     ansible.inventory_path = "../../../ansible/node/inventory"
+     ansible.verbose = "vvv"
+  end
+
+end
