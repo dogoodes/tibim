@@ -6,7 +6,7 @@ metadata:
   labels:
     app: jenkins
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: jenkins-static-ip
+    kubernetes.io/ingress.global-static-ip-name: jenkins-static-dogood-ip
 spec:
   securityContext:
     fsGroup: 300

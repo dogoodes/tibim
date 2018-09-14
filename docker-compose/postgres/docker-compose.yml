@@ -1,0 +1,32 @@
+version: "3"
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    networks:
+      - sonarnet
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+#        POSTGRES_INITDB_ARGS:
+#        POSTGRES_INITDB_WALDIR:
+#        PGDATA:
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    networks:
+      - sonarnet
+    ports:
+      - 8080:8080
+networks:
+  sonarnet:
+    driver: bridge
+volumes:
+  postgresql:
+  postgresql_data:

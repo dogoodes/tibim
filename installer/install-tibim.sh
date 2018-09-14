@@ -25,9 +25,14 @@ create_simbolic_link() {
     sudo -S ln -s $TIBIM_PATH/tibim.sh /usr/local/bin/tibim
 }
 
+change_permission() {
+    sudo chmod +x $TIBIM_PATH/tibim.sh
+}
+
 main() {
     get_dir_root
     create_simbolic_link
+    change_permission
 }
 
 ### ..:: Fluxo normal do programa ::..

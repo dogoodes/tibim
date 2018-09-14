@@ -17,19 +17,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.network "private_network", ip: machine["ip"]
         node.vm.hostname = machine["hostname"]
 
-        node.vm.provider "virtualbox" do |vb|
-           vb.name = machine["hostname"]
-           vb.memory = machine["ram"]
-           vb.cpus = machine["cpu"]
+        node.vm.provider "libvirt" do |libvirt|
+           libvirt.memory = machine["ram"]
+           libvirt.cpus = machine["cpu"]
+           libvirt.default_prefix = ""
         end
      end
   end
 
-  config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "../../ansible/playbook.yml"
-     ansible.inventory_path = "../../ansible/inventory"
-     ansible.verbose = "vvv"
-     ansible.host_key_checking = "false"
-  end
+  #config.vm.provision "ansible" do |ansible|
+  #   ansible.playbook = "ansible/playbook.yml"
+  #   ansible.inventory_path = "ansible/inventory"
+  #   ansible.verbose = "vvv"
+  #end
 
 end

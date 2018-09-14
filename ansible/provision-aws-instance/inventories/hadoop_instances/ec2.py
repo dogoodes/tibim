@@ -1204,9 +1204,9 @@ class Ec2Inventory(object):
             dest = cluster['ConfigurationEndpoint']['Address']
             is_redis = False
         else:
-            # Redis sigle node cluster
+            # Redis sigle single-node cluster
             # Because all.yml Redis clusters are single nodes, we'll merge the
-            # info from the cluster with info about the node
+            # info from the cluster with info about the single-node
             dest = cluster['CacheNodes'][0]['Endpoint']['Address']
             is_redis = True
 
@@ -1237,7 +1237,7 @@ class Ec2Inventory(object):
                     self.push_group(self.inventory, region, cluster['PreferredAvailabilityZone'])
                 self.push_group(self.inventory, 'zones', cluster['PreferredAvailabilityZone'])
 
-        # Inventory: Group by node type
+        # Inventory: Group by single-node type
         if self.group_by_instance_type and not is_redis:
             type_name = self.to_safe('type_' + cluster['CacheNodeType'])
             self.push(self.inventory, type_name, dest)
@@ -1290,7 +1290,7 @@ class Ec2Inventory(object):
             self.add_elasticache_node(node, cluster, region)
 
     def add_elasticache_node(self, node, cluster, region):
-        ''' Adds an ElastiCache node to the inventory and index, as long as
+        ''' Adds an ElastiCache single-node to the inventory and index, as long as
         it is addressable '''
 
         # Only want available nodes unless all_elasticache_nodes is True
@@ -1309,7 +1309,7 @@ class Ec2Inventory(object):
         # Add to index
         self.index[dest] = [region, node_id]
 
-        # Inventory: Group by node ID (always a group of 1)
+        # Inventory: Group by single-node ID (always a group of 1)
         if self.group_by_instance_id:
             self.inventory[node_id] = [dest]
             if self.nested_groups:
@@ -1329,7 +1329,7 @@ class Ec2Inventory(object):
                     self.push_group(self.inventory, region, cluster['PreferredAvailabilityZone'])
                 self.push_group(self.inventory, 'zones', cluster['PreferredAvailabilityZone'])
 
-        # Inventory: Group by node type
+        # Inventory: Group by single-node type
         if self.group_by_instance_type:
             type_name = self.to_safe('type_' + cluster['CacheNodeType'])
             self.push(self.inventory, type_name, dest)
@@ -1408,7 +1408,7 @@ class Ec2Inventory(object):
 
         # Inventory: Group by availability zone (doesn't apply to replication groups)
 
-        # Inventory: Group by node type (doesn't apply to replication groups)
+        # Inventory: Group by single-node type (doesn't apply to replication groups)
 
         # Inventory: Group by VPC (information not available in the current
         # AWS API version for replication groups
@@ -1552,7 +1552,7 @@ class Ec2Inventory(object):
                 host_info['ec2_configuration_endpoint_address'] = value['Address']
                 host_info['ec2_configuration_endpoint_port'] = value['Port']
 
-            # Target: Cache Nodes and Redis Cache Clusters (single node)
+            # Target: Cache Nodes and Redis Cache Clusters (single single-node)
             if key == 'ec2_endpoint' and value:
                 host_info['ec2_endpoint_address'] = value['Address']
                 host_info['ec2_endpoint_port'] = value['Port']

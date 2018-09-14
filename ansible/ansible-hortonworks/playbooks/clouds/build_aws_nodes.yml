@@ -12,7 +12,7 @@
     msg: "The AMI {{ outer_loop.image }} does not exist in region {{ cloud_config.region }} or it does not provide any information."
   when: current_ami['images'] | length == 0
 
-- name: Create {{ outer_loop.host_group }} node(s) (EBS root volume)
+- name: Create {{ outer_loop.host_group }} single-node(s) (EBS root volume)
   ec2:
     region: "{{ cloud_config.region }}"
     zone: "{{ cloud_config.zone }}"

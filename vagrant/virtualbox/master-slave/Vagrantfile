@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-vagrantfiles = %w[master/Vagrantfile worker/Vagrantfile]
+vagrantfiles = %w[master/Vagrantfile slave/Vagrantfile]
 vagrantfiles.each do |vagrantfile|
   load File.expand_path(vagrantfile) if File.exists?(vagrantfile)
 end

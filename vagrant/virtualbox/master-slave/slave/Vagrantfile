@@ -4,7 +4,7 @@
 require "yaml"
 
 hosts = YAML.load_file("hosts.yml") if File.exists?("hosts.yml")
-hosts = YAML.load_file("worker/hosts.yml") if File.exists?("worker/hosts.yml")
+hosts = YAML.load_file("slave/hosts.yml") if File.exists?("slave/hosts.yml")
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -22,17 +22,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            vb.name = machine["hostname"]
            vb.memory = machine["ram"]
            vb.cpus = machine["cpu"]
-           vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-           vb.customize ["modifyvm", :id, "--ioapic", "on"]
         end
      end
   end
 
-  config.vm.provision "ansible" do |ansible|
-     ansible.playbook = "../../../ansible/playbook-worker.yml"
-     ansible.inventory_path = "../../../ansible/inventory"
-     ansible.verbose = "vvv"
-     ansible.host_key_checking = "false"
-  end
+  #config.vm.provision "ansible" do |ansible|
+  #   ansible.playbook = "ansible/playbook-slave.yml"
+  #   ansible.inventory_path = "ansible/inventory"
+  #   ansible.verbose = "vvv"
+  #end
 
 end

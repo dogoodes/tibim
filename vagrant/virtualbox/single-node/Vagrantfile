@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+HOSTNAME = "node01.dogood.es"
+IP = "192.168.1.1"
+RAM = "2048"
+CPU = "1"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = false
+
+  config.vm.define HOSTNAME do |node|
+    node.vm.network "private_network", ip: IP
+    node.vm.hostname = HOSTNAME
+
+    node.vm.provider "virtualbox" do |vb|
+      vb.name = HOSTNAME
+      vb.memory = RAM
+      vb.cpus = CPU
+    end
+  end
+
+  #config.vm.provision "ansible" do |ansible|
+  #   ansible.playbook = "ansible/playbook.yml"
+  #   ansible.inventory_path = "ansible/inventory"
+  #   ansible.verbose = "vvv"
+  #end
+
+end

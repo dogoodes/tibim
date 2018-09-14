@@ -6,7 +6,7 @@ metadata:
   labels:
     app: nexus
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: nexus-static-ip
+    kubernetes.io/ingress.global-static-ip-name: nexus-static-dogood-ip
 spec:
   securityContext:
     fsGroup: 200

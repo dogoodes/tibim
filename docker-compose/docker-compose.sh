@@ -36,6 +36,7 @@ MONITORING_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/monitoring/monitoring.sh"
 MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
 NIFI_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nifi/nifi.sh"
+POSTGRES_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/postgres/postgres.sh"
 REDIS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/redis/redis.sh"
 RANCHER_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/rancher/rancher.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
@@ -76,6 +77,7 @@ help() {
     echo "      mysql"
     echo "      nexus"
     echo "      nifi"
+    echo "      postgres"
     echo "      rancher"
     echo "      redis"
     echo "      sonarqube"
@@ -103,6 +105,7 @@ call() {
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
         nifi)             sh $NIFI_PATH "$@" ;;
+        postgres)         sh $POSTGRES_PATH "$@" ;;
         rancher)          sh $RANCHER_PATH "$@" ;;
         redis)            sh $REDIS_PATH "$@" ;;
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
