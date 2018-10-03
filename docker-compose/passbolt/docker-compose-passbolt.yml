@@ -1,0 +1,44 @@
+version: "3"
+services:
+  passbolt:
+    image: passbolt/passbolt:develop-debian
+    container_name: passbolt
+    restart: always
+    networks:
+      - sonarnet_mysql_passbolt
+    environment:
+      APP_FULL_BASE_URL: https://dogood.passbolt.com
+      DATASOURCES_DEFAULT_HOST: mysql
+      DATASOURCES_DEFAULT_PORT: 3306
+      DATASOURCES_DEFAULT_DATABASE: dogood
+      DATASOURCES_DEFAULT_USERNAME: root
+      DATASOURCES_DEFAULT_PASSWORD: rot
+#      EMAIL_TRANSPORT_DEFAULT_CLASS_NAME:
+#      EMAIL_DEFAULT_FROM:
+#      EMAIL_DEFAULT_TRANSPORT:
+#      EMAIL_TRANSPORT_DEFAULT_HOST:
+#      EMAIL_TRANSPORT_DEFAULT_PORT:
+#      EMAIL_TRANSPORT_DEFAULT_TIMEOUT:
+#      EMAIL_TRANSPORT_DEFAULT_USERNAME:
+#      EMAIL_TRANSPORT_DEFAULT_PASSWORD:
+#      EMAIL_TRANSPORT_DEFAULT_CLIENT:
+#      EMAIL_TRANSPORT_DEFAULT_TLS:
+#      EMAIL_TRANSPORT_DEFAULT_URL:
+#      GNUPGHOME: /home/www-data/.gnupg
+#      PASSBOLT_KEY_LENGTH: 2048
+#      PASSBOLT_SUBKEY_LENGTH: 2048
+#      PASSBOLT_KEY_NAME:
+#      PASSBOLT_KEY_EMAIL:
+#      PASSBOLT_KEY_EXPIRATION:
+#      PASSBOLT_GPG_SERVER_KEY_FINGERPRINT:
+#      PASSBOLT_GPG_SERVER_KEY_PUBLIC: /var/www/passbolt/config/gpg/serverkey.asc
+#      PASSBOLT_GPG_SERVER_KEY_PRIVATE: /var/www/passbolt/config/gpg/serverkey_private.asc
+#      PASSBOLT_REGISTRATION_PUBLIC: false
+#      PASSBOLT_SSL_FORCE: true
+#      PASSBOLT_SECURITY_SET_HEADERS: true
+#      SECURITY_SALT:
+    ports:
+      - 9999:80
+networks:
+  sonarnet_mysql_passbolt:
+    driver: bridge

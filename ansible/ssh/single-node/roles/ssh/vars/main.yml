@@ -1,0 +1,7 @@
+---
+id_rsa_path: '~/.ssh/id_rsa'
+id_rsa_pub_path: '~/.ssh/id_rsa.pub'
+
+sshd_config: '/etc/ssh/sshd_config'
+
+root_password: 'dogood'

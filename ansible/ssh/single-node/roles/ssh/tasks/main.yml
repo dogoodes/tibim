@@ -1,0 +1,48 @@
+---
+#- name: set authorized key for user root copying it from current user
+#  authorized_key:
+#    user: "{{ item }}"
+#    state: present
+#    key: "{{ lookup('file', id_rsa_pub_path ) }}"
+#  with_items:
+#    - root
+#    - vagrant
+#
+#- name: copy file {{ id_rsa_pub_path }}
+#  copy:
+#    src: "{{ id_rsa_pub_path }}"
+#    dest: "{{ item.path }}"
+#    mode: "{{ item.mod }}"
+#  with_items:
+#  - { path: '/root/.ssh/id_rsa.pub', mod: '0600' }
+#  - { path: '/home/vagrant/.ssh/id_rsa.pub', mod: '0606'}
+#
+#- name: copy file {{ id_rsa_path }}
+#  copy:
+#    src: "{{ id_rsa_path }}"
+#    dest: "{{ item.path }}"
+#    mode: "{{ item.mod }}"
+#  with_items:
+#  - { path: '/root/.ssh/id_rsa', mod: '0600' }
+#  - { path: '/home/vagrant/.ssh/id_rsa', mod: '0606' }
+#  notify: restart sshd
+
+#- name: disable empty password login
+#  lineinfile:
+#    dest: "{{ sshd_config }}"
+#    regexp: "^#?PermitEmptyPasswords"
+#    line: "PermitEmptyPasswords no"
+#    state: present
+#
+#- name: enable remote root login
+#  lineinfile:
+#    dest: "{{ sshd_config }}"
+#    regexp: "^#?PermitRootLogin"
+#    line: "PermitRootLogin yes"
+#    state: present
+#
+#- name: change root password
+#  user:
+#    name: root
+#    password: "{{ root_password }}"
+#  notify: restart sshd

@@ -22,7 +22,7 @@ NAME_SCRIPT="docker-compose"
 PARAMETER=$1
 COMMAND="tibim $NAME_SCRIPT"
 
-CAMPIMETRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/products/campimetro/campimetro.sh"
+BITWARDEN_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/bitwarden/bitwarden.sh"
 CEREBRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/cerebro/cerebro.sh"
 DEVOPS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/devops/devops.sh"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
@@ -36,6 +36,7 @@ MONITORING_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/monitoring/monitoring.sh"
 MYSQL_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/mysql/mysql.sh"
 NEXUS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nexus/nexus.sh"
 NIFI_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/nifi/nifi.sh"
+PASSBOLT_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/passbolt/passbolt.sh"
 POSTGRES_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/postgres/postgres.sh"
 REDIS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/redis/redis.sh"
 RANCHER_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/rancher/rancher.sh"
@@ -64,6 +65,7 @@ help() {
     echo "Usage: $COMMAND COMMAND"
     echo ""
     echo "Options:"
+    echo "      bitwarden"
     echo "      cerebro"
     echo "      devops"
     echo "      elasticsearch"
@@ -77,6 +79,7 @@ help() {
     echo "      mysql"
     echo "      nexus"
     echo "      nifi"
+    echo "      passbolt"
     echo "      postgres"
     echo "      rancher"
     echo "      redis"
@@ -92,6 +95,7 @@ help() {
 call() {
     shift 1
     case $PARAMETER in
+        bitwarden)        sh $BITWARDEN_PATH "$@" ;;
         cerebro)          sh $CEREBRO_PATH "$@" ;;
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
@@ -105,6 +109,7 @@ call() {
         mysql)            sh $MYSQL_PATH "$@" ;;
         nexus)            sh $NEXUS_PATH "$@" ;;
         nifi)             sh $NIFI_PATH "$@" ;;
+        passbolt)         sh $PASSBOLT_PATH "$@" ;;
         postgres)         sh $POSTGRES_PATH "$@" ;;
         rancher)          sh $RANCHER_PATH "$@" ;;
         redis)            sh $REDIS_PATH "$@" ;;

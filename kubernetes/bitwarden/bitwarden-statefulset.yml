@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: jenkins-statefulset
+  namespace: bitwarden
+  labels:
+    app: bitwarden
+spec:
+  serviceName: bitwarden-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: bitwarden
+    spec:
+      securityContext:
+        fsGroup: 300
+      containers:
+        - name: bitwarden
+          image: h1kkan/jenkins-docker:lts
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          volumeMounts:
+            - name: volume-jenkins
+              mountPath: /var/jenkins_home
+            - name: volume-docker-socket
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: volume-jenkins
+          persistentVolumeClaim:
+            claimName: jenkins-persistentvolumeclaim
+        - name: volume-docker-socket
+          hostPath:
+            path: /var/run/docker.sock

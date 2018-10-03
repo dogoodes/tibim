@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+HOSTNAME = "node01.dogood.es"
+IP = "192.168.1.1"
+RAM = "8192"
+CPU = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = false
+
+  config.vm.define HOSTNAME do |node|
+    node.vm.network "private_network", ip: IP
+    node.vm.hostname = HOSTNAME
+
+    # ambari ui
+    node.vm.network "forwarded_port", guest: 8080, host: 8080, guest_ip: IP
+
+    # infra solar ui
+    node.vm.network "forwarded_port", guest: 8886, host: 8886, guest_ip: IP
+
+    # namenode ui
+    node.vm.network "forwarded_port", guest: 50070, host: 50070, guest_ip: IP
+
+    # resource manager ui
+    node.vm.network "forwarded_port", guest: 8088, host: 8088, guest_ip: IP
+
+    # job history ui
+    node.vm.network "forwarded_port", guest: 19888, host: 19888, guest_ip: IP
+
+    # hive dashboard ui
+    node.vm.network "forwarded_port", guest: 3000, host: 3000, guest_ip: IP
+
+    # hbase master ui
+    node.vm.network "forwarded_port", guest: 16010, host: 16010, guest_ip: IP
+
+    # active explorer ui smart sense
+    node.vm.network "forwarded_port", guest: 9060, host: 9060, guest_ip: IP
+
+    # spark server ui
+    node.vm.network "forwarded_port", guest: 18081, host: 18081, guest_ip: IP
+
+    node.vm.provider "virtualbox" do |vb|
+      vb.name = HOSTNAME
+      vb.memory = RAM
+      vb.cpus = CPU
+    end
+  end
+
+end

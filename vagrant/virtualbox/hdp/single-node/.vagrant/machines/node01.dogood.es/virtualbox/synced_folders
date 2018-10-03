@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/fabianormatias/Developer/workspace/dogood/devops/tibim/vagrant/virtualbox/hdp/single-node","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

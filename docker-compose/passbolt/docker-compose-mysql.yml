@@ -5,7 +5,7 @@ services:
     container_name: mysql
     restart: always
     networks:
-      - sonarnet
+      - sonarnet_mysql_passbolt
     environment:
       MYSQL_DATABASE: dogood
       MYSQL_USER: root
@@ -14,7 +14,7 @@ services:
 #      MYSQL_ROOT_HOST: '172.18.0.1'
 #      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
   adminer:
@@ -22,11 +22,11 @@ services:
     container_name: adminer
     restart: always
     networks:
-      - sonarnet
+      - sonarnet_mysql_passbolt
     ports:
       - 8080:8080
 networks:
-  sonarnet:
+  sonarnet_mysql_passbolt:
     driver: bridge
 volumes:
   mysql:

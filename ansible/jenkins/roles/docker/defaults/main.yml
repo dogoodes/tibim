@@ -10,5 +10,5 @@ remove_docker_dependencies:
   - lxc-docker
   - docker-engine
   - docker
-  - docker-common
+  - docker-ssh
   - docker.io

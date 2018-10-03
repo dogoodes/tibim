@@ -1,5 +1,5 @@
 ---
-- name: config cluster
+- name: config node
   hosts: all
   become: true
   roles:
