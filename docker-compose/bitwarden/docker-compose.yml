@@ -4,10 +4,10 @@ services:
     image: mprasil/bitwarden
     container_name: bitwarden
     restart: always
-    environment:
+#    environment:
 #      SIGNUPS_ALLOWED: "false"
-      INVITATIONS_ALLOWED: "false"
-      SHOW_PASSWORD_HINT: "true"
+#      INVITATIONS_ALLOWED: "false"
+#      SHOW_PASSWORD_HINT: "true"
 #      ROCKET_TLS: '{certs="/ssl/certs.pem",key="/ssl/key.pem"}'
 #      DOMAIN: https://bitwarden.dogood.es
 #      DATA_FOLDER: /persistent

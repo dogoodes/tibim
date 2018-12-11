@@ -5,8 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 HOSTNAME = "node01.dogood.es"
 IP = "192.168.1.1"
-RAM = "2048"
-CPU = "1"
+RAM = "8192"
+CPU = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -23,11 +23,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.cpus = CPU
     end
   end
-
-  #config.vm.provision "ansible" do |ansible|
-  #   ansible.playbook = "ansible/playbook.yml"
-  #   ansible.inventory_path = "ansible/inventory"
-  #   ansible.verbose = "vvv"
-  #end
 
 end

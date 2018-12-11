@@ -1,35 +1,67 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: jenkins-statefulset
+  name: bitwarden-statefulset
   namespace: bitwarden
   labels:
     app: bitwarden
 spec:
   serviceName: bitwarden-service
-  replicas: 1
   template:
     metadata:
       labels:
         name: bitwarden
     spec:
-      securityContext:
-        fsGroup: 300
       containers:
         - name: bitwarden
-          image: h1kkan/jenkins-docker:lts
+          image: mprasil/bitwarden
+#          env:
+#            - name: INVITATIONS_ALLOWED
+#              value:  "false"
+#            - name: SHOW_PASSWORD_HINT
+#              value: "true"
+#            - name: SIGNUPS_ALLOWED
+#              value: "false"
+#            - name: ROCKET_TLS
+#              value: '{certs="/ssl/certs.pem",key="/ssl/key.pem"}'
+#            - name: DOMAIN
+#              value: https://bitwarden.dogood.es
+#            - name: DATA_FOLDER
+#              value: /persistent
+#            - name: DATABASE_URL
+#              value: /database/bitwarden.sqlite3
+#            - name: ATTACHMENTS_FOLDER
+#              value: /attachments
+#            - name: ICON_CACHE_FOLDER
+#              value: /icon_cache
+#            - name: ROCKET_LIMITS
+#              value: {json=10485760}
+#            - name: ROCKET_WORKERS
+#              value: 20
+#            - name: SMTP_HOST
+#              value: <smtp.domain.tld>
+#            - name: SMTP_FROM
+#              value: <bitwarden@domain.tld>
+#            - name: SMTP_PORT
+#              value: 587
+#            - name: SMTP_FROM
+#              value: true
+#            - name: SMTP_SSL
+#              value: <bitwarden@domain.tld>
+#            - name: SMTP_USERNAME
+#              value: <username>
+#            - name: SMTP_PASSWORD
+#              value: <password>
+#            - name: WEB_VAULT_ENABLED
+#              value: false
+#            - name: ROCKET_PORT
+#              value: 8080
           ports:
-            - containerPort: 8080
-            - containerPort: 50000
+            - containerPort: 80
           volumeMounts:
-            - name: volume-jenkins
-              mountPath: /var/jenkins_home
-            - name: volume-docker-socket
-              mountPath: /var/run/docker.sock
+            - name: volume-bitwarden
+              mountPath: /data/
       volumes:
-        - name: volume-jenkins
+        - name: volume-bitwarden
           persistentVolumeClaim:
-            claimName: jenkins-persistentvolumeclaim
-        - name: volume-docker-socket
-          hostPath:
-            path: /var/run/docker.sock
+            claimName: bitwarden-persistentvolumeclaim

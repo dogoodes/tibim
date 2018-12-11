@@ -26,6 +26,7 @@ BITWARDEN_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/bitwarden/bitwarden.sh"
 CEREBRO_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/cerebro/cerebro.sh"
 DEVOPS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/devops/devops.sh"
 ELASTICSEARCH_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/elasticsearch/elasticsearch.sh"
+GITLAB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/gitlab/gitlab.sh"
 GRAFANA_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/grafana/grafana.sh"
 INFLUXDB_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/influxdb/influxdb.sh"
 JENKINS_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/jenkins/jenkins.sh"
@@ -43,6 +44,8 @@ RANCHER_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/rancher/rancher.sh"
 SONARQUBE_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/sonarqube/sonarqube.sh"
 SPARK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/spark/spark.sh"
 STREAM_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/stream/stream.sh"
+TRAEFIK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/traefik/traefik.sh"
+TYK_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/tyk/tyk.sh"
 ZABBIX_PATH="$APP_ROOT_PATH/$NAME_SCRIPT/zabbix/zabbix.sh"
 
 ################################################################################
@@ -70,6 +73,7 @@ help() {
     echo "      devops"
     echo "      elasticsearch"
     echo "      grafana"
+    echo "      gitlab"
     echo "      influxdb"
     echo "      jenkins"
     echo "      kafka"
@@ -86,6 +90,8 @@ help() {
     echo "      sonarqube"
     echo "      spark"
     echo "      stream"
+    echo "      traefik"
+    echo "      tyk"
     echo "      zabbix"
     echo ""
     echo "Run '$COMMAND COMMAND help' for more information on a command."
@@ -100,6 +106,7 @@ call() {
         devops)           sh $DEVOPS_PATH "$@" ;;
         elasticsearch)    sh $ELASTICSEARCH_PATH "$@" ;;
         grafana)          sh $GRAFANA_PATH "$@" ;;
+        gitlab)           sh $GITLAB_PATH "$@" ;;
         influxdb)         sh $INFLUXDB_PATH "$@" ;;
         jenkins)          sh $JENKINS_PATH "$@" ;;
         kafka)            sh $KAFKA_PATH "$@" ;;
@@ -116,6 +123,8 @@ call() {
         sonarqube)        sh $SONARQUBE_PATH "$@" ;;
         spark)            sh $SPARK_PATH "$@" ;;
         stream)           sh $STREAM_PATH "$@" ;;
+        traefik)          sh $TRAEFIK_PATH "$@" ;;
+        tyk)              sh $TYK_PATH "$@" ;;
         zabbix)           sh $ZABBIX_PATH "$@" ;;
         *)                help ;;
     esac
