@@ -18,7 +18,7 @@ fi
 
 ### ..:: Execution key ::..
 
-NAME_SCRIPT="jenkins"
+NAME_SCRIPT="kong"
 DOCKER_COMPOSE_PATH="$APP_ROOT_PATH/docker-compose/$NAME_SCRIPT/docker-compose.yml"
 PARAMETER=$1
 COMMAND="tibim docker-compose $NAME_SCRIPT"
