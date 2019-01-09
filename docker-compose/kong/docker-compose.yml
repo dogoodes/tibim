@@ -1,9 +1,5 @@
 version: "3"
 
-networks:
- kong-net:
-  driver: bridge
-
 services:
 
   #######################################
@@ -101,7 +97,7 @@ services:
       - "1337:1337"
 
   #######################################
-  # Konga: Kong GUI
+  # Adminer: Database GUI
   #######################################
   adminer:
     image: adminer
@@ -112,3 +108,7 @@ services:
       - '8080:8080'
     depends_on:
       - kong-database
+
+networks:
+ kong-net:
+  driver: bridge
